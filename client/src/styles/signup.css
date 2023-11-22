@@ -1,0 +1,36 @@
+body{
+    text-align: center;
+}
+#signupForm{
+    text-align: left;
+    display: inline-block;
+    width: 40vh;
+    border-radius:10%;
+    background: rgb(230, 202, 169);
+    height: 50vh;
+    position: relative;
+    top: 10vh;
+}
+.signupInput{
+    background-color: rgb(234, 210, 199);
+    position: relative;
+    top: 8vh;
+    left: 4.5vw;
+}
+#signupBtn{
+    position: relative;
+    top: 18vh;
+    right: 3vw;
+}
+#loginRoute{
+    font-family:sans-serif;
+    position: relative;
+    top: 25vh;
+    right: 7vw;
+}
+#businessName{
+    font-family:cursive;
+    text-align: center;
+    position: relative;
+    top: 5vh;
+}

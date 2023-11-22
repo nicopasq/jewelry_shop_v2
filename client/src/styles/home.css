@@ -1,0 +1,13 @@
+#homeCover{
+    margin-top:2%;
+    width: 65vw;
+    position: relative;
+    right: 2vw;
+}
+#homeCoverBtn{
+    scale: 1.8;
+    position: relative;
+    bottom: 40vh;
+    left: 1vw;
+    color: rgb(246, 77, 105);
+}
