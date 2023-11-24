@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
+import '../../styles/productSrcoll.css'
 
 function ProductScroll({ containerInfo }) {
   const [sliceVal, setSliceVal] = useState({
@@ -9,8 +10,8 @@ function ProductScroll({ containerInfo }) {
 
   const products = containerInfo.productArr.map((product) => {
     return (
-      <Grid item xs={4}>
-        <Card>
+      <Grid item xs={"auto"}>
+        <Card className="productCard" elevation={4}>
           {/* <img src={ring.image} key={ring.id} style={{height:'25vh', margin:'5px', border:'1px solid black'}}/> */}
           {product}
           <CardContent>
@@ -48,7 +49,7 @@ function ProductScroll({ containerInfo }) {
   }
   return (
     <>
-      <Typography variant="h3">{containerInfo.name}</Typography>
+      <Typography variant="h3" className="containerName">{containerInfo.name}</Typography>
       <div className="shell">
         <div className="productContainer">
           <Button
@@ -60,7 +61,10 @@ function ProductScroll({ containerInfo }) {
             {lastBtn}
           </Button>
 
-          <div className="productDisplay">{renderProducts}</div>
+            <Grid container spacing={3} className="productGrid" >
+
+            {renderProducts}
+            </Grid>
 
           <Button
             className="nextBtn"

@@ -1,31 +1,18 @@
 #homeCover{
-    border-radius: 8%;
-    margin-top:2%;
+    /* 
     width: 65vw;
     position: relative;
-    right: 2vw;
+    right: 2vw; */
+    border-radius: 10px;
+    margin:1%;
+    width: 90%;
 }
 #homeCoverBtn{
     scale: 1.8;
     position: relative;
-    bottom: 40vh;
-    left: 1vw;
-    color: rgb(246, 77, 105);
+    bottom: 65vh;
 }
-.shell{
-    border: 1px solid black;
-    height: 40vh;
-    width: 60vw;
-}
-.backBtn{
-    position: relative;
-    top: 13vh;
-    right: 28vw;
-    height: 15vh;
-}
-.nextBtn{
-    position: relative;
-    bottom: 2vh;
-    left: 28vw;
-    height: 15vh;
+#homeCoverBg{
+    width: 100%;
+    background-color: rgba(71, 71, 71, 0.648);
 }
