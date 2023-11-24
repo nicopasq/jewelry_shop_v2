@@ -1,6 +1,5 @@
 class Product < ApplicationRecord
     has_many :order_products
-    has_one_attached :image
 
     validates :product_name, presence: true
     validates :product_type, presence: true

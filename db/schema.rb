@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2023_11_22_020330) do
 
   create_table "products", force: :cascade do |t|
     t.string "product_name"
+    t.string "image_path"
     t.string "product_type"
     t.integer "price"
     t.boolean "in_stock"
