@@ -3,10 +3,12 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
+import ring_images from './images/rings/rings.js'
 import Home from './features/home/Home';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
+  const allProducts = useSelector(state => state.products.value)
   const dispatch = useDispatch()
   const navigation = useNavigate()
   
@@ -18,9 +20,23 @@ function App() {
         dispatch({type:'currentUser/login', payload:data})
       } 
     })
+
+    fetch('/products')
+    .then(r => r.json())
+    .then(data => {
+        data.map(product => {
+            ring_images.map(r => {
+                if (r.includes(product.image_path)){
+                    product.image = r
+                }
+            })
+        })
+        dispatch({type:'products/addProduct', payload:data})
+    })
+
   },[dispatch])
   
-  
+  console.log('allProducts', allProducts)
   
   if (!currentUser){
     return (

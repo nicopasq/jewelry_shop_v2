@@ -10,7 +10,7 @@ function ProductScroll({ containerInfo }) {
 
   const products = containerInfo.productArr.map((product) => {
     return (
-      <Grid item xs={"auto"}>
+      <Grid item xs={"auto"} key={product}> 
         <Card className="productCard" elevation={4}>
           {/* <img src={ring.image} key={ring.id} style={{height:'25vh', margin:'5px', border:'1px solid black'}}/> */}
           {product}
