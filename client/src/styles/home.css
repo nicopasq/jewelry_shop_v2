@@ -12,3 +12,20 @@
     left: 1vw;
     color: rgb(246, 77, 105);
 }
+.shell{
+    border: 1px solid black;
+    height: 40vh;
+    width: 60vw;
+}
+.backBtn{
+    position: relative;
+    top: 13vh;
+    right: 28vw;
+    height: 15vh;
+}
+.nextBtn{
+    position: relative;
+    bottom: 2vh;
+    left: 28vw;
+    height: 15vh;
+}
