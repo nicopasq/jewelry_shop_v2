@@ -24,6 +24,7 @@ function App() {
     fetch('/products')
     .then(r => r.json())
     .then(data => {
+      console.log('ringimages', ring_images)
         data.map(product => {
             ring_images.map(r => {
                 if (r.includes(product.image_path)){

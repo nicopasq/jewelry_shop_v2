@@ -33,6 +33,12 @@
     text-decoration:dotted overline rgb(0, 0, 164);
 }
 .productImage{
+    border: 1px solid black ;
+    /* border-right: 1px solid black ; */
+    border-radius: 10px;
     height: 20vh;
+    width: 10vw;
     margin: 5px;
+    position: relative;
+    left: 2.5vw;
 }

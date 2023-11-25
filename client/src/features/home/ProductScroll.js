@@ -39,9 +39,9 @@ function ProductScroll({ containerInfo }) {
       }
     } else if (e.target.name === "nextBtn") {
       let start = sliceVal.start + 3;
-      if (start >= 9) {
-        setSliceVal({ start: 9, end: 12 });
-      } else if (start <= 9) {
+      if (start >= 22) {
+        setSliceVal({ start: 22, end: 25 });
+      } else if (start <= 22) {
         setSliceVal({ start: start, end: start + 3 });
       }
     }
