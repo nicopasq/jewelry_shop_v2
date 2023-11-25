@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Button, Card, CardContent, Grid, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import '../../styles/productSrcoll.css'
 
@@ -10,15 +10,14 @@ function ProductScroll({ containerInfo }) {
 
   const products = containerInfo.productArr.map((product) => {
     return (
-      <Grid item xs={"auto"} key={product}> 
+      <Grid item xs={"auto"}> 
         <Card className="productCard" elevation={4}>
-          {/* <img src={ring.image} key={ring.id} style={{height:'25vh', margin:'5px', border:'1px solid black'}}/> */}
-          {product}
+          <Paper elevation={5}>
+            <img src={product.image} key={product.id} className="productImage"/>
+          </Paper>
           <CardContent>
-            {/* <Typography>{ring.product_name}</Typography>
-                    <Typography>{ring.price}</Typography> */}
-            <Typography>ring name</Typography>
-            <Typography>price</Typography>
+            <Typography>{product.product_name}</Typography>
+            <Typography>{product.price}</Typography>
           </CardContent>
         </Card>
       </Grid>

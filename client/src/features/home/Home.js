@@ -4,8 +4,21 @@ import '../../styles/home.css'
 import { Button, Container, Paper } from "@mui/material";
 import homeCover from '../home/rings_home_cover.jpg'
 import ProductScroll from "./ProductScroll.js";
+import { useSelector } from "react-redux";
 
 function Home(){
+    const allProducts = useSelector(state => state.products.value)
+
+    const rings = []
+    if(allProducts){
+        allProducts.map(product => {
+            if (product.product_type === 'ring'){
+                rings.push(product)
+            }
+        })
+    }
+    console.log(rings)
+
     return (
     <>
         <Navbar/>
@@ -20,7 +33,7 @@ function Home(){
             <ProductScroll containerInfo={
                 {
                     name:'Shop Rings',
-                    productArr:[1,2,3,4,5,6,7,8,9,10,11,12]
+                    productArr:rings
                 }
             }/>             
             <ProductScroll containerInfo={

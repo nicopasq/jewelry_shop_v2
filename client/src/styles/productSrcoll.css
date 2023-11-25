@@ -11,14 +11,14 @@
 }
 .nextBtn{
     position: relative;
-    bottom: 27.25vh;
+    bottom: 32vh;
     left: 28.3vw;
     height: 15vh;
 }
 .productCard{
     text-align: left;
-    width: 15vw;
-    height: 25vh;
+    width: 15.5vw;
+    height: 30vh;
     position: relative;
     left: 4vw;
 }
@@ -31,4 +31,8 @@
 .containerName{
     text-align: left;
     text-decoration:dotted overline rgb(0, 0, 164);
+}
+.productImage{
+    height: 20vh;
+    margin: 5px;
 }

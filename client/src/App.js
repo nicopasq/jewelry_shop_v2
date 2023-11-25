@@ -36,8 +36,6 @@ function App() {
 
   },[dispatch])
   
-  console.log('allProducts', allProducts)
-  
   if (!currentUser){
     return (
       <Routes>
