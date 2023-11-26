@@ -10,14 +10,17 @@ function Home(){
     const allProducts = useSelector(state => state.products.value)
 
     const rings = []
+    const necklaces = []
     if(allProducts){
         allProducts.map(product => {
             if (product.product_type === 'ring'){
                 rings.push(product)
+            } else if(product.product_type === 'necklace'){
+                necklaces.push(product)
             }
         })
     }
-    console.log(rings)
+    console.log(necklaces)
 
     return (
     <>
@@ -39,7 +42,7 @@ function Home(){
             <ProductScroll containerInfo={
                 {
                     name:'Shop Necklaces',
-                    productArr:[1,2,3,4,5,6,7,8,9,10,11,12]
+                    productArr:necklaces
                 }
             }/>             
             <ProductScroll containerInfo={

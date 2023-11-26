@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
-import ring_images from './images/rings/rings.js'
+import product_images from './images/images.js'
 import Home from './features/home/Home';
 
 function App() {
@@ -24,9 +24,9 @@ function App() {
     fetch('/products')
     .then(r => r.json())
     .then(data => {
-      console.log('ringimages', ring_images)
+      console.log('images', product_images)
         data.map(product => {
-            ring_images.map(r => {
+            product_images.map(r => {
                 if (r.includes(product.image_path)){
                     product.image = r
                 }
