@@ -29,6 +29,30 @@ Product.create(product_name:'White Gold Prong Emerald', image_path:'/white_gold_
 
 #Create All Necklaces
 Product.create(product_name:'Black Opal and Diamond Pendant', image_path:'/opal_diamond', product_type:'necklace', price:300, in_stock: true)
+Product.create(product_name:'Amethyst Pendant', image_path:'/amethyst_pendant', product_type:'necklace', price: 500 , in_stock: true)
+Product.create(product_name:'Diamond Necklace', image_path:'/diamond', product_type:'necklace', price: 1000, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with an Emerald and Diamond Teardrop', image_path:'/emerald_diamond_teardrop', product_type:'necklace', price: 1500, in_stock: true)
+Product.create(product_name:'Sterling Siver with Cube Emerald in Diamond', image_path:'/emrald_cube_pendant', product_type:'necklace', price: 1200, in_stock: true)
+Product.create(product_name:'Gemstone Necklace', image_path:'/gemstones', product_type:'necklace', price: 300, in_stock: true)
+Product.create(product_name:'Stackable Gold Chains', image_path:'/gold_3_stack', product_type:'necklace', price: 400, in_stock: true)
+Product.create(product_name:'Gold Chain with Australian Opal', image_path:'/gold_australian_opal_iShape', product_type:'necklace', price: 1000 , in_stock: true)
+Product.create(product_name:'Gold Bead Necklace', image_path:'/gold_beaded', product_type:'necklace', price: 300, in_stock: true)
+Product.create(product_name:'Gold Chain with Raw Amethyst', image_path:'/gold_chain_amethyst_raw', product_type:'necklace', price: 1100, in_stock: true)
+Product.create(product_name:'Gold Chain with Gold Ring', image_path:'/gold_chain_gold_ring', product_type:'necklace', price: 200, in_stock: true)
+Product.create(product_name:'Gold Plated Necklace with Emerald and Diamond Teardrop', image_path:'/gold_emerald_teardrop', product_type:'necklace', price: 1700, in_stock: true)
+Product.create(product_name:'Golden Flower', image_path:'/gold_flower', product_type:'necklace', price: 100, in_stock: true)
+Product.create(product_name:'Bronze Chain with Round Gold Feature', image_path:'/gold_round_pendant', product_type:'necklace', price: 150, in_stock: true)
+Product.create(product_name:'Gold Chain', image_path:'/gold-necklace', product_type:'necklace', price: 100, in_stock: true)
+Product.create(product_name:'Three Layer Pearl Necklace', image_path:'/pearl_3_stack', product_type:'necklace', price: 1200, in_stock: true)
+Product.create(product_name:'Rose Quartz Crystal', image_path:'/rose_quartz_crystal_2', product_type:'necklace', price: 75, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with Rose Quartz Crystal', image_path:'/rose_quartz_crystal', product_type:'necklace', price: 90, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with Ruby Beads', image_path:'/ruby_beads_pendant_raw', product_type:'necklace', price: 1150, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with Ruby and Diamond Pendant', image_path:'/ruby_diamond_teardrop', product_type:'necklace', price: 1500, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with Ruby Flower', image_path:'/ruby_flower', product_type:'necklace', price: 500, in_stock: true)
+Product.create(product_name:'Sterling Sliver Chain with Smokey Quartz Crystal', image_path:'/smokey_quartz_crystal', product_type:'necklace', price: 90, in_stock: true)
+Product.create(product_name:'Sterling Silver Chain with Amethyst', image_path:'/sterling_amethyst', product_type:'necklace', price: 1300, in_stock: true)
+Product.create(product_name:'White Gold Chain with Diamond Pendant', image_path:'/white_gold_diamond_Yshape', product_type:'necklace', price: 2000 , in_stock: true)
+Product.create(product_name:'Diamond Encrusted White Gold Chain', image_path:'/white_gold_diamond', product_type:'necklace', price: 1700, in_stock: true)
 
 #Create All Bracelets
 

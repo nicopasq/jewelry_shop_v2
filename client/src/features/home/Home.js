@@ -20,7 +20,7 @@ function Home(){
             }
         })
     }
-    console.log(necklaces)
+
 
     return (
     <>
