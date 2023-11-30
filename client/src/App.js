@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +8,9 @@ import Home from './features/home/Home';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
-  const allProducts = useSelector(state => state.products.value)
+  // const allProducts = useSelector(state => state.products.value)
   const dispatch = useDispatch()
-  const navigation = useNavigate()
+  // const navigation = useNavigate()
   
   useEffect(() => {
     fetch('/auth')

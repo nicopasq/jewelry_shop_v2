@@ -10,10 +10,10 @@ function ProductScroll({ containerInfo }) {
 
   const products = containerInfo.productArr.map((product) => {
     return (
-      <Grid item xs={"auto"}> 
+      <Grid item xs={"auto"} key={product.id}> 
         <Card className="productCard" elevation={4}>
           <Paper elevation={5}>
-            <img src={product.image} key={product.id} className="productImage"/>
+            <img src={product.image} alt='' className="productImage"/>
           </Paper>
           <CardContent>
             <Typography>{product.product_name}</Typography>
@@ -47,7 +47,7 @@ function ProductScroll({ containerInfo }) {
     }
   }
   return (
-    <>
+    <div key={containerInfo.name}>
       <Typography variant="h3" className="containerName">{containerInfo.name}</Typography>
       <div className="shell">
         <div className="productContainer">
@@ -60,7 +60,7 @@ function ProductScroll({ containerInfo }) {
             {lastBtn}
           </Button>
 
-            <Grid container spacing={3} className="productGrid" >
+            <Grid container spacing={3} className="productGrid" key={containerInfo.name}>
 
             {renderProducts}
             </Grid>
@@ -75,7 +75,7 @@ function ProductScroll({ containerInfo }) {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

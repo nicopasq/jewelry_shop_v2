@@ -54,6 +54,29 @@ Product.create(product_name:'Sterling Silver Chain with Amethyst', image_path:'/
 Product.create(product_name:'White Gold Chain with Diamond Pendant', image_path:'/white_gold_diamond_Yshape', product_type:'necklace', price: 2000 , in_stock: true)
 Product.create(product_name:'Diamond Encrusted White Gold Chain', image_path:'/white_gold_diamond', product_type:'necklace', price: 1700, in_stock: true)
 
-#Create All Bracelets
-
-#Create All Earrings??
+#Create All Earrings
+Product.create(product_name:'Amethyst and Garnet Ship Sails Encrusted with Diamonds | Drop', image_path:'/amethyst_garnet_shipSail_drop', product_type:'earring', price:2000, in_stock: true)
+Product.create(product_name:'Amethyst Earrings | Stud', image_path:'/amethyst_stud', product_type:'earring', price:1100, in_stock: true)
+Product.create(product_name:'Floating Butterfly | Hoop', image_path:'/butterfly_double_hoop', product_type:'earring', price:750, in_stock: true)
+Product.create(product_name:'Infinite Diamond | Stud', image_path:'/diamond_infinity_stud', product_type:'earring', price:1250, in_stock: true)
+Product.create(product_name:'Diamond Leaf | Stud', image_path:'/diamond_leaf_6Shape_stud', product_type:'earring', price:1500, in_stock: true)
+Product.create(product_name:'Gold Hoop Wrapped with Diamond | Hoop', image_path:'/wrapped_diamond_hoop', product_type:'earring', price:1500, in_stock: true)
+Product.create(product_name:'Duck Earrings | Drop', image_path:'/duck', product_type:'earring', price:20, in_stock: true)
+Product.create(product_name:'Emerald and Diamonds | Dangle', image_path:'/emerald_diamond_drop', product_type:'earring', price:2000, in_stock: true)
+Product.create(product_name:'Emerald Teardrops | Drop', image_path:'/emerald_drop', product_type:'earring', price:2100, in_stock: true)
+Product.create(product_name:'Gold Horseshoe with Diamonds | Stud', image_path:'/gold_diamond_horseshoe_stud', product_type:'earring', price: 950, in_stock: true)
+Product.create(product_name:'Gold Leaf with Emerald and Diamond | Drop', image_path:'/gold_emerald_leaf_drop', product_type:'earring', price:1200, in_stock: true)
+Product.create(product_name:'Gold Hoops | Hoop', image_path:'/gold_hoop', product_type:'earring', price:1000, in_stock: true)
+Product.create(product_name:'Gold and Pearl | Hoop', image_path:'/gold_pearl_hoop', product_type:'earring', price:1400, in_stock: true)
+Product.create(product_name:'Platinum Intertwined with Diamond and Gold | Hoop', image_path:'/gold_platinum_diamond_hoop', product_type:'earring', price:3200, in_stock: true)
+Product.create(product_name:'Moons and Stars | Dangle', image_path:'/moon_and_star_drop', product_type:'earring', price:100, in_stock: true)
+Product.create(product_name:'Pearl with Diamond Loop | Drop', image_path:'/pearl_diamond_dangle', product_type:'earring', price: 2200, in_stock: true)
+Product.create(product_name:'Pearl Earrings | Drop', image_path:'/pearl_drop', product_type:'earring', price:1800, in_stock: true)
+Product.create(product_name:'Pearl Studs | Stud', image_path:'/pearl_stud', product_type:'earring', price: 1000, in_stock: true)
+Product.create(product_name:'Ruby Teardrop | Dangle', image_path:'/ruby_teardrop_drop', product_type:'earring', price:2500, in_stock: true)
+Product.create(product_name:'Sapphire Flower | Stud', image_path:'/sapphire_flower_stud', product_type:'earring', price:2700, in_stock: true)
+Product.create(product_name:'Silver Hoops | Hoop', image_path:'/silver_hoop', product_type:'earring', price:1000, in_stock: true)
+Product.create(product_name:'Sterling Silver with Emerald | Drop', image_path:'/sterling_emerald_drop', product_type:'earring', price: 2000, in_stock: true)
+Product.create(product_name:'Tagau Earrings | Dangle', image_path:'/tagau_stack', product_type:'earring', price:1000, in_stock: true)
+Product.create(product_name:'White Gold Aquamarine with Diamond Cluster | Stud', image_path:'/white_gold_aquamarine_diamond_cluster', product_type:'earring', price: 2300, in_stock: true)
+Product.create(product_name:'White Gold Diamond Infinty | Dangle', image_path:'/white_gold_diamond_8Shape_dangle', product_type:'earring', price: 2000, in_stock: true)

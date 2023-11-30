@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navbar from "../navigation/Navbar"; 
 import '../../styles/home.css'
 import { Button, Container, Paper } from "@mui/material";
@@ -11,13 +11,17 @@ function Home(){
 
     const rings = []
     const necklaces = []
+    const earrings = []
     if(allProducts){
         allProducts.map(product => {
             if (product.product_type === 'ring'){
                 rings.push(product)
             } else if(product.product_type === 'necklace'){
                 necklaces.push(product)
+            } else if(product.product_type === 'earring'){
+                earrings.push(product)
             }
+            return ''
         })
     }
 
@@ -26,35 +30,27 @@ function Home(){
     <>
         <Navbar/>
         <Paper id="homeCoverBg" elevation={9}>
-            <img src={homeCover} id="homeCover"/>
+            <img src={homeCover} alt="" id="homeCover"/>
         </Paper>
-        <Container 
-        // sx={{border:'1px solid black'}}
-        >
+        <Container >
             <Button variant="outlined" id="homeCoverBtn">Shop Now!</Button>
            
-            <ProductScroll containerInfo={
+            <ProductScroll key="rings" containerInfo={
                 {
                     name:'Shop Rings',
                     productArr:rings
                 }
             }/>             
-            <ProductScroll containerInfo={
+            <ProductScroll key="necklaces" containerInfo={
                 {
                     name:'Shop Necklaces',
                     productArr:necklaces
                 }
             }/>             
-            <ProductScroll containerInfo={
+            <ProductScroll key="earrings" containerInfo={
                 {
                     name:'Shop Earrings',
-                    productArr:[1,2,3,4,5,6,7,8,9,10,11,12]
-                }
-            }/>             
-            <ProductScroll containerInfo={
-                {
-                    name:'Shop Bracelets',
-                    productArr:[1,2,3,4,5,6,7,8,9,10,11,12]
+                    productArr:earrings
                 }
             }/>             
             <br></br>
