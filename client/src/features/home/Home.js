@@ -1,10 +1,13 @@
 import React from "react";
 import Navbar from "../navigation/Navbar"; 
 import '../../styles/home.css'
-import { Button, Container, Paper } from "@mui/material";
+import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import homeCover from '../home/rings_home_cover.jpg'
 import ProductScroll from "./ProductScroll.js";
 import { useSelector } from "react-redux";
+import ringAd from '../../images/ringAd.png'
+import necklaceAd from '../../images/necklaceAd.png'
+import earringAd from '../../images/earringAd.png'
 
 function Home(){
     const allProducts = useSelector(state => state.products.value)
@@ -33,26 +36,55 @@ function Home(){
             <img src={homeCover} alt="" id="homeCover"/>
         </Paper>
         <Container >
-            <Button variant="outlined" id="homeCoverBtn">Shop Now!</Button>
+            <Button variant="text" id="homeCoverBtn">Shop Now</Button>
            
-            <ProductScroll key="rings" containerInfo={
+           <div id="ringAd">
+            <Box id="ringAdImage">
+                <img alt='ringAd' src={ringAd} className="adImage"/>
+            </Box>
+            <Box id="ringAdContent">
+                <Typography variant='h2' className="adTxt">Find The Perfect Fit!</Typography>
+                <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+            </Box>
+           </div>
+            {/* <ProductScroll key="rings" containerInfo={
                 {
                     name:'Shop Rings',
                     productArr:rings
                 }
-            }/>             
-            <ProductScroll key="necklaces" containerInfo={
+            }/>   */}
+
+            <div id="necklaceAd">
+                <Box id='necklaceAdImage'>
+                    <img alt="necklaceAd" className="adImage" src={necklaceAd}/>
+                </Box>
+                <Box id='necklaceAdContent'>
+                    <Typography variant='h2' className="adTxt">Necklaces for every occasion</Typography>
+                    <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+                </Box>
+            </div>
+            {/* <ProductScroll key="necklaces" containerInfo={
                 {
                     name:'Shop Necklaces',
                     productArr:necklaces
                 }
-            }/>             
-            <ProductScroll key="earrings" containerInfo={
+            }/>  */}
+
+            <div id="earringAd">
+                <Box >
+                    <img alt="earringAd" id="earringAdImage" src={earringAd}/>
+                </Box>
+                <Box id='earringAdContent'>
+                    <Typography variant='h2' className="adTxt">Earrings to match any outfit</Typography>
+                    <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+                </Box>
+            </div>            
+            {/* <ProductScroll key="earrings" containerInfo={
                 {
                     name:'Shop Earrings',
                     productArr:earrings
                 }
-            }/>             
+            }/>              */}
             <br></br>
         </Container>
     </>

@@ -29,7 +29,7 @@ function ProductScroll({ containerInfo }) {
   const nextBtn = ">";
 
   function scroll(e) {
-    // const max = 12
+    const max = 9
     if (e.target.name === "backBtn") {
       let start = sliceVal.start - 3;
       if (start < 0) {
@@ -39,16 +39,15 @@ function ProductScroll({ containerInfo }) {
       }
     } else if (e.target.name === "nextBtn") {
       let start = sliceVal.start + 3;
-      if (start >= 22) {
-        setSliceVal({ start: 22, end: 25 });
-      } else if (start <= 22) {
+      if (start >= max) {
+        setSliceVal({ start: max, end: max + 3 });
+      } else if (start <= max) {
         setSliceVal({ start: start, end: start + 3 });
       }
     }
   }
   return (
     <div key={containerInfo.name}>
-      <Typography variant="h3" className="containerName">{containerInfo.name}</Typography>
       <div className="shell">
         <div className="productContainer">
           <Button

@@ -1,18 +1,86 @@
 #homeCover{
-    /* 
-    width: 65vw;
-    position: relative;
-    right: 2vw; */
     border-radius: 10px;
     margin:1%;
-    width: 90%;
+    width: 80%;
+    height: 70vh;
 }
 #homeCoverBtn{
     scale: 1.8;
     position: relative;
-    bottom: 65vh;
+    bottom: 40vh;
 }
 #homeCoverBg{
     width: 100%;
-    background-color: rgba(71, 71, 71, 0.648);
+    /* background-color: rgba(71, 71, 71, 0.648); */
+}
+#ringAd{
+    margin-top: 90px;
+    margin-bottom: 300px;
+    height:40vh;
+    width:80vw;
+    position:relative;
+    right:10vw;
+}
+#ringAdImage{
+    width:40.75vw; 
+    height:40vh; 
+    position:absolute
+}
+#ringAdContent{
+    width:39.75vw; 
+    height:40vh; 
+    position:absolute; 
+    right:0vw; 
+    background:#8B8B13;
+}
+.adTxt{
+    position: relative;
+    top: 5vw;
+}
+.adBtn{
+    position: relative;
+    top: 7vw;
+    scale: 2.5;
+}
+.adImage{
+    height: 40vh;
+    width: 40vw;
+}
+#necklaceAd{
+    margin-bottom: 300px;
+    height:40vh;
+    width:80vw;
+    position:relative;
+    right:10vw;
+}
+#necklaceAdImage{
+    width:40.75vw; 
+    height:40vh; 
+    position:absolute; 
+    right:0vw; 
+}
+#necklaceAdContent{
+    width:39.75vw; 
+    height:40vh; 
+    position:absolute; 
+    background-color:#CC7624;
+}
+#earringAd{
+    height:40vh;
+    width:80vw;
+    position:relative;
+    right:10vw;
+}
+#earringAdImage{
+    width:40.75vw; 
+    height:46.55vh; 
+    position:absolute; 
+    left:0vw
+}
+#earringAdContent{
+    width:39.75vw; 
+    height:40vh; 
+    position:absolute; 
+    right:0vw; 
+    background-color: #134F5C;
 }
