@@ -19,9 +19,7 @@ function Shop(){
                     <img src={p.image} alt={p.product_name} className="productCardImage"/>
                     <Typography variant='h6' >{p.product_name}</Typography>
                     <Typography variant='body1'>${p.price}</Typography>
-                    <Link to={`/shop/${p.id}`} className='addBtn'>
-                        <Button variant='text'>Add to Bag</Button>
-                    </Link>
+                    <Button variant='text' className='addBtn'>Add to Bag</Button>
                 </Card>
             </Grid>
         )
