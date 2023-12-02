@@ -14,7 +14,7 @@ function Profile(){
     date[2] = year
     const joinDate = date.join('-')
 return(
-    <div>
+    <div className="main">
         <Navbar/>
 
         <Container>

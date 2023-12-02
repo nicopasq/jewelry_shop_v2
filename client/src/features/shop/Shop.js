@@ -11,23 +11,22 @@ function Shop(){
 
     const test = products?.map((p) => {
         return (
-            <Grid item xs={4} key={p.id}>
+            <Grid item xs={4} key={p.id} sm={3}>
                 <Card elevation={0} className="product">
                     <img src={p.image} alt={p.product_name} className="productCardImage"/>
-                    <Typography variant='h6' className='productCardName'>{p.product_name}</Typography>
-                    <Typography variant='body1' className='productCardPrice'>${p.price}</Typography>
-                    <Button variant='text' onClick={()=>{}}>Add to cart</Button>
+                    <Typography variant='h6' >{p.product_name}</Typography>
+                    <Typography variant='body1'>${p.price}</Typography>
                 </Card>
             </Grid>
         )
     })
     return (
-        <>
+        <div className='main'>
             <Navbar/>
             <Grid container spacing={4} id='shopGrid'>
                 {test}
             </Grid>
-        </>
+        </div>
     )
 }
 

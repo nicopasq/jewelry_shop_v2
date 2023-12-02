@@ -26,13 +26,9 @@ function Home(){
             return ''
         })
     }
-function sendToShop(){
-    navigate('/shop')
-    window.scrollTo(0,0)
-}
 
     return (
-    <>
+    <div className="main">
         <Navbar/>
         <Container >
            
@@ -42,7 +38,7 @@ function sendToShop(){
             </Box>
             <Box id="ringAdContent">
                 <Typography variant='h2' className="adTxt">Find The Perfect Fit!</Typography>
-                <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
+                <Button variant='text' className="adBtn" onClick={() => navigate('/shop')}> Explore Jewelry</Button>
             </Box>
            </div>
 
@@ -52,7 +48,7 @@ function sendToShop(){
                 </Box>
                 <Box id='necklaceAdContent'>
                     <Typography variant='h2' className="adTxt">Necklaces for every occasion</Typography>
-                    <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
+                    <Button variant='text' className="adBtn" onClick={() => navigate('/shop')}> Explore Jewelry</Button>
                 </Box>
             </div>
 
@@ -62,12 +58,12 @@ function sendToShop(){
                 </Box>
                 <Box id='earringAdContent'>
                     <Typography variant='h2' className="adTxt">Earrings to match any outfit</Typography>
-                    <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
+                    <Button variant='text' className="adBtn" onClick={() => navigate('/shop')}> Explore Jewelry</Button>
                 </Box>
             </div>            
             <br></br>
         </Container>
-    </>
+    </div>
     )
 }
 

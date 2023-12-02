@@ -8,12 +8,16 @@
     width: 20vw;
 }
 .product{
+    /* border: 1px solid darkBlue; */
     width: 20vw;
     text-align: left;
     position: relative;
-    left: 5vw;
+    left: 1vw;
 }
 .productCardImage{
-    height: 40vh;
-    width: 40vh;
+    /* border: 1px solid orange; */
+    height: 30vh;
+    width: 30vh;
+    position: relative;
+    left: 2.5vw;
 }
