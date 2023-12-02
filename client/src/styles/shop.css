@@ -4,20 +4,15 @@
     top: 1vh;
     margin-bottom: 5vh;
 }
-.productCardName{
-    width: 20vw;
-}
 .product{
-    /* border: 1px solid darkBlue; */
-    width: 20vw;
+    width: 30vh;
     text-align: left;
     position: relative;
-    left: 1vw;
+    left: 3vw;
+    bottom: 3vh;
+    /* border: 1px solid orange; */
 }
 .productCardImage{
-    /* border: 1px solid orange; */
     height: 30vh;
     width: 30vh;
-    position: relative;
-    left: 2.5vw;
 }

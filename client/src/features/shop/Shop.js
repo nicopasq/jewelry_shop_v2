@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../navigation/Navbar'
-import { Button, Card, Container, Grid, Typography } from '@mui/material'
+import { Card, Grid, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import '../../styles/shop.css'
 
@@ -11,7 +11,9 @@ function Shop(){
 
     const test = products?.map((p) => {
         return (
-            <Grid item xs={4} key={p.id} sm={3}>
+            <Grid item xs={4} key={p.id} sm={3} 
+            // sx={{border:'1px solid darkblue'}}
+            >
                 <Card elevation={0} className="product">
                     <img src={p.image} alt={p.product_name} className="productCardImage"/>
                     <Typography variant='h6' >{p.product_name}</Typography>
