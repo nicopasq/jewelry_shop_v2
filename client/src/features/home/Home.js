@@ -1,16 +1,16 @@
 import React from "react";
 import Navbar from "../navigation/Navbar"; 
 import '../../styles/home.css'
-import { Box, Button, Container, Paper, Typography } from "@mui/material";
-import homeCover from '../home/rings_home_cover.jpg'
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import ringAd from '../../images/ringAd.png'
 import necklaceAd from '../../images/necklaceAd.png'
 import earringAd from '../../images/earringAd.png'
+import { Link, useNavigate } from "react-router-dom";
 
 function Home(){
+    const navigate = useNavigate()
     const allProducts = useSelector(state => state.products.value)
-
     const rings = []
     const necklaces = []
     const earrings = []
@@ -26,16 +26,15 @@ function Home(){
             return ''
         })
     }
-
+function sendToShop(){
+    navigate('/shop')
+    window.scrollTo(0,0)
+}
 
     return (
     <>
         <Navbar/>
-        <Paper id="homeCoverBg" elevation={9}>
-            <img src={homeCover} alt="" id="homeCover"/>
-        </Paper>
         <Container >
-            <Button variant="text" id="homeCoverBtn">Shop Now</Button>
            
            <div id="ringAd">
             <Box id="ringAdImage">
@@ -43,7 +42,7 @@ function Home(){
             </Box>
             <Box id="ringAdContent">
                 <Typography variant='h2' className="adTxt">Find The Perfect Fit!</Typography>
-                <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+                <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
             </Box>
            </div>
 
@@ -53,7 +52,7 @@ function Home(){
                 </Box>
                 <Box id='necklaceAdContent'>
                     <Typography variant='h2' className="adTxt">Necklaces for every occasion</Typography>
-                    <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+                    <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
                 </Box>
             </div>
 
@@ -63,7 +62,7 @@ function Home(){
                 </Box>
                 <Box id='earringAdContent'>
                     <Typography variant='h2' className="adTxt">Earrings to match any outfit</Typography>
-                    <Button variant='text' className="adBtn"> Explore Jewelry</Button>
+                    <Button variant='text' className="adBtn" onClick={() => sendToShop()}> Explore Jewelry</Button>
                 </Box>
             </div>            
             <br></br>

@@ -5,6 +5,7 @@
     position: absolute;
     top: 15vh;
     left: 1vw;
+    background-color: antiquewhite;
 }
 .dataContainer{
     text-align: left;

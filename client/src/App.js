@@ -26,7 +26,6 @@ function App() {
     fetch('/products')
     .then(r => r.json())
     .then(data => {
-      console.log('images', product_images)
         data.map(product => {
             product_images.map(r => {
                 if (r.includes(product.image_path)){

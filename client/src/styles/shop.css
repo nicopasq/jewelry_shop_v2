@@ -1,0 +1,19 @@
+#shopGrid{
+    position: relative;
+    left: 1vw;
+    top: 1vh;
+    margin-bottom: 5vh;
+}
+.productCardName{
+    width: 20vw;
+}
+.product{
+    width: 20vw;
+    text-align: left;
+    position: relative;
+    left: 5vw;
+}
+.productCardImage{
+    height: 40vh;
+    width: 40vh;
+}

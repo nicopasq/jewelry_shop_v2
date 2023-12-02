@@ -27,14 +27,14 @@ return(
                 <Typography variant="h5" className="profileCardData">Total Orders:</Typography>
             </Card>
 
-            <Paper elevation={6} className="dataContainer">
+            <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
                 <div className="containerHeader">
                     <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>Items Ordered</Typography>
                 </div>
                 <Table id='itemsTable'></Table>
             </Paper>
 
-            <Paper elevation={6} className="dataContainer">
+            <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
                 <div className="containerHeader">
                     <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>All Orders</Typography>
                 </div>  
