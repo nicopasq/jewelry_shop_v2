@@ -16,3 +16,7 @@
     height: 30vh;
     width: 30vh;
 }
+.addBtn{
+    position: relative;
+    right: 0.4vw;
+}

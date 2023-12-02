@@ -1,8 +1,9 @@
 import React from 'react'
 import Navbar from '../navigation/Navbar'
-import { Card, Grid, Typography } from '@mui/material'
+import { Button, Card, Grid, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import '../../styles/shop.css'
+import { Link } from 'react-router-dom'
 
 function Shop(){
     const products = useSelector(state => state.products.value)
@@ -18,6 +19,9 @@ function Shop(){
                     <img src={p.image} alt={p.product_name} className="productCardImage"/>
                     <Typography variant='h6' >{p.product_name}</Typography>
                     <Typography variant='body1'>${p.price}</Typography>
+                    <Link to={`/shop/${p.id}`} className='addBtn'>
+                        <Button variant='text'>Add to Bag</Button>
+                    </Link>
                 </Card>
             </Grid>
         )
