@@ -3,7 +3,6 @@ import Navbar from "../navigation/Navbar";
 import '../../styles/home.css'
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import homeCover from '../home/rings_home_cover.jpg'
-import ProductScroll from "./ProductScroll.js";
 import { useSelector } from "react-redux";
 import ringAd from '../../images/ringAd.png'
 import necklaceAd from '../../images/necklaceAd.png'
@@ -47,12 +46,6 @@ function Home(){
                 <Button variant='text' className="adBtn"> Explore Jewelry</Button>
             </Box>
            </div>
-            {/* <ProductScroll key="rings" containerInfo={
-                {
-                    name:'Shop Rings',
-                    productArr:rings
-                }
-            }/>   */}
 
             <div id="necklaceAd">
                 <Box id='necklaceAdImage'>
@@ -63,12 +56,6 @@ function Home(){
                     <Button variant='text' className="adBtn"> Explore Jewelry</Button>
                 </Box>
             </div>
-            {/* <ProductScroll key="necklaces" containerInfo={
-                {
-                    name:'Shop Necklaces',
-                    productArr:necklaces
-                }
-            }/>  */}
 
             <div id="earringAd">
                 <Box >
@@ -79,12 +66,6 @@ function Home(){
                     <Button variant='text' className="adBtn"> Explore Jewelry</Button>
                 </Box>
             </div>            
-            {/* <ProductScroll key="earrings" containerInfo={
-                {
-                    name:'Shop Earrings',
-                    productArr:earrings
-                }
-            }/>              */}
             <br></br>
         </Container>
     </>

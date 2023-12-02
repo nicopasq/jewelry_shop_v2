@@ -5,6 +5,7 @@ import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
 import product_images from './images/images.js'
 import Home from './features/home/Home';
+import Profile from './features/profile/Profile.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
@@ -48,6 +49,7 @@ function App() {
     return (
       <Routes>
         <Route path='/home' element={<Home />}/>
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     )
   }

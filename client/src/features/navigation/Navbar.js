@@ -5,24 +5,27 @@ import '../../styles/navBar.css'
 import { Link } from "react-router-dom";
 
 function Navbar(){
-    const siteLinks = ['Featured', 'Shop', 'Showcase']
-
-    const renderSiteLinks = siteLinks.map((link, index) => {
-        return (
-            <Grid item xs={4} key={index}>
-                <Link to={link.toLowerCase()}>
-                    <Typography variant="h6" className='siteLinks'>{link}</Typography>
-                </Link>
-            </Grid>
-        )
-    })
 
     return(
         <div id="navBar">
             <QuickLinks/>
             <Typography variant="h3" id="name">Rock Hound</Typography>
             <Grid container spacing={3} id="linkContainer">
-                {renderSiteLinks}
+                <Grid item xs={4}>
+                    <Link to='/home'>
+                        <Typography variant="h6" className='siteLinks'>Home</Typography>
+                    </Link>
+                </Grid>
+                <Grid item xs={4}>
+                    <Link>
+                        <Typography variant="h6" className='siteLinks'>Shop</Typography>
+                    </Link>
+                </Grid>
+                <Grid item xs={4}>
+                    <Link>
+                        <Typography variant="h6" className='siteLinks'>Cart</Typography>
+                    </Link>
+                </Grid>
             </Grid>
         </div>
     );

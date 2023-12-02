@@ -1,17 +1,17 @@
 #navBar{
     background-color: black;
     border: 1px solid black;
-    height: 10vh;
+    height: 11vh;
 }
 #name{
     color: rgb(230, 203, 183);
     font-family: cursive;
     position: relative;
-    top: -3vh;
+    top: -5vh;
 }
 #linkContainer{
     position: relative;
-    top: -3vh;
+    top: -5vh;
 }
 #linkContainer a{
     text-decoration: none;
