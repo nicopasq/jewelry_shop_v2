@@ -17,7 +17,7 @@ function Navbar(){
                     </Link>
                 </Grid>
                 <Grid item xs={4}>
-                    <Link>
+                    <Link to='/shop'>
                         <Typography variant="h6" className='siteLinks'>Shop</Typography>
                     </Link>
                 </Grid>
