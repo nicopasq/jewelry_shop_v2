@@ -1,0 +1,27 @@
+#profileCard{
+    text-align: left;
+    height: 30vh;
+    width: 15vw;
+    position: absolute;
+    top: 15vh;
+    left: 1vw;
+}
+.profileCardData{
+    
+}
+.dataContainer{
+    text-align: left;
+    margin: 5vh;
+    height: 35vh;
+    position: relative;
+    left: 2vw;
+}
+.containerHeader{
+    border-bottom: 1px solid black;
+    position: relative;
+    top: 1vh;
+}
+.containerTitle{
+    position: relative;
+    left: 1vw;
+}
