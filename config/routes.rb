@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # resources :orders
   resources :users, only:[:create]
-  resources :products
+  resources :products, only:[:show, :index]
 
   post '/login', to:'sessions#create'
   get '/auth', to:'sessions#show'

@@ -8,13 +8,10 @@ import { useNavigate } from 'react-router-dom'
 function Shop(){
     const navigation = useNavigate()
     const products = useSelector(state => state.products.value)
-    // console.log(products)
 
-    const test = products?.map((p) => {
+    const renderProducts = products?.map((p) => {
         return (
-            <Grid item xs={4} key={p.id} sm={3} 
-            // sx={{border:'1px solid darkblue'}}
-            >
+            <Grid item xs={4} key={p.id} sm={3} >
                 <Card elevation={0} className="product">
                     <img src={p.image} alt={p.product_name} className="productCardImage"/>
                     <Typography variant='h6' >{p.product_name}</Typography>
@@ -22,7 +19,7 @@ function Shop(){
                     <Button 
                         variant='text' 
                         className='addBtn'
-                        onClick={() =>  navigation(`/shop/${p.id}`)}>Learn More</Button>
+                        onClick={() => navigation(`/shop/${p.id}`)}>Learn More</Button>
                 </Card>
             </Grid>
         )
@@ -31,7 +28,7 @@ function Shop(){
         <div className='main'>
             <Navbar/>
             <Grid container spacing={4} id='shopGrid'>
-                {test}
+                {renderProducts}
             </Grid>
         </div>
     )

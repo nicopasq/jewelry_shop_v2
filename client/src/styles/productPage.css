@@ -1,0 +1,19 @@
+.halfScreen{
+    border:1px solid black;
+    width: 49.9%;
+    height: 100vh;
+    position: absolute;
+    top: 11.25vh;
+}
+#productDetails{
+    position: absolute;
+    right: 0vw;
+}
+#imageContainer{
+    overflow-y: hidden;
+}
+#productImage{
+    height: 50vh;
+    position: relative;
+    top: 10vh;
+}

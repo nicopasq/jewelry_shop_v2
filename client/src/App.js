@@ -7,6 +7,7 @@ import product_images from './images/images.js'
 import Home from './features/home/Home';
 import Profile from './features/profile/Profile.js';
 import Shop from './features/shop/Shop.js';
+import ProductPage from './features/shop/ProductPage.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
@@ -53,6 +54,7 @@ function App() {
         <Route path='/home' element={<Home />}/>
         <Route path='/profile' element={<Profile />} />
         <Route path='/shop' element={<Shop/>} />
+        <Route path='/shop/:id' element={<ProductPage/>} /> 
       </Routes>
     )
   }
