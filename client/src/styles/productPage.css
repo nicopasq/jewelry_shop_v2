@@ -8,6 +8,7 @@
 #productDetails{
     position: absolute;
     right: 0vw;
+    text-align: left;
 }
 #imageContainer{
     overflow-y: hidden;
@@ -16,4 +17,23 @@
     height: 50vh;
     position: relative;
     top: 10vh;
+}
+#productDetails div{
+    margin-top: 5vh;
+}
+#productName{
+    font-size: 30pt;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#sizeForm{
+    height: 10vh;
+    position: relative;
+    bottom: 2vh;
+}
+#selectSize {
+    position: relative;
+    bottom: 2vh;
+}
+.productData{
+    margin-left: 1vw;
 }
