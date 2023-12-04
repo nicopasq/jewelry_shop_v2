@@ -14,14 +14,19 @@ function ProductPage(){
     const [ringSize, setRingSize] = useState('')
     const [currentProduct, setCurrentProduct] = useState({})
     const [quantity, setQuantity] = useState('')
+    let ringDisplay = {display:'none'}
     const orderBody = {
         user_id: currentUser.id,
         product_id: currentProduct.id,
         in_cart: true,
+        order_id:'',
         size:'',
         quantity:''
     }
-
+    if (currentProduct && currentProduct.product_type === 'ring'){
+        ringDisplay = {display:'block'}
+    }
+    
     useEffect(() => {
         fetch(`/products/${id}`)
         .then(r => r.json())
@@ -35,6 +40,7 @@ function ProductPage(){
         })
     },[])
 
+ 
     function orderProduct(ringSize){
         orderBody.size = ringSize
         orderBody.quantity = parseInt(quantity)
@@ -46,8 +52,6 @@ function ProductPage(){
             },
             body: JSON.stringify(orderBody)
         })
-        .then(r => r.json())
-        .then(data => console.log(data))
     }
 
     return (
@@ -64,7 +68,7 @@ function ProductPage(){
                 </div>
                 
                 <div id="ringSize">
-                    <div id="sizeForm" className="productData">
+                    <div id="sizeForm" className="productData" style={ringDisplay}>
                         <InputLabel id="ringSizes">Ring Size:</InputLabel>
                         <Select 
                             labelId="ringSizes"
@@ -78,7 +82,7 @@ function ProductPage(){
                             </Select>
                     </div>
                     <div id="quantityForm">
-                            <InputLabel id='quantity'>Quantity:</InputLabel>
+                            <InputLabel id='quantity' sx={{marginTop:'60px'}}>Quantity:</InputLabel>
                             <TextField type="number" placeholder="Enter Quantity" className="qty" onChange={(e) => setQuantity(e.target.value)}/>
                     </div>
                     <Divider sx={{bgcolor:'lightGrey', width:'90%'}}/>

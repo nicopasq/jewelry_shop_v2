@@ -22,8 +22,8 @@ function Navbar(){
                     </Link>
                 </Grid>
                 <Grid item xs={4}>
-                    <Link>
-                        <Typography variant="h6" className='siteLinks'>Cart</Typography>
+                    <Link to='/bag'>
+                        <Typography variant="h6" className='siteLinks'>Bag</Typography>
                     </Link>
                 </Grid>
             </Grid>
