@@ -17,6 +17,7 @@ function ProductPage(){
     const orderBody = {
         user_id: currentUser.id,
         product_id: currentProduct.id,
+        in_cart: true,
         size:'',
         quantity:''
     }
@@ -34,7 +35,7 @@ function ProductPage(){
         })
     },[])
 
-    function orderProduct(ringSize, product){
+    function orderProduct(ringSize){
         orderBody.size = ringSize
         orderBody.quantity = parseInt(quantity)
 
@@ -87,7 +88,7 @@ function ProductPage(){
                     <Typography variant="h5" className="productData">Total:</Typography>
                     <Divider sx={{bgcolor:'lightGrey', width:'90%', marginTop:'5px', marginBottom:'10px'}} />
                     <Typography variant="h4" className="productData">${currentProduct.price}</Typography>
-                    <Button variant="contained" id="addToBagBtn" onClick={(e) => orderProduct(ringSize, currentProduct)}>Add to Bag</Button>
+                    <Button variant="contained" id="addToBagBtn" onClick={() => orderProduct(ringSize)}>Add to Bag</Button>
                     <Typography variant="h4" className="productData"><b>Free Shipping & Free 90 Day Returns</b></Typography>
                 </div>
             </div>
