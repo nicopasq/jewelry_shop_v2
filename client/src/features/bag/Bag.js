@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 
 function Bag(){
     const currentUser = useSelector(state => state.currentUser.value)
-    console.log(currentUser)
+    const saveForLater = currentUser.order_products.filter(order => order.in_cart === false)
+    const inBag = currentUser.order_products.filter(order => order.in_cart === true)
+console.log('inBag', inBag)
     return(
         <div className='main'>
             <Navbar/>
