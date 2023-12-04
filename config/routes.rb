@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only:[:create]
   resources :products, only:[:show, :index]
 
+  # post '/orderProducts', to:'orderProducts#create'
   post '/login', to:'sessions#create'
   get '/auth', to:'sessions#show'
   delete '/logout', to:'sessions#destroy'

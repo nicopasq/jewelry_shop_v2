@@ -1,14 +1,12 @@
 .halfScreen{
-    border:1px solid black;
     width: 49.9%;
-    height: 100vh;
+    height: 80vh;
     position: absolute;
     top: 11.25vh;
 }
 #productDetails{
     position: absolute;
     right: 0vw;
-    text-align: left;
 }
 #imageContainer{
     overflow-y: hidden;
@@ -24,16 +22,34 @@
 #productName{
     font-size: 30pt;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: left;
 }
 #sizeForm{
     height: 10vh;
     position: relative;
     bottom: 2vh;
+    text-align: left;
 }
 #selectSize {
     position: relative;
     bottom: 2vh;
 }
 .productData{
-    margin-left: 1vw;
+    text-align: left;
+    position: relative;
+    left: 1vw;
+}
+#addToBagBtn{
+    margin: 40px;
+    background-color: rgb(41, 0, 0);
+    color: white;
+    height: 5vh;
+    width: 40vw;
+    font-size: 15pt;
+    position: relative;
+    right: 1vw;
+}
+#addToBagBtn:hover{
+    background-color: rgb(59, 45, 45);
+    color: white;
 }

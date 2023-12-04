@@ -3,14 +3,21 @@ import Navbar from "../navigation/Navbar";
 import { useParams } from "react-router-dom";
 import images from '../../images/images'
 import '../../styles/productPage.css'
-import { Divider, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Button, Divider, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function ProductPage(){
+    const currentUser = useSelector(state => state.currentUser.value)
     const [ringSize, setRingSize] = useState('')
     const [currentProduct, setCurrentProduct] = useState({})
     const { id } = useParams()
     const ringSizes = [5.0, 5.25, 5.5, 6.0, 6.25, 6.5, 7.0, 7.25, 7.5, 8.0, 8.25, 8.5, 9.0, 9.25, 9.5, 10, 10.25, 10.5, 11]
     const menuItems = ringSizes.map(size => <MenuItem value={size} key={size}>{size}</MenuItem>)
+    const orderBody = {
+        user_id: currentUser.id,
+        product_id: currentProduct.id,
+        size:''
+    }
 
     useEffect(() => {
         fetch(`/products/${id}`)
@@ -25,6 +32,22 @@ function ProductPage(){
         })
     },[])
 
+    function orderProduct(ringSize, product){
+        if(ringSize){
+            orderBody.size = ringSize
+        }
+        console.log(orderBody)
+        // fetch(`/orderProducts`, {
+        //     method:"POST",
+        //     headers:{
+        //         "Content-Type":"application/json"
+        //     },
+        //     body: JSON.stringify(orderBody)
+        // })
+        // .then(r => r.json())
+        // .then(data => console.log(data))
+    }
+
     return (
         <div className="main">
             <Navbar/>
@@ -35,7 +58,7 @@ function ProductPage(){
                 
                 <div id="productData">
                     <Typography variant="h3" id="productName" className="productData">{currentProduct.product_name}</Typography>
-                    <Divider sx={{bgcolor:'lightGrey'}}/>
+                    <Divider sx={{bgcolor:'lightGrey', width:'90%'}}/>
                 </div>
                 
                 <div id="ringSize">
@@ -52,18 +75,20 @@ function ProductPage(){
                                 {menuItems}
                             </Select>
                     </form>
-                    <Divider sx={{bgcolor:'lightGrey'}}/>
-                </div>
+                    <Divider sx={{bgcolor:'lightGrey', width:'90%'}}/>
+                </div> 
 
                 <div id="payment">
-                    <Typography variant="h5" className="productData" id="total" >Total:</Typography>
-                    <Divider sx={{bgcolor:'lightGrey'}} />
+                    <Typography variant="h5" className="productData">Total:</Typography>
+                    <Divider sx={{bgcolor:'lightGrey', width:'90%', marginTop:'5px', marginBottom:'10px'}} />
                     <Typography variant="h4" className="productData">${currentProduct.price}</Typography>
+                    <Button variant="contained" id="addToBagBtn" onClick={(e) => orderProduct(ringSize, currentProduct)}>Add to Bag</Button>
                     <Typography variant="h4" className="productData"><b>Free Shipping & Free 90 Day Returns</b></Typography>
                 </div>
             </div>
         </div>
     )
 }
+
 
 export default ProductPage;
