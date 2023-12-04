@@ -53,3 +53,15 @@
     background-color: rgb(59, 45, 45);
     color: white;
 }
+#quantityForm{
+    width: fit-content;
+    height: 8.25vh;
+    position: relative;
+    bottom: 5vh;
+    left: 1vw;
+    text-align: left;
+}
+.qty{
+    position: relative;
+    bottom: 10vh;
+}

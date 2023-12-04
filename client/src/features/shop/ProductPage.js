@@ -3,20 +3,22 @@ import Navbar from "../navigation/Navbar";
 import { useParams } from "react-router-dom";
 import images from '../../images/images'
 import '../../styles/productPage.css'
-import { Button, Divider, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Button, Divider, Input, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 function ProductPage(){
     const currentUser = useSelector(state => state.currentUser.value)
-    const [ringSize, setRingSize] = useState('')
-    const [currentProduct, setCurrentProduct] = useState({})
-    const { id } = useParams()
     const ringSizes = [5.0, 5.25, 5.5, 6.0, 6.25, 6.5, 7.0, 7.25, 7.5, 8.0, 8.25, 8.5, 9.0, 9.25, 9.5, 10, 10.25, 10.5, 11]
     const menuItems = ringSizes.map(size => <MenuItem value={size} key={size}>{size}</MenuItem>)
+    const { id } = useParams()
+    const [ringSize, setRingSize] = useState('')
+    const [currentProduct, setCurrentProduct] = useState({})
+    const [quantity, setQuantity] = useState('')
     const orderBody = {
         user_id: currentUser.id,
         product_id: currentProduct.id,
-        size:''
+        size:'',
+        quantity:''
     }
 
     useEffect(() => {
@@ -33,19 +35,18 @@ function ProductPage(){
     },[])
 
     function orderProduct(ringSize, product){
-        if(ringSize){
-            orderBody.size = ringSize
-        }
-        console.log(orderBody)
-        // fetch(`/orderProducts`, {
-        //     method:"POST",
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     },
-        //     body: JSON.stringify(orderBody)
-        // })
-        // .then(r => r.json())
-        // .then(data => console.log(data))
+        orderBody.size = ringSize
+        orderBody.quantity = parseInt(quantity)
+
+        fetch(`/order_products`, {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(orderBody)
+        })
+        .then(r => r.json())
+        .then(data => console.log(data))
     }
 
     return (
@@ -62,7 +63,7 @@ function ProductPage(){
                 </div>
                 
                 <div id="ringSize">
-                    <form id="sizeForm" className="productData">
+                    <div id="sizeForm" className="productData">
                         <InputLabel id="ringSizes">Ring Size:</InputLabel>
                         <Select 
                             labelId="ringSizes"
@@ -74,7 +75,11 @@ function ProductPage(){
                             onChange={(e) => setRingSize(e.target.value)}>
                                 {menuItems}
                             </Select>
-                    </form>
+                    </div>
+                    <div id="quantityForm">
+                            <InputLabel id='quantity'>Quantity:</InputLabel>
+                            <TextField type="number" placeholder="Enter Quantity" className="qty" onChange={(e) => setQuantity(e.target.value)}/>
+                    </div>
                     <Divider sx={{bgcolor:'lightGrey', width:'90%'}}/>
                 </div> 
 

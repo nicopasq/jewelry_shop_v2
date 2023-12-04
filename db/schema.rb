@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2023_12_04_010016) do
     t.integer "user_id"
     t.integer "order_id"
     t.integer "quantity"
+    t.integer "size"
     t.boolean "in_cart"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
