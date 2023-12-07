@@ -20,8 +20,21 @@ function Bag(){
     const saveForLater = orderProducts.filter(p => p.in_cart === false)
 
     //make into bagDisplay component
+    function deleteOrderProduct(product){
+        console.log('delete order product:', product)
+        fetch('/order_products', {
+            method:"DELETE",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(product)
+        })
+        .then(r => console.log(r))
+    }
+
     const bagDisplay = inBag.map(product => {
         const productObj = product.product
+        console.log(product)
         return (
                 <Card key={product.id} className='productCardBag'>
                     <img src={product.image} />
@@ -45,7 +58,11 @@ function Bag(){
             </Typography>
         </Link>)
 
+
+
+    //render bagDisplay component 
     const render = bagDisplay.length > 0 ? bagDisplay : nothingInBag;
+
     return(
         <div className='main'>
             <Navbar/>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :order_products, only:[:create]
+  resources :order_products, only:[:create, :destroy]
   # resources :orders
   resources :users, only:[:create]
   resources :products, only:[:show, :index]

@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2023_12_04_010016) do
     t.string "product_type"
     t.integer "price"
     t.boolean "in_stock"
-    t.integer "size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

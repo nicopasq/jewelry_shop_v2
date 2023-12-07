@@ -6,7 +6,6 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :product_type
       t.integer :price
       t.boolean :in_stock
-      t.integer :size
       t.timestamps
     end
   end
