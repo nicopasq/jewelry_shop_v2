@@ -1,0 +1,35 @@
+.productCardBag{
+    text-align: left;
+    height: 17vh;
+    margin-bottom: 5px;
+}
+.productCardBag img{
+    height: 15vh;
+}
+#totalContainer{
+    border: 1px solid black;
+    width: 15%;
+    height: 30vh;
+    position: relative;
+    top: 1vh;
+    left: 10%;
+}
+.cardContent{
+    position: relative;
+    bottom: 95%;
+    left: 26%;
+}
+#bag{
+    text-align: left;
+    overflow-y: scroll;
+    position: relative;
+    bottom: 27vh;   
+    left: 30%;
+    width:40%;
+    height:47vh;
+}
+.cardButtons{
+    position: relative;
+    bottom:190%;
+    left: 65%;
+}

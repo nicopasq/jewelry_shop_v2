@@ -20,13 +20,13 @@ body{
 #signupBtn{
     position: relative;
     top: 18vh;
-    right: 3vw;
+    right: 20%;
 }
 #loginRoute{
     font-family:sans-serif;
     position: relative;
-    top: 25vh;
-    right: 7vw;
+    top: 30%;
+    left: 40%;
 }
 #businessName{
     font-family:cursive;
