@@ -1,12 +1,13 @@
 .productCardBag{
     border: 1px solid rgba(86, 103, 0, 0.351);
     text-align: left;
-    height: 17vh;
+    height: 20vh;
     margin-bottom: 5px;
 }
 .productCardBag img{
     height: 15vh;
-    margin-top: 1.25%;
+    width: 15vh;
+    margin-top: 3%;
     margin-left: 1%;
 }
 #totalContainer{
@@ -18,10 +19,12 @@
     left: 67%;
 }
 .cardContent{
-    width: 30%;
+    border: 1px solid blue;
+    width: 50%;
+    height: 16.5vh;
     position: relative;
-    bottom: 98%;
-    left: 26%;
+    bottom: 95%;
+    left: 20%;
 }
 #bag{
     text-align: left;
@@ -42,10 +45,18 @@
     width: 100%;
 }
 .openMenu{
-    display: inline-block;
-    text-align: right;
-    width: 18.5%;
+    width: fit-content;
     position: relative;
-    bottom: 215%;
-    left: 80%;
+    bottom:3.35vh;
+    left: 70%;
+}
+.openMenu:hover{
+    cursor: pointer;
+}
+.cardButtons{
+    width: 30%;
+    height: 5%;
+    position: absolute;
+    top:2vh;
+    left: 115%;
 }

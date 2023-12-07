@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 function Bag(){
     const [anchorEl, setAnchorEl] = useState(null)
-    const [menuDisplay, setMenuDisplay] = useState(false)
+    const [open, setOpen] = useState(false)
+
     const currentUser = useSelector(state => state.currentUser.value)
     const products = useSelector(state => state.products.value)
     const orderProducts = []    
@@ -35,8 +36,13 @@ function Bag(){
     }
 
     function handleMenuToggle(target){
-        setAnchorEl(target)
-        setMenuDisplay(true)
+        if(target !== null){
+            setAnchorEl(target)
+            setOpen(true)
+        } else {
+            setAnchorEl(null)
+            setOpen(false)
+        }
     }
     const bagDisplay = inBag.map(product => {
         const productObj = product.product
@@ -56,15 +62,16 @@ function Bag(){
                                 return {display:'none'}
                             }
                         }}>Size: {product.size}</Typography>
+                    <div className='cardButtons'>
+                        <Typography className='openMenu' sx={{fontSize:'25pt'}} 
+                        onClick={(e) => handleMenuToggle(e.target)}>...</Typography>
+                    </div>
                     </CardContent>
-                    <Typography className='openMenu' sx={{fontSize:'27pt'}} onClick={(e) => handleMenuToggle(e.target)}>...</Typography>
-                        <Menu className='buttonMenu' anchorEl={anchorEl} open={menuDisplay}>
-                            <MenuItem>🗑️</MenuItem>
-                            <MenuItem>Save for later</MenuItem>
-                        </Menu>
                 </Card>
         )
     })
+
+
     const nothingInBag = (
         <Link to='/shop/'>
             <Typography variant='h6' sx={{fontFamily:'serif'}}>
@@ -97,6 +104,11 @@ function Bag(){
             <div id='bag'>
             <Typography variant='h5' sx={{fontFamily:"serif"}}>Your Bag</Typography>
                 {render}
+                <Menu open={open} anchorEl={anchorEl} onClose={() => handleMenuToggle(null)}>
+                            <MenuItem>🗑️</MenuItem>
+                            <MenuItem>Save for later</MenuItem>
+                            <MenuItem>Edit Order</MenuItem>
+                </Menu>
             </div>
         </div>
     )
