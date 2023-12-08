@@ -19,7 +19,6 @@
     left: 67%;
 }
 .cardContent{
-    border: 1px solid blue;
     width: 50%;
     height: 16.5vh;
     position: relative;
@@ -45,10 +44,11 @@
     width: 100%;
 }
 .openMenu{
-    width: fit-content;
+    text-align: right;
+    width: 120%;
     position: relative;
-    bottom:3.35vh;
-    left: 70%;
+    bottom:2vh;
+    right: 20%;
 }
 .openMenu:hover{
     cursor: pointer;

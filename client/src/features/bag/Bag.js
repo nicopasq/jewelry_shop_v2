@@ -9,6 +9,7 @@ function Bag(){
     const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false)
 
+    const [currentProduct, setCurrentProduct] = useState(null)
     const currentUser = useSelector(state => state.currentUser.value)
     const products = useSelector(state => state.products.value)
     const orderProducts = []    
@@ -35,15 +36,28 @@ function Bag(){
         .then(r => console.log(r))
     }
 
-    function handleMenuToggle(target){
+    function handleMenuToggle(target, product){
         if(target !== null){
             setAnchorEl(target)
             setOpen(true)
+            setCurrentProduct(product)
         } else {
             setAnchorEl(null)
             setOpen(false)
+            setCurrentProduct(null)
         }
     }
+
+    function handleDelete(product){
+        console.log('delete me', product)
+    }
+    function handleSaveForLater(product){
+        console.log('save', product)
+    }
+    function handleEditItem(product){
+        console.log('Edit me', product)
+    }
+
     const bagDisplay = inBag.map(product => {
         const productObj = product.product
         return (
@@ -64,7 +78,15 @@ function Bag(){
                         }}>Size: {product.size}</Typography>
                     <div className='cardButtons'>
                         <Typography className='openMenu' sx={{fontSize:'25pt'}} 
-                        onClick={(e) => handleMenuToggle(e.target)}>...</Typography>
+                        onClick={(e) => handleMenuToggle(e.target, product)}>...</Typography>
+                        <Menu 
+                         anchorEl={anchorEl}
+                         open={open} 
+                         onClose={() => handleMenuToggle(null)}>
+                            <MenuItem onClick={() => handleDelete(currentProduct)}>🗑️</MenuItem>
+                            <MenuItem onClick={() => handleSaveForLater(currentProduct)}>Save for later</MenuItem>
+                            <MenuItem onClick={() => handleEditItem(currentProduct)}>Edit Order</MenuItem>
+                        </Menu>
                     </div>
                     </CardContent>
                 </Card>
@@ -95,20 +117,15 @@ function Bag(){
         <div className='main'>
             <Navbar/>
             <div id='totalContainer'>
-                <Typography variant='h6'>Subtotal: ${subtotal}</Typography>
+                <Typography variant='h6'>Subtotal: ${subtotal.toFixed(2)}</Typography>
                 <Typography variant='h6'>Tax: ${tax}</Typography>
                 <Divider sx={{bgcolor:'lightgrey'}}/>
-                <Typography variant='h5'>Total Price: ${parseFloat(subtotal) + parseFloat(tax)}</Typography>
+                <Typography variant='h5'>Total Price: ${(parseFloat(subtotal) + parseFloat(tax)).toFixed(2)}</Typography>
                 <Button id='checkout' variant='contained'>Checkout</Button>
             </div>
             <div id='bag'>
             <Typography variant='h5' sx={{fontFamily:"serif"}}>Your Bag</Typography>
                 {render}
-                <Menu open={open} anchorEl={anchorEl} onClose={() => handleMenuToggle(null)}>
-                            <MenuItem>🗑️</MenuItem>
-                            <MenuItem>Save for later</MenuItem>
-                            <MenuItem>Edit Order</MenuItem>
-                </Menu>
             </div>
         </div>
     )
