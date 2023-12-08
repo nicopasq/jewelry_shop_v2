@@ -11,8 +11,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     end
 
     def destroy
-        byebug
+        user = User.find_by(id:params[:user_id])
+        order = user.order_products.find_by(id:params[:id])
+        OrderProduct.destroy(order[:id])
+        render json: user
     end
+
+
     private
 
     def orderProductParams

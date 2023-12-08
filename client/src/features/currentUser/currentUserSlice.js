@@ -12,6 +12,9 @@ export const currentUserSlice = createSlice({
     },
     logout: (state, action) =>{
       state.value = action.payload
+    },
+    updateBag: (state, action) =>{
+      state.value = action.payload
     }
   }
 })

@@ -1,19 +1,19 @@
 import { Button, Card, CardActionArea, CardContent, Divider, Menu, MenuItem, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Navbar from '../navigation/Navbar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../../styles/bag.css'
 import { Link } from 'react-router-dom';
 
 function Bag(){
     const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false)
-
     const [currentProduct, setCurrentProduct] = useState(null)
+    const dispatch = useDispatch()
     const currentUser = useSelector(state => state.currentUser.value)
     const products = useSelector(state => state.products.value)
     const orderProducts = []    
-    currentUser.order_products.map(orderProduct => {
+    currentUser.order_products?.map(orderProduct => {
         products?.map(p => {
             if(p.id === orderProduct.product_id){
                 orderProducts.push({...orderProduct, image: p.image})
@@ -24,18 +24,6 @@ function Bag(){
     const saveForLater = orderProducts.filter(p => p.in_cart === false)
 
 //make into bagDisplay component
-    function deleteOrderProduct(product){
-        console.log('delete order product:', product)
-        fetch('/order_products', {
-            method:"DELETE",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(product)
-        })
-        .then(r => console.log(r))
-    }
-
     function handleMenuToggle(target, product){
         if(target !== null){
             setAnchorEl(target)
@@ -49,8 +37,20 @@ function Bag(){
     }
 
     function handleDelete(product){
-        console.log('delete me', product)
+        console.log('delete order product:', product)
+        fetch('/order_products', {
+            method:"DELETE",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(product)
+        })
+        .then(r => r.json())
+        .then(data => dispatch({type:'currentUser/updateBag', payload:data}))
+        setAnchorEl(null)
+        setOpen(false)
     }
+
     function handleSaveForLater(product){
         console.log('save', product)
     }
