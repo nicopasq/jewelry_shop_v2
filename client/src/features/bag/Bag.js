@@ -75,7 +75,7 @@ function Bag(){
                             } else{
                                 return {display:'none'}
                             }
-                        }}>Size: {product.size}</Typography>
+                        }}>Size: {product.size.toFixed(2)}</Typography>
                     <div className='cardButtons'>
                         <Typography className='openMenu' sx={{fontSize:'25pt'}} 
                         onClick={(e) => handleMenuToggle(e.target, product)}>...</Typography>

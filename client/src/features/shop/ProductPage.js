@@ -44,7 +44,7 @@ function ProductPage(){
     function orderProduct(ringSize){
         orderBody.size = parseFloat(ringSize)
         orderBody.quantity = parseInt(quantity)
-
+        console.log(ringSize)
         fetch(`/order_products`, {
             method:"POST",
             headers:{
