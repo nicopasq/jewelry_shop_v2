@@ -5,12 +5,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
 
     def create
         user = User.find_by(id:params[:user_id])
+        product = user.order_products.find_by(product_id:params[:product_id])
 
-        orderProduct = user.order_products.find_by(product_id:params[:product_id])
-
-        if !orderProduct || orderProduct.size != params[:size].to_i
-            orderProduct = OrderProduct.create!(orderProductParams)
-            render json: orderProduct, status: :created
+        if !product 
+            product = OrderProduct.create!(orderProductParams)
+            render json: product, status: :created
+        else
+            product.update(quantity:product[:quantity].to_i + params[:quantity].to_i)
         end
     end
 

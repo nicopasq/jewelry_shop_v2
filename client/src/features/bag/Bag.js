@@ -6,6 +6,11 @@ import '../../styles/bag.css'
 import { Link } from 'react-router-dom';
 
 function Bag(){
+const bagItems = useSelector(state => state.bag)
+console.log('bagItems', bagItems)
+
+
+
     const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false)
     const [currentProduct, setCurrentProduct] = useState(null)
@@ -75,7 +80,7 @@ function Bag(){
                             } else{
                                 return {display:'none'}
                             }
-                        }}>Size: {product.size.toFixed(2)}</Typography>
+                        }}>Size: {product.size?.toFixed(2)}</Typography>
                     <div className='cardButtons'>
                         <Typography className='openMenu' sx={{fontSize:'25pt'}} 
                         onClick={(e) => handleMenuToggle(e.target, product)}>...</Typography>
