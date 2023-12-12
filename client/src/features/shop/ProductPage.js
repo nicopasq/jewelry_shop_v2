@@ -59,11 +59,21 @@ function ProductPage() {
 
 
     function orderProduct(){
-      orderBody = {...orderBody, size:size, quantity:quantity}
+      orderBody = {...orderBody, size:size, quantity:parseInt(quantity)}
 
-        dispatch({type:'bag/addToBag', payload:orderBody})
+      fetch('/order_products', {
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(orderBody)
+      })
+      .then(r => r.json())
+      .then(data=>console.log(data))
+      // .then(data => dispatch({type:'bag/addToBag', payload:data}))
 
     }
+
 
   return (
     <div className="main">
