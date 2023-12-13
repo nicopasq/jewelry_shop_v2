@@ -2,10 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const orderSlice = createSlice({
     name:'order',
-    initialState:{},
+    initialState:{
+        billing:{},
+        shipping:{}
+    },
     reducers: {
-        createOrder:(state,action) => {
-            state.value = action.payload
+        billing:(state,action) => {
+            state.billing = action.payload
+        },
+        shipping:(state, action) => {
+            state.shipping = action.payload;
         }
     }
 })
