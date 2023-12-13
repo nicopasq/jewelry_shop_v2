@@ -1,8 +1,11 @@
 import { Button, Divider, Typography } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Total(){
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const currentUser = useSelector(state => state.currentUser.value)
     const inBag = currentUser.order_products
 
@@ -14,13 +17,19 @@ function Total(){
 
     const subtotal = priceArray.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
     const tax = (subtotal * .029).toFixed(2)
+    const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2)
+
+    function handleCheckout(){
+        navigate('/bag/checkout')
+        dispatch({type:'total/total', payload:total})
+    }
     return (
         <div id='totalContainer'>
             <Typography variant='h6'>Subtotal: ${subtotal.toFixed(2)}</Typography>
             <Typography variant='h6'>Tax: ${tax}</Typography>
             <Divider sx={{bgcolor:'lightgrey'}}/>
-            <Typography variant='h5'>Total Price: ${(parseFloat(subtotal) + parseFloat(tax)).toFixed(2)}</Typography>
-            <Button id='checkout' variant='contained'>Checkout</Button>
+            <Typography variant='h5'>Total Price: ${total}</Typography>
+            <Button id='checkout' variant='contained' onClick={() => handleCheckout()}>Checkout</Button>
         </div>
     )
 }

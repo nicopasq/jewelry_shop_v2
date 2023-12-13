@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import currentUserReducer from '../features/currentUser/currentUserSlice'
 import productReducer from '../features/products/productSlice'
-import bagReducer from '../features/bag/bagSlice'
+import totalReducer from '../features/bag/totalSlice'
+import orderReducer from '../features/checkout/orderSlice'
 
 export default configureStore({
   reducer: {
     currentUser: currentUserReducer,
     products: productReducer,
-    bag: bagReducer
+    total: totalReducer,
+    order: orderReducer
   }
 })

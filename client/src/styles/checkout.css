@@ -1,0 +1,8 @@
+#checkoutFormContainer{
+    border: 1px solid pink;
+    width: 40%;
+    min-height: 70vh;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+}
