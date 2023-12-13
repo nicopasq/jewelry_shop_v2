@@ -32,7 +32,6 @@ function ProductPage() {
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
   let orderBody = {
-    product_name: currentProduct.product_name,
     user_id: currentUser.id,
     product_id: currentProduct.id,
     in_cart: true,

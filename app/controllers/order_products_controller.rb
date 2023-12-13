@@ -39,9 +39,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
         params.permit(:user_id, :product_id, :size, :quantity, :in_cart, :order_id)
     end
 
-    # def orderProductName
-    #     params.permit(:product_name)
-    # end
     def orderProductId
         params.permit(:id)
     end
