@@ -69,10 +69,6 @@ function ProductPage() {
         },
         body: JSON.stringify(orderBody)
       })
-      .then(r => r.json())
-      .then(data=>console.log(data))
-      // .then(data => dispatch({type:'bag/addToBag', payload:data}))
-
     }
 
 
