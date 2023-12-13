@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 function Bag(){
     const currentUser = useSelector(state => state.currentUser.value)
-    console.log('currentUser order products',[...currentUser.order_products].sort((a,b) => (a.id > b.id) ? 1 : -1))
+    const sortedBagItems = [...currentUser.order_products].sort((a,b) => (a.id > b.id) ? 1 : -1)
+    console.log('currentUser order products', sortedBagItems)
 
 
     const [anchorEl, setAnchorEl] = useState(null)
@@ -16,7 +17,7 @@ function Bag(){
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.value)
     const orderProducts = []    
-    currentUser.order_products?.map(orderProduct => {
+    sortedBagItems.map(orderProduct => {
         products?.map(p => {
             if(p.id === orderProduct.product_id){
                 orderProducts.push({...orderProduct, image: p.image})
@@ -86,7 +87,7 @@ function Bag(){
                          anchorEl={anchorEl}
                          open={open} 
                          onClose={() => handleMenuToggle(null)}>
-                            <MenuItem onClick={() => handleDelete(currentProduct)}>🗑️</MenuItem>
+                            <MenuItem onClick={() => handleDelete(currentProduct)}>Remove All</MenuItem>
                             <MenuItem onClick={() => handleSaveForLater(currentProduct)}>Save for later</MenuItem>
                             <MenuItem onClick={() => handleEditItem(currentProduct)}>Edit Order</MenuItem>
                         </Menu>
