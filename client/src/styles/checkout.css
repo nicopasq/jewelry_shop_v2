@@ -1,8 +1,36 @@
 #checkoutFormContainer{
-    border: 1px solid pink;
     width: 40%;
-    min-height: 70vh;
+    min-height: 60vh;
     align-items: center;
     justify-content: center;
     display: inline-flex;
+}
+#stepper{
+
+    position: absolute;
+    top: 20%;
+}
+#next{
+    position: absolute;
+    bottom: 25%;
+    right: 30%;
+}
+#back{
+    position: absolute;
+    bottom: 25%;
+    left: 30%;
+}
+#billingForm{
+    text-align: left;
+    width: 60%;
+    height: 32vh;
+}
+.formInput{
+    margin: 15px;
+}
+.billingInput{
+    margin: 5px;
+    height: 29%;
+    width: fit-content;
+    display: inline-block;
 }

@@ -63,26 +63,25 @@ function Checkout(){
         <div className="main">
             <Navbar/>
             <div id="checkoutFormContainer">
-                <Stepper nonLinear activeStep={activeStep}>
-                    {steps.map((label, index) => (
-                        <Step key={label}>
-                            <StepButton onClick={() => handleStepBtn(index)}>
-                                {label}
-                            </StepButton>
-                        </Step>
-                    ))}
-                </Stepper>
+                <div id="stepper">
+                    <Stepper nonLinear activeStep={activeStep}>
+                        {steps.map((label, index) => (
+                            <Step key={label}>
+                                <StepButton onClick={() => handleStepBtn(index)}>
+                                    {label}
+                                </StepButton>
+                            </Step>
+                        ))}
+                    </Stepper>
+                </div>
+                {renderForm}
+                    <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
+                        Next
+                    </Button>
+                    <Button id="back" onClick={() => handleBack()} sx={backBtnDisplay}>
+                        Back
+                    </Button>
             </div>
-            {renderForm}
-            <Button id="next" onClick={() => handleNext()} sx={nextBtnDisplay}>
-                Next
-            </Button>
-            <Button id="placeOrder" onClick={() => handlePlaceOrder()} sx={placeOrderBtn}>
-                Place Order
-            </Button>
-            <Button id="back" onClick={() => handleBack()} sx={backBtnDisplay}>
-                Back
-            </Button>
         </div>
     )
 }
