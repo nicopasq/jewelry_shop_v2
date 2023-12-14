@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import Navbar from '../navigation/Navbar';
-import '../../styles/bag.css'
+import './bag.css'
 import BagDisplay from './BagDisplay';
 import Total from './Total';
 

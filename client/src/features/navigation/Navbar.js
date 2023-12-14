@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import QuickLinks from "./QuickLinks";
-import '../../styles/navBar.css'
+import './navBar.css'
 import { Link } from "react-router-dom";
 
 function Navbar(){

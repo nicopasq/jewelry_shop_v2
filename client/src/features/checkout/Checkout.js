@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../navigation/Navbar";
 import { useSelector } from "react-redux";
-import '../../styles/checkout.css'
+import './checkout.css'
 import { Button, Step, StepButton, Stepper } from "@mui/material";
 import Billing from "./Billing";
 import Shipping from "./Shipping";

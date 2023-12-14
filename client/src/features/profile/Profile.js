@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../navigation/Navbar";
 import { Card, Container, Paper, Table, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import '../../styles/profile.css'
+import './profile.css'
 
 function Profile(){
     const currentUser = useSelector(state => state.currentUser.value)

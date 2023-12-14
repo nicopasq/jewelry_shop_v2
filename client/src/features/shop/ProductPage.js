@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navigation/Navbar";
 import { useParams } from "react-router-dom";
 import images from "../../images/images";
-import "../../styles/productPage.css";
+import './productPage.css'
 import {
   Button,
   Divider,

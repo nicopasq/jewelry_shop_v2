@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import { Button, TextField, Typography } from "@mui/material";
-import '../../styles/signup.css'
+import './signup.css'
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup(){

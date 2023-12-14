@@ -6,6 +6,7 @@ body{
     display: inline-block;
     width: 40vh;
     border-radius:10%;
+    /* background: rgb(230, 202, 169); */
     background: rgb(230, 202, 169);
     height: 45vh;
     position: relative;
@@ -20,13 +21,13 @@ body{
 #loginBtn{
     position: relative;
     top: 18vh;
-    right: 18%;
+    right: 14%;
 }
 #signupRoute{
     font-family:sans-serif;
     position: relative;
-    top: 35%;
-    left: 38%;
+    top: 25vh;
+    right: 35%;
 }
 #businessName{
     font-family:cursive;

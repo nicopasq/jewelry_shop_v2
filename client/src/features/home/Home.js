@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../navigation/Navbar"; 
-import '../../styles/home.css'
+import './home.css'
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import ringAd from '../../images/ringAd.png'

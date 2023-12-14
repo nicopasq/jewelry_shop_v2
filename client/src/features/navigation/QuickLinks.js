@@ -1,6 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import '../../styles/quickLinks.css'
+import './quickLinks.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 

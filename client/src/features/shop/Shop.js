@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../navigation/Navbar'
 import { Button, Card, Grid, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
-import '../../styles/shop.css'
+import './shop.css'
 import { useNavigate } from 'react-router-dom'
 
 function Shop(){
