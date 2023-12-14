@@ -10,7 +10,13 @@ const orderSlice = createSlice({
             expiration_date: "",
             cvv: "",
         },
-        shipping:{}
+        shipping:{
+            state: "",
+            city: "",
+            street_address: "",
+            apt_number: "",
+            zip_code: ""
+        }
     },
     reducers: {
         billing:(state,action) => {

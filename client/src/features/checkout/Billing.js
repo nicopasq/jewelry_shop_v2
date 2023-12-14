@@ -1,17 +1,10 @@
 import { Input, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Billing() {
   const billingInfo = useSelector(state => state.order.billing)
   const dispatch = useDispatch()
-  // const [billingInfo, setBillingInfo] = useState({
-    //   first_name: "",
-    //   last_name: "",
-    //   card_number: "",
-    //   expiration_date: "",
-    //   cvv: "",
-    // });
     
     function handleChange(e) {
       dispatch({type:'order/billing', payload:{...billingInfo, [e.target.name] : e.target.value}})
@@ -19,7 +12,7 @@ function Billing() {
     console.log(billingInfo)
 
   return (
-    <form id="billingForm" >
+    <form className="orderForm" >
       <label>
         <Typography variant="h6" sx={{ fontFamily: "serif" }}>
           <u>Name on Card:</u>
@@ -43,7 +36,7 @@ function Billing() {
         value={billingInfo.last_name}
         onChange={e => handleChange(e)}
       />
-      <div className="billingInput">
+      <div className="orderInput">
         <label>
           <Typography variant="subtitle1">
             <u>Card Number</u>
@@ -59,7 +52,7 @@ function Billing() {
         />
       </div>
 
-      <div className="billingInput">
+      <div className="orderInput">
         <label>
           <Typography variant="subtitle1">
             <u>Expiration Date</u>
@@ -75,7 +68,7 @@ function Billing() {
          />
       </div>
 
-      <div className="billingInput">
+      <div className="orderInput">
         <label>
           <Typography variant="subtitle1">
             <u>Security Code</u>

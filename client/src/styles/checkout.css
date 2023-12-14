@@ -20,7 +20,7 @@
     bottom: 25%;
     left: 30%;
 }
-#billingForm{
+.orderForm{
     text-align: left;
     width: 60%;
     height: 32vh;
@@ -28,7 +28,7 @@
 .formInput{
     margin: 15px;
 }
-.billingInput{
+.orderInput{
     margin: 5px;
     height: 29%;
     width: fit-content;

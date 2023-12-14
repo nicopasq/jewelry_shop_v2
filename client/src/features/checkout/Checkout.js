@@ -34,8 +34,6 @@ function Checkout(){
         }
     }
     function handleNext() {
-        // console.log(activeStep, " + ", 1, '=', activeStep + 1)
-        // console.log(activeStep)
         if(activeStep + 1 < steps.length -1){
             setActiveStep(activeStep + 1)
             handleSwitch(activeStep + 1)
