@@ -9,7 +9,7 @@ import Confirmation from "./Confirmation";
 
 function Checkout(){
     const [activeStep, setActiveStep] = useState(0)
-    const [renderForm, setRenderForm] = useState(<Billing/>)
+    const [renderForm, setRenderForm] = useState(<Billing handleNext={handleNext} />)
     let nextBtnDisplay = {display:'inline'}
     let placeOrderBtn = {display:'none'}
     let backBtnDisplay = {display:'inline'}
@@ -24,16 +24,18 @@ function Checkout(){
     }
 
     function handleSwitch(param){
-        switch(param){
+        switch(activeStep){
             case(0):
-                return setRenderForm(<Billing/>);
+                return setRenderForm(<Billing handleNext={handleNext} />);
             case(1):
-                return setRenderForm(<Shipping/>);
+                return setRenderForm(<Shipping handleNext={handleNext}/>);
             case(2):
                 return setRenderForm(<Confirmation/>);
         }
     }
     function handleNext() {
+        // console.log(activeStep, " + ", 1, '=', activeStep + 1)
+        // console.log(activeStep)
         if(activeStep + 1 < steps.length -1){
             setActiveStep(activeStep + 1)
             handleSwitch(activeStep + 1)
@@ -42,7 +44,6 @@ function Checkout(){
             handleSwitch(steps.length - 1)
         }
     }
-
     function handleBack() {
         if(activeStep - 1 >= 0){
             setActiveStep(activeStep - 1)
@@ -75,9 +76,12 @@ function Checkout(){
                     </Stepper>
                 </div>
                 {renderForm}
-                    <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
+                    {/* <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
                         Next
-                    </Button>
+                    </Button> */}
+                    {/* <Button id="placeOrder" className="rightSide" onClick={() => handlePlaceOrder()} sx={placeOrderBtn}>
+                        Place Order
+                    </Button> */}
                     <Button id="back" onClick={() => handleBack()} sx={backBtnDisplay}>
                         Back
                     </Button>
