@@ -1,11 +1,10 @@
 import { Button, Input } from "@mui/material";
 import React from "react";
 
-function Shipping({handleNext}){
+function Shipping(){
 
     function handleSubmit(e){
         e.preventDefault();
-        handleNext()
     }
     return (
         <form id="shippingForm" onSubmit={(e) => handleSubmit(e)}>
@@ -14,9 +13,6 @@ function Shipping({handleNext}){
             <Input type="text" placeholder="Street Address"/>
             <Input type="number" placeholder="Apt. #"/>
             <Input type="number" placeholder="zip"/>
-            <Button id="next" className="rightSide" type="submit">
-                Next
-            </Button>
         </form>
     )
 }

@@ -9,7 +9,7 @@ import Confirmation from "./Confirmation";
 
 function Checkout(){
     const [activeStep, setActiveStep] = useState(0)
-    const [renderForm, setRenderForm] = useState(<Billing handleNext={handleNext} />)
+    const [renderForm, setRenderForm] = useState(<Billing />)
     let nextBtnDisplay = {display:'inline'}
     let placeOrderBtn = {display:'none'}
     let backBtnDisplay = {display:'inline'}
@@ -24,11 +24,11 @@ function Checkout(){
     }
 
     function handleSwitch(param){
-        switch(activeStep){
+        switch(param){
             case(0):
-                return setRenderForm(<Billing handleNext={handleNext} />);
+                return setRenderForm(<Billing />);
             case(1):
-                return setRenderForm(<Shipping handleNext={handleNext}/>);
+                return setRenderForm(<Shipping />);
             case(2):
                 return setRenderForm(<Confirmation/>);
         }
@@ -76,12 +76,12 @@ function Checkout(){
                     </Stepper>
                 </div>
                 {renderForm}
-                    {/* <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
+                    <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
                         Next
-                    </Button> */}
-                    {/* <Button id="placeOrder" className="rightSide" onClick={() => handlePlaceOrder()} sx={placeOrderBtn}>
+                    </Button> 
+                    <Button id="placeOrder" className="rightSide" onClick={() => handlePlaceOrder()} sx={placeOrderBtn}>
                         Place Order
-                    </Button> */}
+                    </Button>
                     <Button id="back" onClick={() => handleBack()} sx={backBtnDisplay}>
                         Back
                     </Button>

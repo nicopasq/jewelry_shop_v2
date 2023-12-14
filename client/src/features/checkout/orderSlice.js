@@ -3,7 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const orderSlice = createSlice({
     name:'order',
     initialState:{
-        billing:{},
+        billing:{
+            first_name: "",
+            last_name: "",
+            card_number: "",
+            expiration_date: "",
+            cvv: "",
+        },
         shipping:{}
     },
     reducers: {

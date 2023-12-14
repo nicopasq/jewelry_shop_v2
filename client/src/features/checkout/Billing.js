@@ -1,29 +1,25 @@
-import { Button, Input, TextField, Typography } from "@mui/material";
+import { Input, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function Billing({handleNext}) {
-
-  const [billingInfo, setBillingInfo] = useState({
-    first_name: "",
-    last_name: "",
-    card_number: "",
-    expiration_date: "",
-    cvv: "",
-  });
-
-  function handleChange(e) {
-    setBillingInfo({ ...billingInfo, [e.target.name]: e.target.value });
-  }
-
-
-  function handleSubmit(e){
-    e.preventDefault()
-    console.log('billing info', billingInfo)
-    handleNext()
-}
+function Billing() {
+  const billingInfo = useSelector(state => state.order.billing)
+  const dispatch = useDispatch()
+  // const [billingInfo, setBillingInfo] = useState({
+    //   first_name: "",
+    //   last_name: "",
+    //   card_number: "",
+    //   expiration_date: "",
+    //   cvv: "",
+    // });
+    
+    function handleChange(e) {
+      dispatch({type:'order/billing', payload:{...billingInfo, [e.target.name] : e.target.value}})
+    }
+    console.log(billingInfo)
 
   return (
-    <form id="billingForm" onSubmit={(e) => handleSubmit(e)}>
+    <form id="billingForm" >
       <label>
         <Typography variant="h6" sx={{ fontFamily: "serif" }}>
           <u>Name on Card:</u>
@@ -35,6 +31,7 @@ function Billing({handleNext}) {
         type="text"
         placeholder="First Name"
         name="first_name"
+        value={billingInfo.first_name}
         onChange={e => handleChange(e)}
       />
       <TextField
@@ -43,6 +40,7 @@ function Billing({handleNext}) {
         sx={{ margin: "5px" }}
         type="text"
         placeholder="Last Name"
+        value={billingInfo.last_name}
         onChange={e => handleChange(e)}
       />
       <div className="billingInput">
@@ -56,6 +54,7 @@ function Billing({handleNext}) {
         className="formInput" 
         type="number" 
         placeholder="Card Number" 
+        value={billingInfo.card_number}
         onChange={e => handleChange(e)}
         />
       </div>
@@ -71,6 +70,7 @@ function Billing({handleNext}) {
         className="formInput" 
         type="date" 
         placeholder="Exp."
+        value={billingInfo.expiration_date}
         onChange={e => handleChange(e)}
          />
       </div>
@@ -86,12 +86,10 @@ function Billing({handleNext}) {
         className="formInput" 
         type="number"
         placeholder="cvv" 
+        value={billingInfo.cvv}
         onChange={e => handleChange(e)}
         />
       </div>
-      <Button id="next" className="rightSide" type="submit">
-        Next
-      </Button>
     </form>
   );
 }
