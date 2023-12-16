@@ -11,14 +11,12 @@ function Checkout(){
     const [activeStep, setActiveStep] = useState(0)
     const [renderForm, setRenderForm] = useState(<Billing />)
     let nextBtnDisplay = {display:'inline'}
-    let placeOrderBtn = {display:'none'}
     let backBtnDisplay = {display:'inline'}
     const total = useSelector(state => state.total.value)
     const steps = ['Billing Information', 'Shipping Information', 'Confirmation']
 
     if (activeStep === steps.length -1){
         nextBtnDisplay = {display : 'none'}
-        placeOrderBtn = {display : 'inline'}
     } else if (activeStep === 0){
         backBtnDisplay = {display:'none'}
     }
@@ -77,9 +75,7 @@ function Checkout(){
                     <Button id="next" className="rightSide" onClick={() => handleNext()} sx={nextBtnDisplay}>
                         Next
                     </Button> 
-                    <Button id="placeOrder" className="rightSide" onClick={() => handlePlaceOrder()} sx={placeOrderBtn}>
-                        Place Order
-                    </Button>
+
                     <Button id="back" onClick={() => handleBack()} sx={backBtnDisplay}>
                         Back
                     </Button>

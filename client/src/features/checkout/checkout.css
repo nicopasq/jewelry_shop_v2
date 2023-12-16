@@ -6,7 +6,6 @@
     display: inline-flex;
 }
 #stepper{
-
     position: absolute;
     top: 20%;
 }
@@ -22,7 +21,7 @@
 }
 .orderForm{
     text-align: left;
-    width: 60%;
+    width: 70%;
     height: 32vh;
 }
 .formInput{
@@ -33,4 +32,32 @@
     height: 29%;
     width: fit-content;
     display: inline-block;
+}
+#confirmationPage{
+    margin-top: 7%;
+    height: 47vh;
+    width: 80%;
+    overflow-y: scroll;
+}
+#placeOrderButton{
+    position: relative;
+    top:30%;
+    left: 20%;
+}
+#tableContainer{
+    width: 95%;
+    height: 53%;
+    margin-left: 2.5%;
+    overflow-y: scroll;
+}
+#confirmationTotal{
+    margin-top: 10px;
+    text-align: right;
+}
+#confirmationTotal, br{
+    float: right;
+    width: 40%;
+}
+#userInfo{
+    text-align: left;
 }
