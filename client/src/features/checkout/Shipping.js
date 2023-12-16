@@ -12,7 +12,42 @@ function Shipping() {
     }
 
   return (
-    <form className="orderForm">
+    <form className="orderForm" id="shippingForm">
+      <Typography variant="h6"><u>Recipient:</u></Typography>
+      <div className="orderInput">
+        <label>
+          <Typography variant="subtitle1">
+            <u>First Name</u>
+          </Typography>
+        </label>
+        <TextField
+          label="First Name"
+          sx={{ margin: "5px" }}
+          type="text"
+          placeholder="First Name"
+          name="first_name"
+          value={shippingInfo.first_name}
+          onChange={(e) => handleChange(e)}
+        />
+      </div>
+
+      <div className="orderInput">
+        <label>
+          <Typography variant="subtitle1">
+            <u>Last Name</u>
+          </Typography>
+        </label>
+        <TextField
+          label="Last Name"
+          sx={{ margin: "5px" }}
+          type="text"
+          placeholder="Last Name"
+          name="last_name"
+          value={shippingInfo.last_name}
+          onChange={(e) => handleChange(e)}
+        />
+      </div>
+
       <div className="orderInput">
         <label>
           <Typography variant="subtitle1">

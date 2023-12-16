@@ -21,6 +21,11 @@ function Checkout(){
         backBtnDisplay = {display:'none'}
     }
 
+    function handleEdit(param){
+        setActiveStep(param)
+        handleSwitch(param)
+    }
+
     function handleSwitch(param){
         switch(param){
             case(0):
@@ -28,9 +33,10 @@ function Checkout(){
             case(1):
                 return setRenderForm(<Shipping />);
             case(2):
-                return setRenderForm(<Confirmation/>);
+                return setRenderForm(<Confirmation handleEdit={handleEdit}/>);
         }
     }
+
     function handleNext() {
         if(activeStep + 1 < steps.length -1){
             setActiveStep(activeStep + 1)

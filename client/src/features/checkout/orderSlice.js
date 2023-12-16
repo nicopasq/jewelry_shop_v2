@@ -11,6 +11,8 @@ const orderSlice = createSlice({
             cvv: "",
         },
         shipping:{
+            first_name:"",
+            last_name:"",
             state: "",
             city: "",
             street_address: "",

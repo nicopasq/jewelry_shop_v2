@@ -2,7 +2,7 @@ import { Button, Divider, Paper, Table, TableBody, TableCell, TableContainer, Ta
 import React from "react";
 import { useSelector } from "react-redux";
 
-function Confirmation(){
+function Confirmation({handleEdit}){
     const currentUser = useSelector(state => state.currentUser.value)
     const sortedBagItems = [...currentUser.order_products].sort((a,b) => (a.id > b.id) ? 1 : -1)
     console.log('sortedBagItems', sortedBagItems)
@@ -22,22 +22,36 @@ function Confirmation(){
     const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join('-');
     return (
         <div id="confirmationPage">
-            <div id="userInfo">
-                <Typography variant="h5"><u>Billing Details</u></Typography>
-                <Typography variant="h6">Card Holder: {orderInfo.billing.first_name+' '+orderInfo.billing.last_name }</Typography>
-                <Typography variant="h6">Card #: {cardNum}</Typography>
-                <Typography variant="h6">Expiration Date: {orderInfo.billing.expiration_date}</Typography>
-                <Typography variant="h6">cvv: {orderInfo.billing.cvv}</Typography>
-                <Typography variant="h5"><u>Shipping Details</u></Typography>
-            </div>
             <Typography variant="h5">
                 Order Details
             </Typography>
-            <TableContainer component={Paper} elevation={5} id="tableContainer">
+            <div id="userInfo">
+                <Typography variant="h5"><u>Billing</u></Typography>
+                <Button variant="text" className="editInfo" onClick={() => handleEdit(0)}>Edit</Button>
+                <div className="userDetails">
+                <Typography variant="h6">Card Holder: {orderInfo.billing.first_name+' '+orderInfo.billing.last_name }</Typography>
+                <Typography variant="h6">Card #: {cardNum}</Typography>
+                <Typography variant="h6">Expiration Date: {orderInfo.billing.expiration_date}</Typography>
+                </div>
+                <Typography variant="h5"><u>Shipping</u></Typography>
+                <Button variant="text" className="editInfo" onClick={() => handleEdit(1)}>Edit</Button>
+                <div className="userDetails">
+                <Typography variant="h6">Recipient: {orderInfo.shipping.first_name+' '+orderInfo.shipping.last_name }</Typography>
+                <Typography variant="h6">State: {orderInfo.shipping.state}</Typography>
+                <Typography variant="h6">City: {orderInfo.shipping.city}</Typography>
+                <Typography variant="h6">Street {orderInfo.shipping.street_address}</Typography>
+                <Typography variant="h6">Apt. #: {orderInfo.shipping.apt_number}</Typography>
+                <Typography variant="h6">Zip Code: {orderInfo.shipping.zip_code}</Typography>
+                </div>
+                <Divider sx={{bgcolor:'black', margin:'5px'}}/>
+            </div>
+
+            <TableContainer component={Paper} elevation={3} id="tableContainer">
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>Items ( {sortedBagItems.length} )</TableCell>
+                            <TableCell align="right">Size</TableCell>
                             <TableCell align="right">Quantity</TableCell>
                             <TableCell align="right">Price</TableCell>
                         </TableRow>
@@ -51,6 +65,7 @@ function Confirmation(){
                             <TableCell scope="row">
                                 {item.product.product_name}
                             </TableCell>
+                            <TableCell align="right">{item.size}</TableCell>
                             <TableCell align="right">{item.quantity}</TableCell>
                             <TableCell align="right">${item.product.price.toFixed(2)}</TableCell>
                             </TableRow>

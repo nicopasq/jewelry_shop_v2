@@ -38,11 +38,10 @@
     height: 47vh;
     width: 80%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 #placeOrderButton{
-    position: relative;
-    top:30%;
-    left: 20%;
+    margin-top: 5%;
 }
 #tableContainer{
     width: 95%;
@@ -55,9 +54,28 @@
     text-align: right;
 }
 #confirmationTotal, br{
-    float: right;
+    margin-left: 56%;
     width: 40%;
 }
 #userInfo{
     text-align: left;
+    width: 94%;
+    margin-left: 2.5%;
+}
+.userDetails{
+    position: relative;
+    bottom: 3vh;
+    left: 5%;
+    color: rgba(148, 0, 0, 0.725);
+}
+#shippingForm{
+    position: relative;
+    bottom: 4vh;
+}
+.editInfo{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 3.75vh;
+    left: 90%;
 }
