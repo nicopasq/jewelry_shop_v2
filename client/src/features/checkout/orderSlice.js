@@ -7,7 +7,7 @@ const orderSlice = createSlice({
             first_name: "",
             last_name: "",
             card_number: "",
-            expiration_date: "",
+            expiration: "",
             cvv: "",
         },
         shipping:{

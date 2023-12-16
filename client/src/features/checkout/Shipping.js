@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 function Shipping() {
     const dispatch = useDispatch()
     const shippingInfo = useSelector(state => state.order.shipping)
-    console.log(shippingInfo)
 
     function handleChange(e){
         dispatch({type:'order/shipping', payload:{...shippingInfo, [e.target.name] : e.target.value}})

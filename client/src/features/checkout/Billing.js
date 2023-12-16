@@ -9,7 +9,7 @@ function Billing() {
     function handleChange(e) {
       dispatch({type:'order/billing', payload:{...billingInfo, [e.target.name] : e.target.value}})
     }
-    console.log(billingInfo)
+
 
   return (
     <form className="orderForm" id="billingForm" >
@@ -59,11 +59,11 @@ function Billing() {
           </Typography>
         </label>
         <Input
-        name="expiration_date" 
+        name="expiration" 
         className="formInput" 
         type="date" 
         placeholder="Exp."
-        value={billingInfo.expiration_date}
+        value={billingInfo.expiration}
         onChange={e => handleChange(e)}
          />
       </div>
