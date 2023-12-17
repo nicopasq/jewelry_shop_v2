@@ -59,20 +59,6 @@ function Confirmation({ handleEdit }) {
       })
     })
   }
-  
-  // useEffect(() => {
-    // inBag.forEach(p => {
-    //   fetch('/order_products', {
-    //     method:"PATCH",
-    //     headers:{
-    //       "Content-Type":"application/json"
-    //     },
-    //     body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:orderId})
-    //     })
-    //     .then(r => r.json())
-    //     .then(data => console.log(data))
-    // })
-  // }, [orderId])
 
   return (
     <div id="confirmationPage">
