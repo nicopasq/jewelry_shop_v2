@@ -6,6 +6,7 @@ import './profile.css'
 
 function Profile(){
     const currentUser = useSelector(state => state.currentUser.value)
+
     const dateTime = currentUser.created_at.split('T')
     const date = dateTime[0].split('-')
     const [year, month, day] = date
@@ -29,17 +30,17 @@ return(
 
             <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
                 <div className="containerHeader">
-                    <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>Items Ordered</Typography>
+                    <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>All Orders</Typography>
                 </div>
                 <Table id='itemsTable'></Table>
             </Paper>
 
-            <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
+            {/* <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
                 <div className="containerHeader">
-                    <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>All Orders</Typography>
+                    <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>Saved For Later</Typography>
                 </div>  
                 <Table id='ordersTable'></Table>
-            </Paper>
+            </Paper> */}
         </Container>
     </div>
 )

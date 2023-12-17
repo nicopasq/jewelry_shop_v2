@@ -5,6 +5,7 @@ class CreateOrderProducts < ActiveRecord::Migration[6.1]
       t.integer :user_id
       t.integer :order_id
       t.integer :quantity
+      t.boolean :ring
       t.float :size
       t.boolean :in_cart
       t.timestamps

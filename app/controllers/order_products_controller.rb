@@ -4,25 +4,29 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
 
     def create
         user = User.find_by(id:params[:user_id])
-        if params[:size] != ""
-            product = user.order_products.find_by_product_id_and_size(params[:product_id], params[:size])
-            if !product
-                product = OrderProduct.create!(orderProductParams)
-                render json: product, status: :created
-            else 
-                product.update(quantity: product[:quantity] + params[:quantity])
-                render json: product, status: :accepted
+        if params[:ring]
+            order_product = user.order_products.find_by_product_id_and_size(params[:product_id], params[:size])
+            if order_product[:order_id] == ""
+                order_product.update(quantity:order_product[:quantity] + params[:quantity])
+                render json: order_product, status: :accepted
+            elsif !order_product
+                order_product = OrderProduct.create!(orderProductParams)
+                render json: order_product, status: :created
+            elsif order_product[:order_id] != ""
+                order_product = OrderProduct.create!(orderProductParams)
+                render json: order_product, status: :created
             end
-        elsif params[:size] == ""
-            product = user.order_products.find_by(product_id: params[:product_id])
-            if !product
-                product = OrderProduct.create!(orderProductParams)
-                render json: product, status: :created
-            else 
-                product.update(quantity: product[:quantity] + params[:quantity])
-                render json: product, status: :accepted
-            end
+            else
+                order_product = user.order_products.find_by(product_id:params[:product_id])
+                if !order_product || order_product[:order_id] == ""
+                    order_product = OrderProduct.create!(orderProductParams)
+                    render json: order_product, status: :created
+                    else
+                        order_product.update(quantity:order_product[:quantity] + params[:quantity])
+                        render json: order_product, status: :accepted
+                end
         end
+
     end
 
     def destroy
@@ -43,7 +47,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     private
 
     def orderProductParams
-        params.permit(:user_id, :product_id, :size, :quantity, :in_cart, :order_id)
+        params.permit(:user_id, :product_id, :size, :quantity, :in_cart, :order_id, :ring)
     end
 
     def invalid_order_product invalid

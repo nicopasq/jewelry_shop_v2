@@ -38,6 +38,7 @@ function ProductPage() {
     order_id: "",
     size: "",
     quantity: "",
+    ring: false
   };
 
   if (currentProduct && currentProduct.product_type === "ring") {
@@ -59,8 +60,12 @@ function ProductPage() {
 
 
     function orderProduct(){
-      orderBody = {...orderBody, size:size, quantity:parseInt(quantity)}
-
+      if (currentProduct.product_type === 'ring'){
+        orderBody = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
+      } else{
+        orderBody = {...orderBody, size:size, quantity:parseInt(quantity)}
+      }
+      console.log(orderBody)
       fetch('/order_products', {
         method:"POST",
         headers:{
@@ -68,6 +73,8 @@ function ProductPage() {
         },
         body: JSON.stringify(orderBody)
       })
+      .then(r => r.json())
+      .then(data => console.log('new order product:', data))
     }
 
 
