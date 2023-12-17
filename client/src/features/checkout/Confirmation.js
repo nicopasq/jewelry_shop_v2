@@ -45,22 +45,34 @@ function Confirmation({ handleEdit }) {
       body:JSON.stringify(orderBody)
     })
     .then(r => r.json())
-    .then(data => setOrderId(data.id))
+    .then(data => {
+      inBag.forEach(p => {
+        fetch('/order_products', {
+          method:"PATCH",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
+          })
+          .then(r => r.json())
+          .then(data => console.log(data))
+      })
+    })
   }
   
-  useEffect(() => {
-    inBag.forEach(p => {
-      fetch('/order_products', {
-        method:"PATCH",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:orderId})
-        })
-        .then(r => r.json())
-        .then(data => console.log(data))
-    })
-  }, [orderId])
+  // useEffect(() => {
+    // inBag.forEach(p => {
+    //   fetch('/order_products', {
+    //     method:"PATCH",
+    //     headers:{
+    //       "Content-Type":"application/json"
+    //     },
+    //     body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:orderId})
+    //     })
+    //     .then(r => r.json())
+    //     .then(data => console.log(data))
+    // })
+  // }, [orderId])
 
   return (
     <div id="confirmationPage">
