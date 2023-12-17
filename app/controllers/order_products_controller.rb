@@ -32,15 +32,18 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
         render json: user
     end
 
+    def update
+        user = User.find_by(id: params[:user_id])
+        order_product = user.order_products.find_by(id: params[:id])
+        order_product.update(order_id:params[:order_id], in_cart:false)
+        # byebug
+        render json: order_product
+    end
 
     private
 
     def orderProductParams
         params.permit(:user_id, :product_id, :size, :quantity, :in_cart, :order_id)
-    end
-
-    def orderProductId
-        params.permit(:id)
     end
 
     def invalid_order_product invalid

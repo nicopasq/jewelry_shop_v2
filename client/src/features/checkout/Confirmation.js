@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function Confirmation({ handleEdit }) {
@@ -31,6 +31,7 @@ function Confirmation({ handleEdit }) {
   const tax = (subtotal * 0.029).toFixed(2);
   const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
+  const [orderId, setOrderId] = useState(null);
 
 
   function handlePlaceOrder(){
@@ -44,8 +45,22 @@ function Confirmation({ handleEdit }) {
       body:JSON.stringify(orderBody)
     })
     .then(r => r.json())
-    .then(data => console.log('created order:', data))
+    .then(data => setOrderId(data.id))
   }
+  
+  useEffect(() => {
+    inBag.forEach(p => {
+      fetch('/order_products', {
+        method:"PATCH",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:orderId})
+        })
+        .then(r => r.json())
+        .then(data => console.log(data))
+    })
+  }, [orderId])
 
   return (
     <div id="confirmationPage">

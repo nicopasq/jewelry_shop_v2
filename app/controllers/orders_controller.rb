@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     def create
         user = User.find_by(id: params[:user_id])
         new_order = user.orders.create!(orderParams)
-        render json: new_order 
+        render json: new_order
     end
 
     private
