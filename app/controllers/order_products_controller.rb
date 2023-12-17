@@ -7,13 +7,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
         # byebug
         if params[:ring]
             order_product = user.order_products.find_by_product_id_and_size(params[:product_id], params[:size])
-            if order_product[:order_id] == ""
+            if order_product && order_product[:order_id] == ""
                 order_product.update(quantity:order_product[:quantity] + params[:quantity])
                 render json: order_product, status: :accepted
             elsif !order_product
                 order_product = OrderProduct.create!(orderProductParams)
                 render json: order_product, status: :created
-            elsif order_product[:order_id] != ""
+            elsif order_product && order_product[:order_id] != ""
                 order_product = OrderProduct.create!(orderProductParams)
                 render json: order_product, status: :created
             end
