@@ -4,6 +4,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
 
     def create
         user = User.find_by(id:params[:user_id])
+        # byebug
         if params[:ring]
             order_product = user.order_products.find_by_product_id_and_size(params[:product_id], params[:size])
             if order_product[:order_id] == ""
