@@ -34,8 +34,8 @@ function ProductPage() {
   let orderBody = {
     user_id: currentUser.id,
     product_id: currentProduct.id,
+    order_id: null,
     in_cart: true,
-    order_id: "",
     size: "",
     quantity: "",
     ring: false
@@ -63,9 +63,9 @@ function ProductPage() {
       if (currentProduct.product_type === 'ring'){
         orderBody = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
       } else{
-        orderBody = {...orderBody, size:size, quantity:parseInt(quantity)}
+        orderBody = {...orderBody, ring: false, size:size, quantity:parseInt(quantity)}
       }
-      console.log(orderBody)
+      console.log('orderBody befor fetch:', orderBody)
       fetch('/order_products', {
         method:"POST",
         headers:{
@@ -76,7 +76,6 @@ function ProductPage() {
       .then(r => r.json())
       .then(data => console.log('new order product:', data))
     }
-
 
   return (
     <div className="main">
