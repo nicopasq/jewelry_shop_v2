@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Confirmation({ handleEdit }) {
+  const navigation = useNavigate()
   const currentUser = useSelector((state) => state.currentUser.value);
   const sortedBagItems = [...currentUser.order_products].sort((a, b) =>
     a.id > b.id ? 1 : -1
@@ -31,7 +33,6 @@ function Confirmation({ handleEdit }) {
   const tax = (subtotal * 0.029).toFixed(2);
   const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
-  const [orderId, setOrderId] = useState(null);
 
 
   function handlePlaceOrder(){
@@ -55,7 +56,7 @@ function Confirmation({ handleEdit }) {
           body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
           })
           .then(r => r.json())
-          .then(data => console.log(data))
+          .then(data => navigation('/bag/thankYou'))
       })
     })
   }

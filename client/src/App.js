@@ -10,6 +10,7 @@ import Shop from './features/shop/Shop.js';
 import ProductPage from './features/shop/ProductPage.js';
 import Bag from './features/bag/Bag.js';
 import Checkout from './features/checkout/Checkout.js';
+import ThankYou from './features/checkout/ThankYou.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
@@ -59,6 +60,7 @@ function App() {
         <Route path='/shop/:id' element={<ProductPage/>} /> 
         <Route path='/bag' element={<Bag />} />
         <Route path='/bag/checkout' element={<Checkout/>} />
+        <Route path='/bag/thankYou' element={<ThankYou />} />
       </Routes>
     )
   }
