@@ -13,10 +13,11 @@ function BagDisplay(){
     const products = useSelector(state => state.products.value)
     const orderProducts = []    
     sortedBagItems.map(orderProduct => {
-        products?.map(p => {
+        return products?.map(p => {
             if(p.id === orderProduct.product_id){
-                orderProducts.push({...orderProduct, image: p.image})
+                return orderProducts.push({...orderProduct, image: p.image})
             }
+            return null
         })
     })
     const inBag = orderProducts.filter(p => p.in_cart === true)
@@ -59,7 +60,7 @@ function BagDisplay(){
         const productObj = product.product
         return (
                 <Card key={product.id} className='productCardBag'>
-                    <img src={product.image} />
+                    <img src={product.image} alt={productObj.product_name} />
                     <CardContent className='cardContent'>
                         <Typography variant='h6'>{productObj.product_name}</Typography>
                         <Divider sx={{bgcolor:'lightgrey'}}/>

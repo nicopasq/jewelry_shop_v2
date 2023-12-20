@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "../navigation/Navbar";
-import { useSelector } from "react-redux";
 import './checkout.css'
 import { Button, Step, StepButton, Stepper } from "@mui/material";
 import Billing from "./Billing";
@@ -12,7 +11,6 @@ function Checkout(){
     const [renderForm, setRenderForm] = useState(<Billing />)
     let nextBtnDisplay = {display:'inline'}
     let backBtnDisplay = {display:'inline'}
-    const total = useSelector(state => state.total.value)
     const steps = ['Billing Information', 'Shipping Information', 'Confirmation']
 
     if (activeStep === steps.length -1){
@@ -34,6 +32,8 @@ function Checkout(){
                 return setRenderForm(<Shipping />);
             case(2):
                 return setRenderForm(<Confirmation handleEdit={handleEdit}/>);
+            default:
+                return setRenderForm(<Billing />)
         }
     }
 
@@ -61,7 +61,6 @@ function Checkout(){
         handleSwitch(index)
     }
 
-    function handlePlaceOrder() {}
     return (
         <div className="main">
             <Navbar/>

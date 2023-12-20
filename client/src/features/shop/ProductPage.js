@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../navigation/Navbar";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import images from "../../images/images";
 import './productPage.css'
 import {
+  Alert,
   Button,
   Divider,
-  Input,
   InputLabel,
   MenuItem,
   Select,
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function ProductPage() {
-  const dispatch = useDispatch()
+  const [alertSeverity, setAlertSeverity] = useState('error')
+  const [alertMessage, setAlertMessage] = useState([])
+  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
   const currentUser = useSelector((state) => state.currentUser.value);
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -37,7 +39,7 @@ function ProductPage() {
     order_id: null,
     in_cart: true,
     size: "",
-    quantity: "",
+    quantity:0,
     ring: false
   };
 
@@ -49,14 +51,15 @@ function ProductPage() {
     fetch(`/products/${id}`)
       .then((r) => r.json())
       .then((data) => {
-        images.map((image) => {
+        return images.map((image) => {
           if (image.includes(data.image_path)) {
             data.image = image;
-            setCurrentProduct(data);
+            return setCurrentProduct(data);
           }
+          return null
         });
       });
-  }, []);
+  }, [id]);
 
 
     function orderProduct(){
@@ -65,21 +68,41 @@ function ProductPage() {
       } else{
         orderBody = {...orderBody, ring: false, size:size, quantity:parseInt(quantity)}
       }
-      console.log('orderBody befor fetch:', orderBody)
-      fetch('/order_products', {
-        method:"POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify(orderBody)
-      })
-      .then(r => r.json())
-      .then(data => console.log('new order product:', data))
+      console.log('orderBody before fetch:', orderBody)
+      if (orderBody.ring && orderBody.size > 0 || orderBody.ring === false){
+        fetch('/order_products', {
+          method:"POST",
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(orderBody)
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.errors){
+            const messages = data.errors.map((message, index) => {
+              return <Typography key={index} variant="body1">{message}</Typography>
+            })
+            setAlertMessage(messages)
+            setAlertSeverity('error')
+            setAlertDisplay({display:true})
+          } else{
+            setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
+            setAlertSeverity('success')
+            setAlertDisplay({display:true})
+          }
+        })
+      } else{
+        setAlertMessage(<Typography variant="body1">Please enter a size</Typography>)
+        setAlertDisplay({display:true})
+        setAlertSeverity('error')
+      }
     }
 
   return (
     <div className="main">
       <Navbar />
+      <Alert sx={alertDisplay} severity={alertSeverity} id="alert">{alertMessage}</Alert>
       <div id="imageContainer" className="halfScreen">
         <img
           src={currentProduct.image}

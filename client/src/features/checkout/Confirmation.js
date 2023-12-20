@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -56,7 +56,7 @@ function Confirmation({ handleEdit }) {
           body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
           })
           .then(r => r.json())
-          .then(data => navigation('/bag/thankYou'))
+          .then(() => navigation('/bag/thankYou'))
       })
     })
   }

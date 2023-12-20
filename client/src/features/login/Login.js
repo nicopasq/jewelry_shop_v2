@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import {  useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography } from "@mui/material";
 import './login.css'
 import { Link, useNavigate } from "react-router-dom";
 
 function Login(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [alertDisplay, setAlertDisplay] = useState({display:"none"})
+    const [alertError, setAlertError] = useState([])
     const [login, setLogin] = useState({
         username:'',
         password:''
@@ -28,13 +30,18 @@ function Login(){
                 dispatch({type:'currentUser/login', payload:data})
                 navigate('/home')
             } else{
-                console.log(data.error)
+                setAlertError(data.error)
+                setAlertDisplay({display:true})
+                setTimeout(() => {
+                    setAlertDisplay({display:'none'})
+                }, 5000);
             }
         })
     }
 
     return(
         <Container>
+            <Alert severity="error" sx={alertDisplay}>{alertError}</Alert>
             <form id="loginForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
                 <TextField 

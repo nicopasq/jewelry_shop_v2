@@ -4,16 +4,18 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
 
     def create
         user = User.find_by(id:params[:user_id])
-        matching_product_array = []
+        # byebug
 
         if params[:ring]
             order_product = user.order_products.find_by(product_id:params[:product_id], size:params[:size], in_cart:true)
-            if order_product 
+            if order_product && params[:quantity] > 0
                 order_product.update(quantity:order_product[:quantity] + params[:quantity])
                 render json: order_product, status: :accepted
             elsif !order_product 
                 order_product = OrderProduct.create!(orderProductParams)
                 render json: order_product, status: :created
+            # elsif params[:quantity].to_i < 0
+            #     render json: {error: "Quantity must be greater than 0"}
             end
         else
             order_product = user.order_products.find_by(product_id:params[:product_id], in_cart:true)

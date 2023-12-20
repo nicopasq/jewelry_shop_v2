@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import ringAd from '../../images/ringAd.png'
 import necklaceAd from '../../images/necklaceAd.png'
 import earringAd from '../../images/earringAd.png'
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 function Home(){
     const navigate = useNavigate()

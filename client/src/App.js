@@ -14,7 +14,6 @@ import ThankYou from './features/checkout/ThankYou.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.value)
-  // const allProducts = useSelector(state => state.products.value)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
@@ -23,6 +22,7 @@ function App() {
     .then(r => r.json())
     .then(data => {
       if (data){
+        // navigate('/home')
         dispatch({type:'currentUser/login', payload:data})
       } 
     })
@@ -30,11 +30,13 @@ function App() {
     fetch('/products')
     .then(r => r.json())
     .then(data => {
-        data.map(product => {
-            product_images.map(r => {
+         data.map(product => {
+          return product_images.map(r => {
                 if (r.includes(product.image_path)){
                     product.image = r
+                    return product
                 }
+                return null
             })
         })
         dispatch({type:'products/addProduct', payload:data})

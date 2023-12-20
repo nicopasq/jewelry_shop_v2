@@ -79,3 +79,10 @@
     bottom: 3.75vh;
     left: 90%;
 }
+#thankYouMessage{
+    position: relative;
+    top: 5vh;
+}
+#thankYouCheckMark{
+    scale: .6;
+}

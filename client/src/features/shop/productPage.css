@@ -1,8 +1,8 @@
 .halfScreen{
+    float: left;
     width: 49.9%;
     height: 80vh;
-    position: absolute;
-    top: 11.25vh;
+    margin-top: -1.5%;
 }
 #productDetails{
     position: absolute;
@@ -64,4 +64,8 @@
 .qty{
     position: relative;
     bottom: 10vh;
+}
+#alert{
+    position: relative;
+    bottom: 2.75vh;
 }
