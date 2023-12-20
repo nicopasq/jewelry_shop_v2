@@ -3,7 +3,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
-import product_images from './images/images.js'
 import Home from './features/home/Home';
 import Profile from './features/profile/Profile.js';
 import Shop from './features/shop/Shop.js';
@@ -19,32 +18,18 @@ function App() {
   
   useEffect(() => {
     fetch('/auth')
-    .then(r => r.json())
-    .then(data => {
-      if (data){
-        // navigate('/home')
-        dispatch({type:'currentUser/login', payload:data})
-      } 
-    })
-
-    fetch('/products')
-    .then(r => r.json())
-    .then(data => {
-         data.map(product => {
-          return product_images.map(r => {
-                if (r.includes(product.image_path)){
-                    product.image = r
-                    return product
-                }
-                return null
-            })
+    .then(r => {
+      if (r.ok){
+        r.json().then(data => {
+          if (data){
+            navigate('/home')
+            dispatch({type:'currentUser/login', payload:data})
+          } 
         })
-        dispatch({type:'products/addProduct', payload:data})
+      }
     })
-
-
     window.scrollTo(0,0)
-  },[dispatch, navigate])
+  },[])
   
   if (!currentUser){
     return (

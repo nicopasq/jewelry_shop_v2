@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../navigation/Navbar"; 
 import './home.css'
 import { Box, Button, Container, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import ringAd from '../../images/ringAd.png'
 import necklaceAd from '../../images/necklaceAd.png'
 import earringAd from '../../images/earringAd.png'
@@ -10,22 +9,6 @@ import {  useNavigate } from "react-router-dom";
 
 function Home(){
     const navigate = useNavigate()
-    const allProducts = useSelector(state => state.products.value)
-    const rings = []
-    const necklaces = []
-    const earrings = []
-    if(allProducts){
-        allProducts.map(product => {
-            if (product.product_type === 'ring'){
-                rings.push(product)
-            } else if(product.product_type === 'necklace'){
-                necklaces.push(product)
-            } else if(product.product_type === 'earring'){
-                earrings.push(product)
-            }
-            return ''
-        })
-    }
 
     return (
     <div className="main">
