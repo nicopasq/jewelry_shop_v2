@@ -8,7 +8,7 @@ class UsersController < ApplicationController
             session[:user_id] = new_user.id
             render json: new_user, status: :created
         else
-            render json: {errors: "Password and password confirmation must match."}, status: 422
+            render json: {errors: ["Password and password confirmation must match."]}, status: 422
         end
     end
 

@@ -14,8 +14,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
             elsif !order_product 
                 order_product = OrderProduct.create!(orderProductParams)
                 render json: order_product, status: :created
-            # elsif params[:quantity].to_i < 0
-            #     render json: {error: "Quantity must be greater than 0"}
             end
         else
             order_product = user.order_products.find_by(product_id:params[:product_id], in_cart:true)

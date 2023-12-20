@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography } from "@mui/material";
 import './signup.css'
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [alertDisplay, setAlertDisplay] = useState({display:"none"})
+    const [alertError, setAlertError] = useState([])
     const [signup, setSignup] = useState({
         username:'',
         password:'',
@@ -29,13 +31,21 @@ function Signup(){
                 dispatch({type: 'currentUser/signup', payload:data})
                 navigate('/home')
             }else{
-                console.log(data.errors)
+                const errors = data.errors.map((error, index) => (
+                    <Typography variant="body1" key={index}>{error}</Typography>
+                ))
+                setAlertError(errors)
+                setAlertDisplay({display:true})
+                setTimeout(() => {
+                    setAlertDisplay({display:'none'})
+                }, 5000);
             }
         })
     }
 
     return(
         <Container>
+            <Alert severity="error" sx={alertDisplay}>{alertError}</Alert>
             <form id="signupForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
                 <TextField 

@@ -10,12 +10,13 @@ import ProductPage from './features/shop/ProductPage.js';
 import Bag from './features/bag/Bag.js';
 import Checkout from './features/checkout/Checkout.js';
 import ThankYou from './features/checkout/ThankYou.js';
+import product_images from './images/images.js';
 
 function App() {
-  const currentUser = useSelector(state => state.currentUser.value)
+  const currentUser = useSelector(state => state.currentUser.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     fetch('/auth')
     .then(r => {
@@ -28,17 +29,35 @@ function App() {
         })
       }
     })
+
+    fetch('/products')
+    .then(r => r.json())
+    .then(data => {
+         data.map(product => {
+          return product_images.map(r => {
+                if (r.includes(product.image_path)){
+                    product.image = r
+                    return product
+                }
+                return null
+            })
+        })
+        dispatch({type:'products/addProduct', payload:data})
+    })
+
+
     window.scrollTo(0,0)
   },[])
-  
-  if (!currentUser){
+
+  console.log(currentUser)
+  if (!currentUser ){
     return (
       <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
       </Routes>
     );
-  } else {
+  } else if (currentUser.username) {
     return (
       <Routes>
         <Route path='/home' element={<Home />}/>

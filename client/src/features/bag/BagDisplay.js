@@ -8,7 +8,7 @@ function BagDisplay(){
     const [open, setOpen] = useState(false)
     const [currentProduct, setCurrentProduct] = useState(null)
     const dispatch = useDispatch()
-    const currentUser = useSelector(state => state.currentUser.value)
+    const currentUser = useSelector(state => state.currentUser.bag)
     const sortedBagItems = [...currentUser.order_products].sort((a,b) => (a.id > b.id) ? 1 : -1)
     const products = useSelector(state => state.products.value)
     const orderProducts = []    

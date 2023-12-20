@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 function QuickLinks(){
-    const currentUser = useSelector(state => state.currentUser.value)
+    const currentUser = useSelector(state => state.currentUser.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 

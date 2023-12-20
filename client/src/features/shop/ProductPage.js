@@ -13,13 +13,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductPage() {
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
-  const currentUser = useSelector((state) => state.currentUser.value);
+  const currentUser = useSelector((state) => state.currentUser);
+  const dispatch = useDispatch()
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState('')
   const menuItems = [
@@ -34,7 +35,7 @@ function ProductPage() {
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
   let orderBody = {
-    user_id: currentUser.id,
+    user_id: currentUser.user.id,
     product_id: currentProduct.id,
     order_id: null,
     in_cart: true,
@@ -80,16 +81,14 @@ function ProductPage() {
         .then(r => r.json())
         .then(data => {
           if (data.errors){
-            const messages = data.errors.map((message, index) => {
-              return <Typography key={index} variant="body1">{message}</Typography>
-            })
-            setAlertMessage(messages)
+            setAlertMessage(<Typography variant="body1">Quantity must be greater than 0</Typography>)
             setAlertSeverity('error')
             setAlertDisplay({display:true})
           } else{
             setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
             setAlertSeverity('success')
             setAlertDisplay({display:true})
+            dispatch({type:'currentUser/updateBag', payload:data})
           }
         })
       } else{

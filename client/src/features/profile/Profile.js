@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import './profile.css'
 
 function Profile(){
-    const currentUser = useSelector(state => state.currentUser.value)
+    const currentUser = useSelector(state => state.currentUser)
 
-    const dateTime = currentUser.created_at.split('T')
+    const dateTime = currentUser.user.created_at.split('T')
     const date = dateTime[0].split('-')
     const [year, month, day] = date
     date[0] = month
@@ -20,7 +20,7 @@ return(
 
         <Container>
             <Card elevation={10} id="profileCard">
-                <Typography variant="h4" className="profileCardData"><u>{currentUser.username}</u></Typography>
+                <Typography variant="h4" className="profileCardData"><u>{currentUser.user.username}</u></Typography>
                 <br/>
                 <Typography variant="h5" className="profileCardData">Joined:{joinDate}</Typography>
                 <br/>

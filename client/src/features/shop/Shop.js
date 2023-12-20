@@ -9,24 +9,6 @@ import product_images from '../../images/images.js'
 function Shop(){
     const products = useSelector(state => state.products.value)
     const navigation = useNavigate()
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        fetch('/products')
-        .then(r => r.json())
-        .then(data => {
-             data.map(product => {
-              return product_images.map(r => {
-                    if (r.includes(product.image_path)){
-                        product.image = r
-                        return product
-                    }
-                    return null
-                })
-            })
-            dispatch({type:'products/addProduct', payload:data})
-        })
-    }, [])
 
     const renderProducts = products?.map((p) => {
         return (

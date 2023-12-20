@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
-  const currentUser = useSelector((state) => state.currentUser.value);
+  const currentUser = useSelector((state) => state.currentUser.bag);
   const sortedBagItems = [...currentUser.order_products].sort((a, b) =>
     a.id > b.id ? 1 : -1
   );
