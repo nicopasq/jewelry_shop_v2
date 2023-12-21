@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import { Alert, Button, TextField, Typography } from "@mui/material";
@@ -15,6 +15,18 @@ function Signup(){
         password:'',
         confirmation:''
     })
+
+    // let timeout
+    // useEffect(() => {
+    //     if (alertError.length > 0) {
+    //         timeout = setTimeout(() => {
+    //             setAlertDisplay({display:"none"})
+    //         }, 5000)
+    //     } else{
+    //         return clearTimeout(timeout)
+    //     }
+    // }, [alertError])
+
 
     function handleSubmit(e){
         e.preventDefault();
@@ -36,9 +48,6 @@ function Signup(){
                 ))
                 setAlertError(errors)
                 setAlertDisplay({display:true})
-                setTimeout(() => {
-                    setAlertDisplay({display:'none'})
-                }, 5000);
             }
         })
     }

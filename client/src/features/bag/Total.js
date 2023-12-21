@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Total(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const currentUser = useSelector(state => state.currentUser.bag)
+    const currentUser = useSelector(state => state.currentUser.value)
     const inBag = currentUser.order_products.filter(p => p.in_cart === true)
 
     const priceArray = inBag.map(product => {

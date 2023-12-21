@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
-  const currentUser = useSelector((state) => state.currentUser.bag);
+  const currentUser = useSelector((state) => state.currentUser.value);
   const sortedBagItems = [...currentUser.order_products].sort((a, b) =>
     a.id > b.id ? 1 : -1
   );
@@ -56,7 +56,12 @@ function Confirmation({ handleEdit }) {
           body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
           })
           .then(r => r.json())
-          .then(() => navigation('/bag/thankYou'))
+          .then((data) =>{ 
+            console.log(data)
+            if (!data.erorrs){
+              navigation('/bag/thankYou')
+            }
+          })
       })
     })
   }

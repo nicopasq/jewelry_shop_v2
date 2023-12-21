@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {  useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import { Alert, Button, TextField, Typography } from "@mui/material";
@@ -15,13 +15,24 @@ function Login(){
         password:''
     })
 
+    let timeout
+    useEffect(() => {
+        if (alertError.length > 0){
+          timeout = setTimeout(() => {
+                setAlertDisplay({display:'none'})
+            }, 5000);
+        } else{
+            return clearTimeout(timeout)
+        }
+    }, [alertError])
+
     function handleSubmit(e){
         e.preventDefault();
         fetch('/login', {
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
-                },
+            },
             body: JSON.stringify(login)
         })
         .then(r => r.json())
@@ -32,13 +43,10 @@ function Login(){
             } else{
                 setAlertError(data.error)
                 setAlertDisplay({display:true})
-                setTimeout(() => {
-                    setAlertDisplay({display:'none'})
-                }, 5000);
             }
         })
     }
-
+    
     return(
         <Container>
             <Alert severity="error" sx={alertDisplay}>{alertError}</Alert>

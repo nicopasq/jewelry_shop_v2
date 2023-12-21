@@ -13,7 +13,7 @@ import ThankYou from './features/checkout/ThankYou.js';
 import product_images from './images/images.js';
 
 function App() {
-  const currentUser = useSelector(state => state.currentUser.user)
+  const currentUser = useSelector(state => state.currentUser.value)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -49,7 +49,7 @@ function App() {
     window.scrollTo(0,0)
   },[])
 
-  console.log(currentUser)
+
   if (!currentUser ){
     return (
       <Routes>
