@@ -11,13 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
-  const currentUser = useSelector((state) => state.currentUser.value);
-  const sortedBagItems = [...currentUser.order_products].sort((a, b) =>
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.currentUser.user);
+  const order_products = [...currentUser.order_products]
+  const sortedBagItems = order_products.sort((a, b) =>
     a.id > b.id ? 1 : -1
   );
   const inBag = sortedBagItems.filter(p => p.in_cart === true)
@@ -47,21 +49,25 @@ function Confirmation({ handleEdit }) {
     })
     .then(r => r.json())
     .then(data => {
-      inBag.forEach(p => {
-        fetch('/order_products', {
-          method:"PATCH",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
-          })
-          .then(r => r.json())
-          .then((data) =>{ 
-            if (!data.erorrs){
-              navigation('/bag/thankYou')
-            }
-          })
-      })
+      console.log(data)
+      // inBag.forEach(p => {
+      //   fetch('/order_products', {
+      //     method:"PATCH",
+      //     headers:{
+      //       "Content-Type":"application/json"
+      //     },
+      //     body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
+      //     })
+      //     .then(r => r.json())
+      //     .then((data) =>{ 
+      //       if (!data.erorrs){
+      //         navigation('/bag/thankYou')
+      //         const updatedBag = order_products.map(item => item.id === data.id ? data : item)
+      //         const updatedUser = {...currentUser, order_products:updatedBag}
+      //         dispatch({type:'currentUser/updateBag', payload:updatedUser})
+      //       }
+      //     })
+      // })
     })
   }
 
