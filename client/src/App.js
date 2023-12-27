@@ -13,7 +13,7 @@ import ThankYou from './features/checkout/ThankYou.js';
 import product_images from './images/images.js';
 
 function App() {
-  const currentUser = useSelector(state => state.currentUser.value)
+  const currentUser = useSelector(state => state.currentUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -48,16 +48,15 @@ function App() {
 
     window.scrollTo(0,0)
   },[])
-
-
-  if (!currentUser ){
+console.log(currentUser)
+  if (!currentUser.user ){
     return (
       <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
       </Routes>
     );
-  } else if (currentUser.username) {
+  } else {
     return (
       <Routes>
         <Route path='/home' element={<Home />}/>

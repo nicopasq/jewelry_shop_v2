@@ -19,7 +19,9 @@ function ProductPage() {
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
-  const currentUser = useSelector((state) => state.currentUser.value);
+  const currentUserObj = useSelector((state) => state.currentUser);
+  const bag = currentUserObj.user.order_products
+  const currentUser = currentUserObj.user
   const dispatch = useDispatch()
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -88,7 +90,18 @@ function ProductPage() {
             setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
             setAlertSeverity('success')
             setAlertDisplay({display:true})
-            dispatch({type:'currentUser/updateBag', payload:data})
+           console.log('data from product page, after fetch', data)
+            let match = bag.find(item => item.id === data.id)
+            if (!match){
+              const updatedBag = [...bag, data]
+              const updatedUser = {...currentUser, order_products:updatedBag}
+              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+            } else {
+              match = {...match, quantity: data.quantity}
+              const updatedBag = bag.map(item => item.id === match.id ? item = match : item)
+              const updatedUser = {...currentUser, order_products:updatedBag}
+              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+            }
           }
         })
       } else{
@@ -97,8 +110,8 @@ function ProductPage() {
         setAlertSeverity('error')
       }
     }
-
-  return (
+    console.log('bag from product page,', bag)
+    return (
     <div className="main">
       <Navbar />
       <Alert sx={alertDisplay} severity={alertSeverity} id="alert">{alertMessage}</Alert>

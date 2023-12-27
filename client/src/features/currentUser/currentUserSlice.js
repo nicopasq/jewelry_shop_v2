@@ -2,22 +2,23 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const currentUserSlice = createSlice({
   name: 'currentUser',
-  initialState: {},
+  initialState: {
+    user:undefined
+  },
   reducers: {
     login: (state, action) =>{
-        state.value = action.payload
+        state.user = action.payload
     },
     signup: (state, action) =>{
-      state.value = action.payload
+      state.user = action.payload
     },
     logout: (state, action) =>{
-      state.value = action.payload
+      state.user = action.payload
     },
-    // updateBag: (state, action) =>{
-    //   const bagItem = action.payload
-    //   let currentBag = state.value.order_products
+    updateBag: (state, action) =>{
+      state.user = action.payload
+    },
 
-    // }
   }
 })
 

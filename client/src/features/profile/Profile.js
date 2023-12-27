@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../navigation/Navbar";
 import { Card, Container, Paper, Table, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import "./profile.css";
 
 function Profile() {
-  const currentUser = useSelector((state) => state.currentUser.value);
-console.log(currentUser)
-  const dateTime = currentUser.created_at.split("T");
-  const date = dateTime[0].split("-");
-  const [year, month, day] = date;
-  date[0] = month;
-  date[1] = day;
-  date[2] = year;
-  const joinDate = date.join("-");
+  const currentUser = useSelector((state) => state.currentUser.user);
+  console.log(currentUser)
+  let date 
+  if (currentUser.created_at){
+    const tempDate = currentUser.created_at.split('T')[0].split('-')
+    const year = tempDate.shift()
+    tempDate.push(year)
+    date = tempDate.join(' / ')
+  }
+  const joinDate = date
   return (
     <div className="main">
       <Navbar />
@@ -25,7 +26,7 @@ console.log(currentUser)
           </Typography>
           <br />
           <Typography variant="h5" className="profileCardData">
-            Joined:{joinDate}
+            Joined: {joinDate}
           </Typography>
           <br />
           <br />

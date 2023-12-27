@@ -57,7 +57,6 @@ function Confirmation({ handleEdit }) {
           })
           .then(r => r.json())
           .then((data) =>{ 
-            console.log(data)
             if (!data.erorrs){
               navigation('/bag/thankYou')
             }
