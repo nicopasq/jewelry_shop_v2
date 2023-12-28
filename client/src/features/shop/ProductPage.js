@@ -36,7 +36,7 @@ function ProductPage() {
   let ringDisplay = { display: "none" };
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
-  let orderBody = {
+  const orderBody = {
     user_id: currentUser.id,
     product_id: currentProduct.id,
     order_id: null,
@@ -66,19 +66,19 @@ function ProductPage() {
 
 
     function orderProduct(){
+      let orderBodyCopy = {}
       if (currentProduct.product_type === 'ring'){
-        orderBody = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
+        orderBodyCopy = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
       } else{
-        orderBody = {...orderBody, ring: false, size:size, quantity:parseInt(quantity)}
+        orderBodyCopy = {...orderBody, ring: false, size:size, quantity:parseInt(quantity)}
       }
-      console.log('orderBody before fetch:', orderBody)
-      if (orderBody.ring && orderBody.size > 0 || orderBody.ring === false){
+      if (orderBodyCopy.ring && orderBodyCopy.size > 0 || orderBodyCopy.ring === false){
         fetch('/order_products', {
           method:"POST",
           headers:{
             'Content-Type':'application/json'
           },
-          body: JSON.stringify(orderBody)
+          body: JSON.stringify(orderBodyCopy)
         })
         .then(r => r.json())
         .then(data => {
@@ -90,15 +90,14 @@ function ProductPage() {
             setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
             setAlertSeverity('success')
             setAlertDisplay({display:true})
-           console.log('data from product page, after fetch', data)
             let match = bag.find(item => item.id === data.id)
             if (!match){
               const updatedBag = [...bag, data]
               const updatedUser = {...currentUser, order_products:updatedBag}
               dispatch({type:'currentUser/updateBag', payload:updatedUser})
             } else {
-              match = {...match, quantity: data.quantity}
-              const updatedBag = bag.map(item => item.id === match.id ? item = match : item)
+              const matchCopy = {...match, quantity: data.quantity}
+              const updatedBag = bag.map(item => item.id === matchCopy.id ? item = matchCopy : item)
               const updatedUser = {...currentUser, order_products:updatedBag}
               dispatch({type:'currentUser/updateBag', payload:updatedUser})
             }
@@ -110,7 +109,6 @@ function ProductPage() {
         setAlertSeverity('error')
       }
     }
-    console.log('bag from product page,', bag)
     return (
     <div className="main">
       <Navbar />

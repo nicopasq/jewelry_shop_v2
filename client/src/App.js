@@ -48,7 +48,6 @@ function App() {
 
     window.scrollTo(0,0)
   },[])
-console.log(currentUser)
   if (!currentUser.user ){
     return (
       <Routes>

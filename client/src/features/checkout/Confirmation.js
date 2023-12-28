@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Divider,
   Paper,
@@ -10,7 +11,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -35,11 +36,19 @@ function Confirmation({ handleEdit }) {
   const tax = (subtotal * 0.029).toFixed(2);
   const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
+  const [alertMessage, setAlertMessage] = useState([])
+  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
 
+  function showAlert(errors){
+    const errorJSX = errors.map((error, index) => <li key={index}>{error}</li>)
+    setAlertMessage(errorJSX)
+    setAlertDisplay({display:true})
+    setTimeout(() =>{setAlertDisplay({display:'none'})}, 10000)
+  }
 
   function handlePlaceOrder(){
     const orderBody = {user_id:currentUser.id, ...orderInfo.billing, ...orderInfo.shipping}
-
+    if (inBag.length > 0){
     fetch('/orders', {
       method:"POST",
       headers:{
@@ -49,26 +58,15 @@ function Confirmation({ handleEdit }) {
     })
     .then(r => r.json())
     .then(data => {
-      console.log(data)
-      // inBag.forEach(p => {
-      //   fetch('/order_products', {
-      //     method:"PATCH",
-      //     headers:{
-      //       "Content-Type":"application/json"
-      //     },
-      //     body:JSON.stringify({user_id:currentUser.id, id:p.id, order_id:data.id})
-      //     })
-      //     .then(r => r.json())
-      //     .then((data) =>{ 
-      //       if (!data.erorrs){
-      //         navigation('/bag/thankYou')
-      //         const updatedBag = order_products.map(item => item.id === data.id ? data : item)
-      //         const updatedUser = {...currentUser, order_products:updatedBag}
-      //         dispatch({type:'currentUser/updateBag', payload:updatedUser})
-      //       }
-      //     })
-      // })
+      if (!data.errors){
+        navigation('/bag/thankYou')
+        dispatch({type:'currentUser/updateBag', payload:data})
+      } else {
+        const errors = data.errors.split(':')[1].split(', ')
+        showAlert(errors)
+      }
     })
+  } else { showAlert(["Can not checkout an empty bag."])}
   }
 
   return (
@@ -126,6 +124,8 @@ function Confirmation({ handleEdit }) {
         </div>
         <Divider sx={{ bgcolor: "black", margin: "5px" }} />
       </div>
+
+<Alert severity="error" sx={alertDisplay}>{alertMessage}</Alert>
 
       <TableContainer component={Paper} elevation={3} id="tableContainer">
         <Table>
