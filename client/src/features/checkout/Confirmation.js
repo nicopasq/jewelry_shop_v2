@@ -61,6 +61,7 @@ function Confirmation({ handleEdit }) {
       if (!data.errors){
         navigation('/bag/thankYou')
         dispatch({type:'currentUser/updateBag', payload:data})
+        dispatch({type:'order/clear'})
       } else {
         showAlert(data.errors)
       }

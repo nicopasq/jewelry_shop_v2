@@ -82,27 +82,26 @@ function ProductPage() {
         })
         .then(r => r.json())
         .then(data => {
-          console.log(data)
-          // if (data.errors){
-          //   setAlertMessage(<Typography variant="body1">Quantity must be greater than 0</Typography>)
-          //   setAlertSeverity('error')
-          //   setAlertDisplay({display:true})
-          // } else{
-          //   setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
-          //   setAlertSeverity('success')
-          //   setAlertDisplay({display:true})
-          //   let match = bag.find(item => item.id === data.id)
-          //   if (!match){
-          //     const updatedBag = [...bag, data]
-          //     const updatedUser = {...currentUser, order_products:updatedBag}
-          //     dispatch({type:'currentUser/updateBag', payload:updatedUser})
-          //   } else {
-          //     const matchCopy = {...match, quantity: data.quantity}
-          //     const updatedBag = bag.map(item => item.id === matchCopy.id ? item = matchCopy : item)
-          //     const updatedUser = {...currentUser, order_products:updatedBag}
-          //     dispatch({type:'currentUser/updateBag', payload:updatedUser})
-          //   }
-          // }
+          if (data.errors){
+            setAlertMessage(<Typography variant="body1">Quantity must be greater than 0</Typography>)
+            setAlertSeverity('error')
+            setAlertDisplay({display:true})
+          } else{
+            setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
+            setAlertSeverity('success')
+            setAlertDisplay({display:true})
+            let match = bag.find(item => item.id === data.id)
+            if (!match){
+              const updatedBag = [...bag, data]
+              const updatedUser = {...currentUser, order_products:updatedBag}
+              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+            } else {
+              const matchCopy = {...match, quantity: data.quantity}
+              const updatedBag = bag.map(item => item.id === matchCopy.id ? item = matchCopy : item)
+              const updatedUser = {...currentUser, order_products:updatedBag}
+              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+            }
+          }
         })
       } else{
         setAlertMessage(<Typography variant="body1">Please enter a size</Typography>)

@@ -26,6 +26,25 @@ const orderSlice = createSlice({
         },
         shipping:(state, action) => {
             state.shipping = action.payload;
+        },
+        clear:(state) => {
+            state = { billing:{
+                first_name: "",
+                last_name: "",
+                card_number: "",
+                expiration: "",
+                cvv: "",
+            },
+            shipping:{
+                first_name:"",
+                last_name:"",
+                state: "",
+                city: "",
+                street_address: "",
+                apt_number: "",
+                zip_code: ""
+            }}
+            return state
         }
     }
 })
