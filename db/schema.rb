@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2023_12_04_010016) do
     t.string "order_number"
     t.string "first_name"
     t.string "last_name"
+    t.string "holder_first_name"
+    t.string "holder_last_name"
     t.string "card_number"
     t.date "expiration"
     t.integer "cvv"

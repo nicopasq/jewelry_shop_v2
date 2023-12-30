@@ -23,17 +23,17 @@ function Billing() {
         sx={{ margin: "5px" }}
         type="text"
         placeholder="First Name"
-        name="first_name"
-        value={billingInfo.first_name}
+        name="holder_first_name"
+        value={billingInfo.holder_first_name}
         onChange={e => handleChange(e)}
       />
       <TextField
         label="Last Name"
-        name="last_name"
+        name="holder_last_name"
         sx={{ margin: "5px" }}
         type="text"
         placeholder="Last Name"
-        value={billingInfo.last_name}
+        value={billingInfo.holder_last_name}
         onChange={e => handleChange(e)}
       />
       <div className="orderInput">

@@ -5,6 +5,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.string :order_number
       t.string :first_name
       t.string :last_name
+      t.string :holder_first_name
+      t.string :holder_last_name
       t.string :card_number
       t.date :expiration
       t.integer :cvv

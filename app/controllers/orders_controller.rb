@@ -16,10 +16,16 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
         render json: user
     end
 
+    def show 
+        user = User.find_by(id: session[:user_id])
+        order = user.orders.find_by(order_number: params[:id])
+        render json: order
+    end
+
     private
 
     def orderParams
-        params.permit(:user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :order)
+        params.permit(:user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :order, :holder_first_name, :holder_last_name)
     end
 
     def invalid_order invalid

@@ -4,8 +4,8 @@ const orderSlice = createSlice({
     name:'order',
     initialState:{
         billing:{
-            first_name: "",
-            last_name: "",
+            holder_first_name: "",
+            holder_last_name: "",
             card_number: "",
             expiration: "",
             cvv: "",
@@ -29,8 +29,8 @@ const orderSlice = createSlice({
         },
         clear:(state) => {
             state = { billing:{
-                first_name: "",
-                last_name: "",
+                holder_first_name: "",
+                holder_last_name: "",
                 card_number: "",
                 expiration: "",
                 cvv: "",
