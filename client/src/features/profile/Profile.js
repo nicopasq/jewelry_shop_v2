@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../navigation/Navbar";
-import { Card, Container, Paper, Table, TableHead, TableRow, Typography } from "@mui/material";
+import { Card, Container, Divider, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import "./profile.css";
 
@@ -16,9 +16,6 @@ function Profile() {
     date = tempDate.join(' / ')
   }
   const joinDate = date
-
-  // const renderOrders = currentUser.orders.map(order = {})
-
 
   return (
     <div className="main">
@@ -54,9 +51,20 @@ function Profile() {
               All Orders
             </Typography>
           </div>
-          <Table id="itemsTable">
+          <Table id="itemsTable" sx={{width:"70%"}}>
             <TableHead>
-              <TableRow></TableRow>
+              <TableRow>
+                <TableCell>Order Number</TableCell>
+                <TableCell align="right">Order Date</TableCell>
+              </TableRow>
+              <TableBody>
+                {currentUser.orders.map(order => (
+                  <TableRow key={order.id} sx={{border:0}}>
+                    <TableCell scope="row">{order.order_number}</TableCell>
+                    <TableCell sx={{marginLeft:'100%'}}>{order.created_at}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </TableHead>
           </Table>
         </Paper>
