@@ -3,8 +3,10 @@ import Navbar from "../navigation/Navbar";
 import { Card, Container, Divider, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import "./profile.css";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
+  const navigate = useNavigate()
   const currentUser = useSelector((state) => state.currentUser.user);
   console.log(currentUser)
 
@@ -66,20 +68,13 @@ function Profile() {
                   const date = dateTime.join(' / ')
                 return (
                   <TableRow key={order.id} sx={{border:0}}>
-                    <TableCell scope="row">{order.order_number}</TableCell>
+                    <TableCell scope="row" onClick={() => navigate(`/orders/${order.order_number}`)}>{order.order_number}</TableCell>
                     <TableCell align="right">{date}</TableCell>
                   </TableRow>
                 )})}
               </TableBody>
           </Table>
         </Paper>
-
-        {/* <Paper elevation={6} className="dataContainer" sx={{bgcolor:'antiquewhite'}}>
-                <div className="containerHeader">
-                    <Typography variant="body1" className="containerTitle" sx={{fontFamily:'monospace'}}>Saved For Later</Typography>
-                </div>  
-                <Table id='ordersTable'></Table>
-            </Paper> */}
       </Container>
     </div>
   );

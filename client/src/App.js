@@ -11,6 +11,7 @@ import Bag from './features/bag/Bag.js';
 import Checkout from './features/checkout/Checkout.js';
 import ThankYou from './features/checkout/ThankYou.js';
 import product_images from './images/images.js';
+import ShowOrder from './features/profile/ShowOrder.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser)
@@ -65,6 +66,7 @@ function App() {
         <Route path='/bag' element={<Bag />} />
         <Route path='/bag/checkout' element={<Checkout/>} />
         <Route path='/bag/thankYou' element={<ThankYou />} />
+        <Route path='/orders/:order_number' element={<ShowOrder />} />
       </Routes>
     )
   }
