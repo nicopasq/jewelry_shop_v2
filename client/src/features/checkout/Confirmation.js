@@ -62,8 +62,7 @@ function Confirmation({ handleEdit }) {
         navigation('/bag/thankYou')
         dispatch({type:'currentUser/updateBag', payload:data})
       } else {
-        const errors = data.errors.split(':')[1].split(', ')
-        showAlert(errors)
+        showAlert(data.errors)
       }
     })
   } else { showAlert(["Can not checkout an empty bag."])}

@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
 
     def create
-        user = User.find_by(id: params[:user_id])
+        user = User.find_by(id: session[:user_id])
         new_order = user.orders.create!(orderParams)
             products = user.order_products.filter{|item| item.in_cart == true}
             products.map{|item| 
@@ -20,7 +20,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     end
 
     def invalid_order invalid
-        render json: {errors: invalid}
+        render json: {errors: invalid.record.errors.full_messages}
     end
 
 
