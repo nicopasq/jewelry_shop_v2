@@ -57,15 +57,20 @@ function Profile() {
                 <TableCell>Order Number</TableCell>
                 <TableCell align="right">Order Date</TableCell>
               </TableRow>
+            </TableHead>
               <TableBody>
-                {currentUser.orders.map(order => (
+                {currentUser.orders.map(order => {
+                  const dateTime = order.created_at.split('T')[0].split('-')
+                  const year = dateTime.shift()
+                  dateTime.push(year)
+                  const date = dateTime.join(' / ')
+                return (
                   <TableRow key={order.id} sx={{border:0}}>
                     <TableCell scope="row">{order.order_number}</TableCell>
-                    <TableCell sx={{marginLeft:'100%'}}>{order.created_at}</TableCell>
+                    <TableCell align="right">{date}</TableCell>
                   </TableRow>
-                ))}
+                )})}
               </TableBody>
-            </TableHead>
           </Table>
         </Paper>
 
