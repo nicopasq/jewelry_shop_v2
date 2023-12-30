@@ -47,7 +47,7 @@ function Confirmation({ handleEdit }) {
   }
 
   function handlePlaceOrder(){
-    const orderBody = {user_id:currentUser.id, ...orderInfo.billing, ...orderInfo.shipping}
+    const orderBody = {...orderInfo.billing, ...orderInfo.shipping, user_id:currentUser.id}
     if (inBag.length > 0){
     fetch('/orders', {
       method:"POST",
