@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../navigation/Navbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -16,10 +17,14 @@ import {
   Typography,
 } from "@mui/material";
 import './showOrder.css'
+import { useDispatch, useSelector } from "react-redux";
 
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});
+  const currentUser = useSelector(state => state.currentUser.user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false)
   const style = {
     position: 'absolute',
@@ -50,7 +55,6 @@ function ShowOrder() {
       .then((r) => r.json())
       .then((data) => setCurrentOrder(data));
   }, []);
-  // console.log(currentOrder);
 
 
   function handleAction(action){
@@ -69,7 +73,10 @@ function ShowOrder() {
       },
       body:JSON.stringify(currentOrder)
     })
-    .then(r => console.log(r))
+    const updatedOrders = [...currentUser.orders].filter(order => order.id !== currentOrder.id)
+    const updatedUser = {...currentUser, orders: updatedOrders}
+    dispatch({type:"currentUser/updateBag", payload:updatedUser})
+    navigate('/profile')
   }
   return (
     <div className="main">
