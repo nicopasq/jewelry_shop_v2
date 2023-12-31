@@ -1,0 +1,21 @@
+.infoDisplay{
+    width:25%;
+    height: 26vh;
+    text-align: left;
+    margin-left: 22.5%;
+}
+#billingInfo{
+    position: relative;
+    bottom: 26.25vh;
+    left: 30%;
+}
+#orderProducts{
+    position: relative;
+    bottom: 20vh;
+}
+#itemTable{
+    width: 95%;
+    height: 35vh;
+    margin-left: 2.5%;
+    overflow-y: scroll;
+}

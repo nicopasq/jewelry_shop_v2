@@ -10,7 +10,6 @@ function Billing() {
       dispatch({type:'order/billing', payload:{...billingInfo, [e.target.name] : e.target.value}})
     }
 
-
   return (
     <form className="orderForm" id="billingForm" >
       <label>

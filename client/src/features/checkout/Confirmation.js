@@ -86,7 +86,7 @@ function Confirmation({ handleEdit }) {
         <div className="userDetails">
           <Typography variant="h6">
             Card Holder:{" "}
-            {orderInfo.billing.first_name + " " + orderInfo.billing.last_name}
+            {orderInfo.billing.holder_first_name + " " + orderInfo.billing.holder_last_name}
           </Typography>
           <Typography variant="h6">Card #: {cardNum}</Typography>
           <Typography variant="h6">
