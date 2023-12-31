@@ -13,7 +13,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
         }
         new_order.order_products = products
         new_order.update(order_number: unique_order_id)
-        render json: user
+        render json: new_order, status: :created
     end
 
     def show 
@@ -22,6 +22,12 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
         render json: order
     end
 
+    def destroy
+        user = User.find_by(id: session[:user_id])
+        user.orders.destroy(params[:id])
+        head:no_content
+        byebug
+    end
     private
 
     def orderParams

@@ -31,16 +31,14 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
 
     def destroy
         user = User.find_by(id:session[:user_id])
-        order = user.order_products.find_by(id:params[:id])
-        user.order_products.destroy(order[:id])
-        render json: user
+        user.order_products.destroy(params[:id])
+        head:no_content
     end
 
     def update
         user = User.find_by(id: session[:user_id])
         order_product = user.order_products.find_by(id: params[:id])
         order_product.update(order_id:params[:order_id], in_cart:false)
-        # byebug
         render json: order_product
     end
 

@@ -59,8 +59,10 @@ function Confirmation({ handleEdit }) {
     .then(r => r.json())
     .then(data => {
       if (!data.errors){
+        const updatedOrders = [...currentUser.orders, data]
+        const updatedUser = {...currentUser, orders:updatedOrders}
         navigation('/bag/thankYou')
-        dispatch({type:'currentUser/updateBag', payload:data})
+        dispatch({type:'currentUser/updateBag', payload:updatedUser})
         dispatch({type:'order/clear'})
       } else {
         showAlert(data.errors)

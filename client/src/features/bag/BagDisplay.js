@@ -47,8 +47,9 @@ function BagDisplay(){
             },
             body: JSON.stringify(product)
         })
-        .then(r => r.json())
-        .then(data => dispatch({type:'currentUser/updateBag', payload:data}))
+        const updatedOrderProducts = [...currentUser.order_products].filter(p => p.id !== product.id )
+        const updatedUser = {...currentUser, order_products: updatedOrderProducts}
+        dispatch({type:"currentUser/updateBag", payload:updatedUser})
         setAnchorEl(null)
         setOpen(false)
     }

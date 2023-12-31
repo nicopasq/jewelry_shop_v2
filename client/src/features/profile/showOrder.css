@@ -2,7 +2,7 @@
     width:25%;
     height: 26vh;
     text-align: left;
-    margin-left: 22.5%;
+    margin-left: 2%;
 }
 #billingInfo{
     position: relative;
@@ -14,8 +14,24 @@
     bottom: 20vh;
 }
 #itemTable{
-    width: 95%;
-    height: 35vh;
-    margin-left: 2.5%;
+    height: 30vh;
+    margin-left: 2%;
     overflow-y: scroll;
+}
+#actionButtons{
+    text-align: left;
+    position: relative;
+    bottom:1vh
+}
+#yesBtn{
+    background-color: green;
+    color: white;
+    margin-right: 9%;
+    margin-top: 3%;
+}
+
+#noBtn{
+    background-color: red;
+    color: white;
+    margin-top: 3%;
 }

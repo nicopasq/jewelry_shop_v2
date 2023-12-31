@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navigation/Navbar";
 import { useParams } from "react-router-dom";
 import {
+  Box,
+  Button,
+  Container,
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -16,6 +20,17 @@ import './showOrder.css'
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});
+  const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false)
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+  };
   const currentOrderCopy = {...currentOrder}
   let cardNum
   let expirationDate
@@ -35,13 +50,49 @@ function ShowOrder() {
       .then((r) => r.json())
       .then((data) => setCurrentOrder(data));
   }, []);
-  console.log(currentOrder);
+  // console.log(currentOrder);
 
+
+  function handleAction(action){
+    if (action === 'edit'){
+      // openEditForm()
+    } else{
+      setDisplayConfirmDelete(true)
+    }
+  }
+
+  function handleDeleteOrder(){
+    fetch(`/orders`, {
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(currentOrder)
+    })
+    .then(r => console.log(r))
+  }
   return (
     <div className="main">
       <Navbar />
-      <Typography variant="h3" align="left" marginLeft='3%' marginBottom='1%' fontFamily="serif"><u>Order #: {currentOrder.order_number}</u></Typography>
-
+      <Container>
+      <Typography variant="h3" align="left" marginBottom='1%' fontFamily="serif"><u>Order #: {currentOrder.order_number}</u></Typography>
+      <Modal
+        open={displayConfirmDelete}
+        onClose={() => setDisplayConfirmDelete(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h6">Are you sure you want to cancel your order?</Typography>
+          <Button id="yesBtn" onClick={() => handleDeleteOrder()}>Yes, cancel my order</Button>
+          <Button id="noBtn" onClick={() => setDisplayConfirmDelete(false)}>I changed my mind</Button>
+        </Box>
+      </Modal>
+      <div id="actionButtons">
+      <Button onClick={() => handleAction('edit')}>Edit</Button>
+      |
+      <Button onClick={() => handleAction('cancel')}>Cancel</Button>
+      </div>
       <div id="shippingInfo" className="infoDisplay">
         <Typography variant="h6"><u>Recipient:</u></Typography>
           <Typography variant="subtitle1">
@@ -89,7 +140,6 @@ function ShowOrder() {
           </Typography>
 
       </div>
-
       <div id="orderProducts">
         <TableContainer component={Paper} elevation={3} id="itemTable">
           <Table>
@@ -116,6 +166,7 @@ function ShowOrder() {
           </Table>
         </TableContainer>
       </div>
+      </Container>
     </div>
   );
 }
