@@ -59,8 +59,8 @@ function Confirmation({ handleEdit }) {
     .then(r => r.json())
     .then(data => {
       if (!data.errors){
-        const updatedOrders = [...currentUser.orders, data]
-        const updatedUser = {...currentUser, orders:updatedOrders}
+        const updatedOrders = [...currentUser.orders, data.new_order]
+        const updatedUser = {...currentUser, order_products:data.order_products, orders:updatedOrders}
         navigation('/bag/thankYou')
         dispatch({type:'currentUser/updateBag', payload:updatedUser})
         dispatch({type:'order/clear'})

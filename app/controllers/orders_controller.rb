@@ -13,7 +13,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
         }
         new_order.order_products = products
         new_order.update(order_number: unique_order_id)
-        render json: new_order, status: :created
+        render json: {order_products: user.order_products, new_order: new_order}, status: :created
     end
 
     def show 
