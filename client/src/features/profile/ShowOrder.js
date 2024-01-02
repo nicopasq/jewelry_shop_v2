@@ -18,24 +18,16 @@ import {
 } from "@mui/material";
 import './showOrder.css'
 import { useDispatch, useSelector } from "react-redux";
+import ConfirmDelete from "./ConfirmDelete";
 
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});
-  const currentUser = useSelector(state => state.currentUser.user)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const currentUser = useSelector(state => state.currentUser.user)
+  // const dispatch = useDispatch()
+  // const navigate = useNavigate()
+  const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
   const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false)
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-  };
   const currentOrderCopy = {...currentOrder}
   let cardNum
   let expirationDate
@@ -65,36 +57,21 @@ function ShowOrder() {
     }
   }
 
-  function handleDeleteOrder(){
-    fetch(`/orders`, {
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(currentOrder)
-    })
-    const updatedOrders = [...currentUser.orders].filter(order => order.id !== currentOrder.id)
-    const updatedUser = {...currentUser, orders: updatedOrders}
-    dispatch({type:"currentUser/updateBag", payload:updatedUser})
-    navigate('/profile')
-  }
   return (
     <div className="main">
       <Navbar />
       <Container>
       <Typography variant="h3" align="left" marginBottom='1%' fontFamily="serif"><u>Order #: {currentOrder.order_number}</u></Typography>
-      <Modal
-        open={displayConfirmDelete}
-        onClose={() => setDisplayConfirmDelete(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography variant="h6">Are you sure you want to cancel your order?</Typography>
-          <Button id="yesBtn" onClick={() => handleDeleteOrder()}>Yes, cancel my order</Button>
-          <Button id="noBtn" onClick={() => setDisplayConfirmDelete(false)}>I changed my mind</Button>
-        </Box>
-      </Modal>
+      <ConfirmDelete 
+        displayConfirmDelete={displayConfirmDelete} 
+        setDisplayConfirmDelete={setDisplayConfirmDelete}
+        currentOrder={currentOrder}
+        />
+      {/* <UpdateOrderModal 
+      displayUpdateForm={displayUpdateForm}
+      setDisplayUpdateForm={setDisplayUpdateForm}
+      currentOrder={currentOrder}
+      /> */}
       <div id="actionButtons">
       <Button onClick={() => handleAction('edit')}>Edit</Button>
       |
