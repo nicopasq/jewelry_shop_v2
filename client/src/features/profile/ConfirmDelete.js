@@ -7,7 +7,8 @@ function ConfirmDelete({displayConfirmDelete, setDisplayConfirmDelete, currentOr
     const currentUser = useSelector(state => state.currentUser.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const style = {
+    const style = { 
+        borderRadius:'10px',
         position: 'absolute',
         top: '50%',
         left: '50%',

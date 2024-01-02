@@ -19,6 +19,7 @@ import {
 import './showOrder.css'
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDelete from "./ConfirmDelete";
+import UpdateOrderModal from "./UpdateOrderModal";
 
 function ShowOrder() {
   const { order_number } = useParams();
@@ -51,7 +52,7 @@ function ShowOrder() {
 
   function handleAction(action){
     if (action === 'edit'){
-      // openEditForm()
+      setDisplayUpdateForm(true)
     } else{
       setDisplayConfirmDelete(true)
     }
@@ -67,11 +68,11 @@ function ShowOrder() {
         setDisplayConfirmDelete={setDisplayConfirmDelete}
         currentOrder={currentOrder}
         />
-      {/* <UpdateOrderModal 
-      displayUpdateForm={displayUpdateForm}
-      setDisplayUpdateForm={setDisplayUpdateForm}
-      currentOrder={currentOrder}
-      /> */}
+      <UpdateOrderModal
+        displayUpdateForm={displayUpdateForm}
+        setDisplayUpdateForm={setDisplayUpdateForm}
+        currentOrder={currentOrder}
+      />
       <div id="actionButtons">
       <Button onClick={() => handleAction('edit')}>Edit</Button>
       |
