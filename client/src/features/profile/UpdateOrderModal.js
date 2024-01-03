@@ -8,24 +8,26 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function UpdateOrderModal({
   displayUpdateForm,
   setDisplayUpdateForm,
   currentOrder,
 }) {
-    const updatedBilling = {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.currentUser.user)
+    const updatedOrder = {
+        user_id: currentUser.id,
         holder_first_name: 'update firstName',
         holder_last_name: 'updated lastName',
         card_number: '9485857373648586',
         expiration: '02-14-3041',
         cvv: 648,
-    }
-    const updateShipping = {
         first_name: 'updated first_name',
         last_name: 'upddated last_name',
-        state: 'Dinosaur',
-        city: 'Colorado',
+        city: 'Dinosaur',
+        state: 'Colorado',
         street_address: '1234 5th Street',
         apt_number: 564,
         zip_code: 40995
@@ -45,12 +47,18 @@ function UpdateOrderModal({
 
   function handleUpdateBilling(e){
     e.preventDefault()
-    console.log(updatedBilling)
-  }
-
-  function handleUpdateShipping(e){
-    e.preventDefault()
-    console.log(updateShipping)
+    fetch(`/orders/${currentOrder.id}`, {
+      method:"PATCH",
+      headers:{
+        "Content-Type":"application/json"
+        }
+    })
+    // .then(r => r.json())
+    // .then(data => {
+    //   const updatedOrders = [...currentUser.orders].map(order => order.id === data.id ? order = data : order)
+    //   const updatedUser = {...currentUser, orders : updatedOrders}
+    //   dispatch({type:'currentUser/updateBag', payload: updatedUser})
+    // })
   }
 
   return (
@@ -61,13 +69,15 @@ function UpdateOrderModal({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography variant="h5">Billing</Typography>
         <form
-          id='updateBillingInfo'
-          className="orderForm"
+          id='updateOrderForm'
+
           onSubmit={(e) => handleUpdateBilling(e)}
           style={{ marginLeft: "20%", marginBottom: "2%" }}
         >
+          <div id="billingForm">
+
+        <Typography variant="h5" align="center">Billing</Typography>
           <label>
             <Typography variant="h6" sx={{ fontFamily: "serif" }}>
               <u>Name on Card:</u>
@@ -76,13 +86,13 @@ function UpdateOrderModal({
             label="First Name"
             sx={{ margin: "5px" }}
             type="text"
-            value={updatedBilling.holder_first_name}
+            value={updatedOrder.holder_first_name}
             />
           <TextField
             label="Last Name"
             sx={{ margin: "5px" }}
             type="text"
-            value={updatedBilling.holder_last_name}
+            value={updatedOrder.holder_last_name}
             />
             </label>
 
@@ -95,7 +105,7 @@ function UpdateOrderModal({
               id ='card_number'
               name="card_number"
               className="formInput"
-              value={updatedBilling.card_number}
+              value={updatedOrder.card_number}
               />
               </label>
           </div>
@@ -105,7 +115,7 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Expiration Date</u>
               </Typography>
-            <Input id="expiration" className="formInput" value={updatedBilling.expiration} />
+            <Input id="expiration" className="formInput" value={updatedOrder.expiration} />
             </label>
           </div>
 
@@ -114,29 +124,18 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Security Code</u>
               </Typography>
-            <Input id="securityCode" className="formInput" type="number" value={updatedBilling.cvv} />
+            <Input id="securityCode" className="formInput" type="number" value={updatedOrder.cvv} />
             </label>
           </div>
+          </div>
 
-          <Button
-            sx={{ width: "30%", marginLeft: "5%", marginBottom: "5%" }}
-            type="submit"
-          >
-            Submit Billing Information
-          </Button>
-        </form>
 
+        <div id="shippingForm">
         <Divider sx={{ bgcolor: "lightBlue" }} />
-
-        <Typography variant="h5" marginTop={"1%"} >
+        <Typography variant="h5" marginTop={"1%"} align="center" >
           Shipping
         </Typography>
-        <form
-          onSubmit={(e) => handleUpdateShipping(e)}
-          className="orderForm"
-          id="updateShippingForm"
-          style={{ marginLeft: "20%" }}
-        >
+
           <Typography variant="h6">
             <u>Recipient:</u>
           </Typography>
@@ -149,7 +148,7 @@ function UpdateOrderModal({
               label="First Name"
               sx={{ margin: "5px" }}
               type="text"
-              value={updateShipping.first_name}
+              value={updatedOrder.first_name}
               />
               </label>
           </div>
@@ -163,7 +162,7 @@ function UpdateOrderModal({
               label="Last Name"
               sx={{ margin: "5px" }}
               type="text"
-              value={updateShipping.last_name}
+              value={updatedOrder.last_name}
               />
               </label>
           </div>
@@ -177,7 +176,7 @@ function UpdateOrderModal({
               label="State"
               sx={{ margin: "5px" }}
               type="text"
-              value={updateShipping.state}
+              value={updatedOrder.state}
               />
               </label>
           </div>
@@ -191,7 +190,7 @@ function UpdateOrderModal({
               label="City"
               sx={{ margin: "5px" }}
               type="text"
-              value={updateShipping.city}
+              value={updatedOrder.city}
               />
               </label>
           </div>
@@ -205,7 +204,7 @@ function UpdateOrderModal({
               id = "street_address"
               className="formInput"
               type="text"
-              value={updateShipping.street_address}
+              value={updatedOrder.street_address}
               />
               </label>
           </div>
@@ -215,7 +214,7 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Apt. #</u>
               </Typography>
-            <Input id="apt_number" className="formInput" type="number" value={updateShipping.apt_number} />
+            <Input id="apt_number" className="formInput" type="number" value={updatedOrder.apt_number} />
             </label>
           </div>
 
@@ -224,15 +223,16 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Zip Code</u>
               </Typography>
-            <Input id="zip_code" className="formInput" type="number" value={updateShipping.zip_code} />
+            <Input id="zip_code" className="formInput" type="number" value={updatedOrder.zip_code} />
             </label>
           </div>
           <Button
             sx={{ width: "30%", marginLeft: "5%", marginBottom: "5%" }}
             type="submit"
           >
-            Submit Shipping Information
+            Update Order
           </Button>
+          </div>
         </form>
       </Box>
     </Modal>

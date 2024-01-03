@@ -28,10 +28,14 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
         head:no_content
         byebug
     end
+
+    def update
+        byebug
+    end
     private
 
     def orderParams
-        params.permit(:user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :order, :holder_first_name, :holder_last_name)
+        params.permit(:id, :user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :holder_first_name, :holder_last_name)
     end
 
     def invalid_order invalid

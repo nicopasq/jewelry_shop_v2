@@ -35,3 +35,14 @@
     color: white;
     margin-top: 3%;
 }
+#updateOrderForm{
+    text-align: left;
+    width: 70%;
+    height: 105%;
+    position: relative;
+    bottom: 3%;
+    right: 4%
+}
+#shippingForm{
+    margin-top: 6%;
+}
