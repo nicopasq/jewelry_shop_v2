@@ -1,5 +1,6 @@
 # # Create All Rings
 
+# Product.create(product_name:'Black Opal', image_path:'/black_opal', product_type:'ring', price:250 ,in_stock: true)
 # Product.create(product_name:'Two Gold Band', image_path:'/gold_band_set_of_2', product_type:'ring', price:100, in_stock: true)
 # Product.create(product_name:'Gold Peridot', image_path:'/gold_bezel_peridot', product_type:'ring', price:150, in_stock: true)
 # Product.create(product_name:'Gold Diamond Alexandrite', image_path:'/gold_diamonds_alexandrite', product_type:'ring', price:200, in_stock: true)
