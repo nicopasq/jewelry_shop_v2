@@ -1,6 +1,6 @@
 import amythystPendant from '../necklaces/amethyst_pendant.png'
 import blackOpalDiamond from '../necklaces/opal_diamond.png'
-import diamond from '../necklaces/diamond.png'
+import diamondNecklace from '../necklaces/diamond_necklace.png'
 import emeraldDiamondTeardrop from '../necklaces/emerald_diamond_teardrop.png'
 import emeraldCubePendant from '../necklaces/emrald_cube_pendant.png'
 import gemstones from '../necklaces/gemstones.png'
@@ -27,7 +27,7 @@ import whiteGoldDiamond from '../necklaces/white_gold_diamond.png'
 const necklace_images = [
     amythystPendant,
     blackOpalDiamond,
-    diamond,
+    diamondNecklace,
     emeraldDiamondTeardrop,
     emeraldCubePendant,
     gemstones,
