@@ -52,14 +52,14 @@ Product.create(product_name:'Sterling Silver Chain with Ruby Flower', image_path
 Product.create(product_name:'Sterling Sliver Chain with Smokey Quartz Crystal', image_path:'/smokey_quartz_crystal', product_type:'necklace', price: 90, in_stock: true)
 Product.create(product_name:'Sterling Silver Chain with Amethyst', image_path:'/sterling_amethyst', product_type:'necklace', price: 1300, in_stock: true)
 Product.create(product_name:'White Gold Chain with Diamond Pendant', image_path:'/white_gold_diamond_Yshape', product_type:'necklace', price: 2000 , in_stock: true)
-Product.create(product_name:'Diamond Encrusted White Gold Chain', image_path:'/white_gold_diamond', product_type:'necklace', price: 1700, in_stock: true)
+Product.create(product_name:'Diamond Encrusted White Gold Chain', image_path:'/Chain_White_Gold_Encrusted_with_Diamonds', product_type:'necklace', price: 1700, in_stock: true)
 
 #Create All Earrings
 Product.create(product_name:'Amethyst and Garnet Ship Sails Encrusted with Diamonds | Drop', image_path:'/amethyst_garnet_shipSail_drop', product_type:'earring', price:2000, in_stock: true)
 Product.create(product_name:'Amethyst Earrings | Stud', image_path:'/amethyst_stud', product_type:'earring', price:1100, in_stock: true)
 Product.create(product_name:'Floating Butterfly | Hoop', image_path:'/butterfly_double_hoop', product_type:'earring', price:750, in_stock: true)
 Product.create(product_name:'Infinite Diamond | Stud', image_path:'/diamond_infinity_stud', product_type:'earring', price:1250, in_stock: true)
-Product.create(product_name:'Diamond Leaf | Stud', image_path:'/diamond_leaf_6Shape_stud', product_type:'earring', price:1500, in_stock: true)
+Product.create(product_name:'Diamond Leaf | Stud', image_path:'/Gold_Earrings_with_Diamond_Leaves', product_type:'earring', price:1500, in_stock: true)
 Product.create(product_name:'Gold Hoop Wrapped with Diamond | Hoop', image_path:'/wrapped_diamond_hoop', product_type:'earring', price:1500, in_stock: true)
 Product.create(product_name:'Duck Earrings | Drop', image_path:'/duck', product_type:'earring', price:20, in_stock: true)
 Product.create(product_name:'Emerald and Diamonds | Dangle', image_path:'/emerald_diamond_drop', product_type:'earring', price:2000, in_stock: true)

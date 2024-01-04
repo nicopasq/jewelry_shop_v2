@@ -2,7 +2,7 @@ import amethystGarnetDrop from './amethyst_garnet_shipSail_drop.png'
 import amethystStud from './amethyst_stud.png'
 import butterflyDoubleHoop from './butterfly_double_hoop.png'
 import diamondInfinityStud from './diamond_infinity_stud.png'
-import GoldEarringswithDiamondLeaves from './Gold_Earrings_with_Diamond_Leaves.png'
+import dimaondLeafDrop from './Gold_Earrings_with_Diamond_Leaves.png'
 import wrappedDiamondHoop from './wrapped_diamond_hoop.png'
 import duck from './duck.png'
 import emeraldDiamondDrop from './emerald_diamond_drop.png'
@@ -29,7 +29,7 @@ const earring_images = [
     amethystStud,
     butterflyDoubleHoop,
     diamondInfinityStud,
-    GoldEarringswithDiamondLeaves,
+    dimaondLeafDrop,
     wrappedDiamondHoop,
     duck,
     emeraldDiamondDrop,
