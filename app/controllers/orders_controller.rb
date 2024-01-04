@@ -30,7 +30,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     end
 
     def update
-        byebug
+        user = User.find_by(id: session[:user_id])
+        order = user.orders.find_by(id: params[:id])
+        order.update(orderParams)
+        render json: order
     end
     private
 

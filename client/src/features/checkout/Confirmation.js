@@ -54,7 +54,7 @@ function Confirmation({ handleEdit }) {
       headers:{
         'Content-Type':'application/json'
       },
-      body:JSON.stringify({order: orderBody})
+      body:JSON.stringify(orderBody)
     })
     .then(r => r.json())
     .then(data => {

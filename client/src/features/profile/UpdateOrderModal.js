@@ -14,6 +14,7 @@ function UpdateOrderModal({
   displayUpdateForm,
   setDisplayUpdateForm,
   currentOrder,
+  setCurrentOrder
 }) {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser.user)
@@ -22,7 +23,7 @@ function UpdateOrderModal({
         holder_first_name: 'update firstName',
         holder_last_name: 'updated lastName',
         card_number: '9485857373648586',
-        expiration: '02-14-3041',
+        expiration: new Date('2041-02-14'),
         cvv: 648,
         first_name: 'updated first_name',
         last_name: 'upddated last_name',
@@ -45,20 +46,22 @@ function UpdateOrderModal({
     p: 4,
   };
 
-  function handleUpdateBilling(e){
+  function handleUpdateOrder(e){
     e.preventDefault()
     fetch(`/orders/${currentOrder.id}`, {
       method:"PATCH",
       headers:{
         "Content-Type":"application/json"
-        }
+      },
+      body: JSON.stringify(updatedOrder)
     })
-    // .then(r => r.json())
-    // .then(data => {
-    //   const updatedOrders = [...currentUser.orders].map(order => order.id === data.id ? order = data : order)
-    //   const updatedUser = {...currentUser, orders : updatedOrders}
-    //   dispatch({type:'currentUser/updateBag', payload: updatedUser})
-    // })
+    .then(r => r.json())
+    .then(data => {
+      const updatedOrders = [...currentUser.orders].map(order => order.id === data.id ? order = data : order)
+      const updatedUser = {...currentUser, orders : updatedOrders}
+      dispatch({type:'currentUser/updateBag', payload: updatedUser})
+      setCurrentOrder(data)
+    })
   }
 
   return (
@@ -72,7 +75,7 @@ function UpdateOrderModal({
         <form
           id='updateOrderForm'
 
-          onSubmit={(e) => handleUpdateBilling(e)}
+          onSubmit={(e) => handleUpdateOrder(e)}
           style={{ marginLeft: "20%", marginBottom: "2%" }}
         >
           <div id="billingForm">
@@ -115,7 +118,7 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Expiration Date</u>
               </Typography>
-            <Input id="expiration" className="formInput" value={updatedOrder.expiration} />
+            <Input id="expiration" className="formInput" value='02-14-2041' />
             </label>
           </div>
 

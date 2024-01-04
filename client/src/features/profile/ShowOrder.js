@@ -24,7 +24,6 @@ import UpdateOrderModal from "./UpdateOrderModal";
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});
-  // const currentUser = useSelector(state => state.currentUser.user)
   // const dispatch = useDispatch()
   // const navigate = useNavigate()
   const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
@@ -69,6 +68,7 @@ function ShowOrder() {
         currentOrder={currentOrder}
         />
       <UpdateOrderModal
+        setCurrentOrder={setCurrentOrder}
         displayUpdateForm={displayUpdateForm}
         setDisplayUpdateForm={setDisplayUpdateForm}
         currentOrder={currentOrder}
