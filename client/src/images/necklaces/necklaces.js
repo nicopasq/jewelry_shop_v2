@@ -22,7 +22,7 @@ import rubyFlower from '../necklaces/ruby_flower.png'
 import smokeyQuartzCrystal from '../necklaces/smokey_quartz_crystal.png'
 import sterlingAmethyst from '../necklaces/sterling_amethyst.png'
 import whiteGoldDiamondYshape from '../necklaces/white_gold_diamond_Yshape.png'
-import whiteGoldDiamond from '../necklaces/white_gold_diamond.png'
+import ChainWhiteGoldEncrustedwithDiamonds from '../necklaces/Chain_White_Gold_Encrusted_with_Diamonds.png'
 
 const necklace_images = [
     amythystPendant,
@@ -49,7 +49,7 @@ const necklace_images = [
     smokeyQuartzCrystal,
     sterlingAmethyst,
     whiteGoldDiamondYshape,
-    whiteGoldDiamond
+    ChainWhiteGoldEncrustedwithDiamonds
 ]
 
 export default necklace_images;
