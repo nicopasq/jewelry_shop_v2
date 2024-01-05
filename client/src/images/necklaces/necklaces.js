@@ -15,14 +15,13 @@ import goldRoundPendant from '../necklaces/gold_round_pendant.png'
 import goldNecklace from '../necklaces/gold-necklace.png'
 import pearlStack from '../necklaces/pearl_3_stack.jpg'
 import roseQuartzCrystal2 from '../necklaces/rose_quartz_crystal_2.png'
-import roseQuartzCrystal from '../necklaces/rose_quartz_crystal.png'
+import roseQuartzCrystal from '../necklaces/sterling_rose_quartz_crystal.png'
 import rubyBeadsPendantRaw from '../necklaces/ruby_beads_pendant_raw.png'
 import rubyDiamondTeardop from '../necklaces/ruby_diamond_teardrop.jpg'
 import rubyFlower from '../necklaces/ruby_flower.png'
 import smokeyQuartzCrystal from '../necklaces/smokey_quartz_crystal.png'
 import sterlingAmethyst from '../necklaces/sterling_amethyst.png'
 import whiteGoldDiamondYshape from '../necklaces/white_gold_diamond_Yshape.png'
-import whiteGoldDiamond from '../necklaces/Chain_White_Gold_Encrusted_with_Diamonds.png'
 
 const necklace_images = [
     amythystPendant,
@@ -49,7 +48,6 @@ const necklace_images = [
     smokeyQuartzCrystal,
     sterlingAmethyst,
     whiteGoldDiamondYshape,
-    whiteGoldDiamond
 ]
 
 export default necklace_images;

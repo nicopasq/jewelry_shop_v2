@@ -12,7 +12,6 @@ import roseGoldDiamondMossAgate from "../rings/kite_mossAgate2.png";
 import roseGoldKiteMossAgate from "../rings/rose_gold_kite_mossAgate.png";
 import sterlingAustrailianOpal from "../rings/sterling_australian_opal.jpeg";
 import twoSterlingBands from "../rings/sterling_band_set_of_2.png";
-import sterlingDiamond from "../rings/Intertwined_Sterling_Silver_Ring_Lined_with_Diamonds.png";
 import sterlingDiamondSapphire from "../rings/sterling_diamond&_sapphire_band.png";
 import sterlingFlowerDiamond from "../rings/sterling_flower_diamond.png";
 import sterlingMossAgate from "../rings/sterling_mossAgate.png";
@@ -37,7 +36,6 @@ const ring_images = [
   sterlingMossAgate,
   sterlingFlowerDiamond,
   sterlingDiamondSapphire,
-  sterlingDiamond,
   twoSterlingBands,
   sterlingAustrailianOpal,
   roseGoldKiteMossAgate,
