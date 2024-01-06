@@ -29,7 +29,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
 
     def update
         order = user.orders.find_by(id: params[:id])
-        order.update(orderParams)
+        order.update(order_params)
         render json: order
     end
     private

@@ -1,30 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
 import {  useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
-import { Alert, Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography} from "@mui/material";
 import './login.css'
 import { Link, useNavigate } from "react-router-dom";
 
 function Login(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const mounted = useRef(false)
     const [alertDisplay, setAlertDisplay] = useState({display:"none"})
     const [alertError, setAlertError] = useState([])
     const [login, setLogin] = useState({
         username:'',
         password:''
     })
-
-    let timeout
-    useEffect(() => {
-        if (alertError.length > 0){
-          timeout = setTimeout(() => {
+        let timeOut = undefined
+        if (mounted.current === true){
+            timeOut = setTimeout(() => {
                 setAlertDisplay({display:'none'})
-            }, 5000);
-        } else{
-            return clearTimeout(timeout)
+            }, 5000)
         }
-    }, [alertError])
+
+    useEffect(() => {
+        mounted.current = true
+        
+        return () => {
+            clearTimeout(timeOut)
+            mounted.current = false
+        }
+    }, [timeOut])
+    
+
 
     function handleSubmit(e){
         e.preventDefault();

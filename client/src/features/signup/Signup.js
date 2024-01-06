@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import { Alert, Button, TextField, Typography } from "@mui/material";
@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Signup(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const mounted = useRef(false)
     const [alertDisplay, setAlertDisplay] = useState({display:"none"})
     const [alertError, setAlertError] = useState([])
     const [signup, setSignup] = useState({
@@ -15,6 +16,23 @@ function Signup(){
         password:'',
         confirmation:''
     })
+    
+    let timeOut = undefined
+    if (mounted.current === true){
+        timeOut = setTimeout(() => {
+            setAlertDisplay({display:'none'})
+        }, 5000)
+    }
+
+useEffect(() => {
+    mounted.current = true
+    
+    return () => {
+        clearTimeout(timeOut)
+        mounted.current = false
+    }
+}, [timeOut])
+
 
     function handleSubmit(e){
         e.preventDefault();

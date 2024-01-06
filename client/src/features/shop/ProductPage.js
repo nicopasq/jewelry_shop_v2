@@ -16,25 +16,22 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductPage() {
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.currentUser.user);
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
-  const currentUser = useSelector((state) => state.currentUser.user);
-  const bag = currentUser.order_products
-  const dispatch = useDispatch()
+  const [currentProduct, setCurrentProduct] = useState({});
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState('')
+  const { id } = useParams();
+  let ringDisplay = { display: "none" };
+  const bag = currentUser.order_products
   const menuItems = [
     5.0, 5.25, 5.5, 6.0, 6.25, 6.5, 7.0, 7.25, 7.5, 8.0, 8.25, 8.5, 9.0, 9.25,
-    9.5, 10, 10.25, 10.5, 11,
-  ].map((size) => (
-    <MenuItem value={size} key={size}>
-      {size}
-    </MenuItem>
-  ));
-  let ringDisplay = { display: "none" };
-  const { id } = useParams();
-  const [currentProduct, setCurrentProduct] = useState({});
+    9.5, 10, 10.25, 10.5, 11].map((size) => (
+    <MenuItem value={size} key={size}> {size} </MenuItem>));
+
   const orderBody = {
     product_id: currentProduct.id,
     order_id: null,
@@ -62,7 +59,11 @@ function ProductPage() {
       });
   }, [id]);
 
-
+    function createAlert(message, severity, display){
+      setAlertMessage(message)
+      setAlertSeverity(severity)
+      setAlertDisplay(display)
+    }
 
     function orderProduct(){
       let orderBodyCopy = {}
@@ -82,30 +83,34 @@ function ProductPage() {
         .then(r => r.json())
         .then(data => {
           if (data.errors){
-            setAlertMessage(<Typography variant="body1">Quantity must be greater than 0</Typography>)
-            setAlertSeverity('error')
-            setAlertDisplay({display:true})
+            createAlert(
+              <Typography variant="body1">Quantity must be greater than 0</Typography>,
+              'error',
+              {display:true}
+            )
           } else{
-            setAlertMessage(<Typography variant="body1">Added to bag</Typography>)
-            setAlertSeverity('success')
-            setAlertDisplay({display:true})
-            let match = bag.find(item => item.id === data.id)
-            if (!match){
+            createAlert(
+              <Typography variant="body1">Added to bag</Typography>,
+              'success',
+              {display:true}
+            )
+            if (!bag.find(item => item.id === data.id)){
               const updatedBag = [...bag, data]
               const updatedUser = {...currentUser, order_products:updatedBag}
               dispatch({type:'currentUser/update', payload:updatedUser})
             } else {
-              const matchCopy = {...match, quantity: data.quantity}
-              const updatedBag = bag.map(item => item.id === matchCopy.id ? item = matchCopy : item)
+              const updatedBag = bag.map(item => item.id === data.id ? item = data : item)
               const updatedUser = {...currentUser, order_products:updatedBag}
               dispatch({type:'currentUser/update', payload:updatedUser})
             }
           }
         })
       } else{
-        setAlertMessage(<Typography variant="body1">Please enter a size</Typography>)
-        setAlertDisplay({display:true})
-        setAlertSeverity('error')
+        createAlert(
+          <Typography variant="body1">Please enter a size</Typography>,
+          'error',
+          {display:true}
+        )
       }
     }
     return (

@@ -35,9 +35,9 @@ function App() {
     .then(r => r.json())
     .then(data => {
          data.map(product => {
-          return product_images.map(r => {
-                if (r.includes(product.image_path)){
-                    product.image = r
+          return product_images.map(image => {
+                if (image.includes(product.image_path)){
+                    product.image = image
                     return product
                 }
                 return null
@@ -49,6 +49,7 @@ function App() {
 
     window.scrollTo(0,0)
   },[])
+  
   if (!currentUser.user ){
     return (
       <Routes>
