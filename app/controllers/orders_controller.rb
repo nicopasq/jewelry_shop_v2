@@ -37,6 +37,9 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     end
     private
 
+    def user
+        User.find_by(id:session[:user_id])
+    end
     def orderParams
         params.permit(:id, :user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :holder_first_name, :holder_last_name)
     end

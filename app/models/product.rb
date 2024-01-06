@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
     has_many :order_products
+    has_many :users, through: :order_products
 
     validates :product_name, presence: true
     validates :product_type, presence: true

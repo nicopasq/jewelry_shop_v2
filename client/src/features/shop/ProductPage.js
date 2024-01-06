@@ -19,9 +19,8 @@ function ProductPage() {
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
-  const currentUserObj = useSelector((state) => state.currentUser);
-  const bag = currentUserObj.user.order_products
-  const currentUser = currentUserObj.user
+  const currentUser = useSelector((state) => state.currentUser.user);
+  const bag = currentUser.order_products
   const dispatch = useDispatch()
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -37,7 +36,6 @@ function ProductPage() {
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
   const orderBody = {
-    user_id: currentUser.id,
     product_id: currentProduct.id,
     order_id: null,
     in_cart: true,

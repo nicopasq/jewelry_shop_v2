@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :order_products, only:[:create]
-  patch '/order_products', to:'order_products#update'
+  patch '/order_products', to:'order_products#addOrderId'
   resources :orders
   resources :users, only:[:create]
   resources :products, only:[:show, :index]
