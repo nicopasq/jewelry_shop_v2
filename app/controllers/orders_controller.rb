@@ -1,36 +1,33 @@
 class OrdersController < ApplicationController
 require 'securerandom'
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
+wrap_parameters format: []
+
     def create
-        user = User.find_by(id: session[:user_id])
-        new_order = user.orders.create!(orderParams)
+        new_order = user.orders.create!(order_params)
         rand_id = SecureRandom.hex(10)
-        unique_order_id = rand_id+ new_order[:id].to_s
-        products = user.order_products.filter{|item| item.in_cart == true}
-        products.map{|item| 
-        item[:order_id] = new_order[:id];
-        item[:in_cart] = false
-        }
-        new_order.order_products = products
+        unique_order_id = "#{rand_id}#{new_order.id}"
         new_order.update(order_number: unique_order_id)
+
+        products = user.order_products.select(&:in_cart)
+        products.each {|item| 
+            item.update(order_id: new_order.id, in_cart: false)
+        }
+
         render json: {order_products: user.order_products, new_order: new_order}, status: :created
     end
 
     def show 
-        user = User.find_by(id: session[:user_id])
         order = user.orders.find_by(order_number: params[:id])
         render json: order
     end
 
     def destroy
-        user = User.find_by(id: session[:user_id])
         user.orders.destroy(params[:id])
         head:no_content
-        byebug
     end
 
     def update
-        user = User.find_by(id: session[:user_id])
         order = user.orders.find_by(id: params[:id])
         order.update(orderParams)
         render json: order
@@ -38,9 +35,9 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     private
 
     def user
-        User.find_by(id:session[:user_id])
+        @user = User.find_by(id:session[:user_id])
     end
-    def orderParams
+    def order_params
         params.permit(:id, :user_id, :first_name, :last_name, :card_number, :expiration, :cvv, :state, :city, :street_address, :apt_number, :zip_code, :holder_first_name, :holder_last_name)
     end
 
