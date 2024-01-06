@@ -19,8 +19,9 @@ function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.currentUser.user);
-  const inBag = [...currentUser.order_products].sort((a, b) =>
-  a.id > b.id ? 1 : -1).filter(p => p.in_cart === true)
+  const inBag = [...currentUser.order_products].sort((a, b) =>a.id > b.id ? 1 : -1)
+  .filter(p => p.in_cart === true)
+  
   const orderInfo = useSelector((state) => state.order);
   const priceArray = inBag.map((product) => {
     const productObj = product.product;

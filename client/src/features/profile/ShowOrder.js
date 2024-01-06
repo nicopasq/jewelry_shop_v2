@@ -34,7 +34,7 @@ function ShowOrder() {
   if (currentOrderCopy.id) {
     cardNum = currentOrder.card_number.match(/.{1,4}/g)?.join("-");
     products = currentOrder.order_products
-    let tempDate = currentOrder.expiration.split('-')
+    const tempDate = currentOrder.expiration.split('-')
     const year = tempDate.shift()
     tempDate.push(year)
     expirationDate = tempDate.join('-')

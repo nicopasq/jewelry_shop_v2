@@ -63,12 +63,13 @@ function ProductPage() {
   }, [id]);
 
 
+
     function orderProduct(){
       let orderBodyCopy = {}
       if (currentProduct.product_type === 'ring'){
         orderBodyCopy = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
       } else{
-        orderBodyCopy = {...orderBody, ring: false, size:size, quantity:parseInt(quantity)}
+        orderBodyCopy = {...orderBody, ring: false, quantity:parseInt(quantity)}
       }
       if (orderBodyCopy.ring && orderBodyCopy.size > 0 || orderBodyCopy.ring === false){
         fetch('/order_products', {
@@ -145,6 +146,7 @@ function ProductPage() {
               {menuItems}
             </Select>
           </div>
+
           <div id="quantityForm">
             <InputLabel id="quantity" sx={{ marginTop: "60px" }}>
               Quantity:
