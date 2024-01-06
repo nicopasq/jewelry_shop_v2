@@ -30,7 +30,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     def update
         order = user.orders.find_by(id: params[:id])
         order.update(order_params)
-        render json: order
+        render json: order, status: :accepted
     end
     private
 
@@ -42,7 +42,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
     end
 
     def invalid_order invalid
-        render json: {errors: invalid.record.errors.full_messages}
+        render json: {errors: invalid.record.errors.full_messages}, status: :unauthorized
     end
 
 

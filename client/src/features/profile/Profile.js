@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.currentUser.user);
-  console.log(currentUser)
 
   let date 
   if (currentUser.created_at){
@@ -35,7 +34,7 @@ function Profile() {
           <br />
           <br />
           <Typography variant="h5" className="profileCardData">
-            Total Orders:
+            Total Orders: {currentUser.orders.length}
           </Typography>
         </Card>
 

@@ -3,7 +3,9 @@ class OrderProduct < ApplicationRecord
     belongs_to :product
     has_one :order
 
-    validates :quantity, presence:true, numericality:{greater_than: 0}
-    validates :user_id, presence:true
     validates :product_id, presence:true
+    validates :user_id, presence:true
+    validates :quantity, presence:true, numericality:{greater_than: 0}
+    validates :ring, presence: true
+    validates :in_cart, presence: true
 end

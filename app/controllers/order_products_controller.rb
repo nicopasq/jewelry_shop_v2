@@ -19,7 +19,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     def addOrderId
         order_product = user.order_products.find_by(id: params[:id])
         order_product.update(order_id:params[:order_id], in_cart:false)
-        render json: order_product
+        render json: order_product, status: :accepted
     end
 
     private

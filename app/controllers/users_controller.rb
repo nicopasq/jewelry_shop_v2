@@ -18,6 +18,6 @@ class UsersController < ApplicationController
     end
 
     def invalid_signup invalid
-        render json: {errors: invalid.record.errors.full_messages}
+        render json: {errors: invalid.record.errors.full_messages}, status: :unauthorized
     end
 end

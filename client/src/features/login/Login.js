@@ -49,7 +49,7 @@ function Login(){
                 navigate('/home')
             } else{
                 setAlertError(data.error)
-                setAlertDisplay({display:true})
+                setAlertDisplay({display:true, position:'absolute'})
             }
         })
     }

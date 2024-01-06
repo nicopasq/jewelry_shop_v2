@@ -16,7 +16,7 @@ function Signup(){
         password:'',
         confirmation:''
     })
-    
+
     let timeOut = undefined
     if (mounted.current === true){
         timeOut = setTimeout(() => {
@@ -53,7 +53,7 @@ useEffect(() => {
                     <Typography variant="body1" key={index}>{error}</Typography>
                 ))
                 setAlertError(errors)
-                setAlertDisplay({display:true})
+                setAlertDisplay({display:true, position:'absolute'})
             }
         })
     }
