@@ -3,7 +3,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     wrap_parameters format: []
 
     def create
-        user = User.find_by(id:session[:user_id])
         if params[:ring]
            update_order_product_ring || create_order_product
         else
