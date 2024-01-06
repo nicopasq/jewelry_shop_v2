@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 require 'securerandom'
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
-wrap_parameters format: []
+
 
     def create
         new_order = user.orders.create!(order_params)

@@ -92,12 +92,12 @@ function ProductPage() {
             if (!match){
               const updatedBag = [...bag, data]
               const updatedUser = {...currentUser, order_products:updatedBag}
-              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+              dispatch({type:'currentUser/update', payload:updatedUser})
             } else {
               const matchCopy = {...match, quantity: data.quantity}
               const updatedBag = bag.map(item => item.id === matchCopy.id ? item = matchCopy : item)
               const updatedUser = {...currentUser, order_products:updatedBag}
-              dispatch({type:'currentUser/updateBag', payload:updatedUser})
+              dispatch({type:'currentUser/update', payload:updatedUser})
             }
           }
         })

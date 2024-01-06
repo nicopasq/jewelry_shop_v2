@@ -19,11 +19,8 @@ function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.currentUser.user);
-  const order_products = [...currentUser.order_products]
-  const sortedBagItems = order_products.sort((a, b) =>
-    a.id > b.id ? 1 : -1
-  );
-  const inBag = sortedBagItems.filter(p => p.in_cart === true)
+  const inBag = [...currentUser.order_products].sort((a, b) =>
+  a.id > b.id ? 1 : -1).filter(p => p.in_cart === true)
   const orderInfo = useSelector((state) => state.order);
   const priceArray = inBag.map((product) => {
     const productObj = product.product;
@@ -33,8 +30,8 @@ function Confirmation({ handleEdit }) {
   const subtotal =
     priceArray.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
 
-  const tax = (subtotal * 0.029).toFixed(2);
-  const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
+  const tax = parseFloat((subtotal * 0.029).toFixed(2));
+  const total = (subtotal + tax).toFixed(2);
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
@@ -62,7 +59,7 @@ function Confirmation({ handleEdit }) {
         const updatedOrders = [...currentUser.orders, data.new_order]
         const updatedUser = {...currentUser, order_products:data.order_products, orders:updatedOrders}
         navigation('/bag/thankYou')
-        dispatch({type:'currentUser/updateBag', payload:updatedUser})
+        dispatch({type:'currentUser/update', payload:updatedUser})
         dispatch({type:'order/clear'})
       } else {
         showAlert(data.errors)

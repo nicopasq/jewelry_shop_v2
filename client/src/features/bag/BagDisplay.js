@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 function BagDisplay(){
     const [anchorEl, setAnchorEl] = useState(null)
     const [open, setOpen] = useState(false)
-    const [currentProduct, setCurrentProduct] = useState(null)
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.currentUser.user)
-    const sortedBagItems = [...currentUser.order_products].sort((a,b) => (a.id > b.id) ? 1 : -1)
+    const bagItems = currentUser.order_products.filter(p => p.in_cart === true)
     const products = useSelector(state => state.products.value)
-    const orderProducts = []    
-    sortedBagItems.map(orderProduct => {
+    const orderProducts = []
+     bagItems.map(orderProduct => {
         return products?.map(p => {
             if(p.id === orderProduct.product_id){
                 return orderProducts.push({...orderProduct, image: p.image})
@@ -22,24 +21,17 @@ function BagDisplay(){
     })
     const inBag = orderProducts.filter(p => p.in_cart === true)
 
-    function handleSaveForLater(product){
-        console.log('save', product)
-    }
-
-    function handleMenuToggle(target, product){
+    function handleMenuToggle(target){
         if(target !== null){
             setAnchorEl(target)
             setOpen(true)
-            setCurrentProduct(product)
         } else {
-            setAnchorEl(null)
+            setAnchorEl(target)
             setOpen(false)
-            setCurrentProduct(null)
         }
     }
 
     function handleDelete(product){
-        console.log('delete order product:', product)
         fetch('/order_products', {
             method:"DELETE",
             headers:{
@@ -49,13 +41,9 @@ function BagDisplay(){
         })
         const updatedOrderProducts = [...currentUser.order_products].filter(p => p.id !== product.id )
         const updatedUser = {...currentUser, order_products: updatedOrderProducts}
-        dispatch({type:"currentUser/updateBag", payload:updatedUser})
+        dispatch({type:"currentUser/update", payload:updatedUser})
         setAnchorEl(null)
         setOpen(false)
-    }
-
-    function handleEditItem(product){
-        console.log('Edit me', product)
     }
 
     const bagDisplay = inBag.map(product => {
@@ -91,9 +79,7 @@ function BagDisplay(){
                          anchorEl={anchorEl}
                          open={open} 
                          onClose={() => handleMenuToggle(null)}>
-                            <MenuItem onClick={() => handleDelete(currentProduct)}>Remove All</MenuItem>
-                            <MenuItem onClick={() => handleSaveForLater(currentProduct)}>Save for later</MenuItem>
-                            <MenuItem onClick={() => handleEditItem(currentProduct)}>Edit Order</MenuItem>
+                            <MenuItem onClick={() => handleDelete(product)}>Remove All</MenuItem>
                         </Menu>
                     </div>
                     </CardContent>

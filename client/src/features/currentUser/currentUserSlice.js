@@ -15,7 +15,7 @@ export const currentUserSlice = createSlice({
     logout: (state, action) =>{
       state.user = action.payload
     },
-    updateBag: (state, action) =>{
+    update: (state, action) =>{
       state.user = action.payload
     },
 

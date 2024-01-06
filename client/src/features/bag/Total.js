@@ -16,8 +16,8 @@ function Total(){
     })
 
     const subtotal = priceArray.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
-    const tax = (subtotal * .029).toFixed(2)
-    const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2)
+    const tax = parseFloat((subtotal * .029).toFixed(2))
+    const total = (subtotal + tax).toFixed(2)
 
     function handleCheckout(){
         navigate('/bag/checkout')

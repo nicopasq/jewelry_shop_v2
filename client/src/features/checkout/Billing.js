@@ -54,15 +54,14 @@ function Billing() {
       <div className="orderInput">
         <label>
           <Typography variant="subtitle1">
-            <u>Expiration Date</u>
+            <u> Select Expiration Date</u>
           </Typography>
         </label>
         <Input
         name="expiration" 
         className="formInput" 
-        type="date" 
-        placeholder="Exp."
-        value={billingInfo.expiration}
+        type="month" 
+        value={billingInfo.expiration} 
         onChange={e => handleChange(e)}
          />
       </div>

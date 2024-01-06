@@ -24,8 +24,6 @@ import UpdateOrderModal from "./UpdateOrderModal";
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
   const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
   const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false)
   const currentOrderCopy = {...currentOrder}

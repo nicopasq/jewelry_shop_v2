@@ -16,18 +16,6 @@ function Signup(){
         confirmation:''
     })
 
-    // let timeout
-    // useEffect(() => {
-    //     if (alertError.length > 0) {
-    //         timeout = setTimeout(() => {
-    //             setAlertDisplay({display:"none"})
-    //         }, 5000)
-    //     } else{
-    //         return clearTimeout(timeout)
-    //     }
-    // }, [alertError])
-
-
     function handleSubmit(e){
         e.preventDefault();
         fetch('/users', {

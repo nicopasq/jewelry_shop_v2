@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Navbar from "../navigation/Navbar";
 import './checkout.css'
 import { Button, Step, StepButton, Stepper } from "@mui/material";
 import Billing from "./Billing";
 import Shipping from "./Shipping";
 import Confirmation from "./Confirmation";
-import { useDispatch } from "react-redux";
 
 function Checkout(){
     const [activeStep, setActiveStep] = useState(0)
     const [renderForm, setRenderForm] = useState(<Billing />)
-    const dispatch = useDispatch()
     let nextBtnDisplay = {display:'inline'}
     let backBtnDisplay = {display:'inline'}
     const steps = ['Billing Information', 'Shipping Information', 'Confirmation']

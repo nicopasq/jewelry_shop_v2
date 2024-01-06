@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2023_12_04_010016) do
     t.string "holder_first_name"
     t.string "holder_last_name"
     t.string "card_number"
-    t.date "expiration"
+    t.string "expiration"
     t.integer "cvv"
     t.string "state"
     t.string "city"

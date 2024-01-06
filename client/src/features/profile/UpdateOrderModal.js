@@ -23,7 +23,7 @@ function UpdateOrderModal({
         holder_first_name: 'update firstName',
         holder_last_name: 'updated lastName',
         card_number: '9485857373648586',
-        expiration: new Date('2041-02-14'),
+        expiration: '2041-02',
         cvv: 648,
         first_name: 'updated first_name',
         last_name: 'upddated last_name',
@@ -59,7 +59,7 @@ function UpdateOrderModal({
     .then(data => {
       const updatedOrders = [...currentUser.orders].map(order => order.id === data.id ? order = data : order)
       const updatedUser = {...currentUser, orders : updatedOrders}
-      dispatch({type:'currentUser/updateBag', payload: updatedUser})
+      dispatch({type:'currentUser/update', payload: updatedUser})
       setCurrentOrder(data)
     })
   }
@@ -118,7 +118,11 @@ function UpdateOrderModal({
               <Typography variant="subtitle1">
                 <u>Expiration Date</u>
               </Typography>
-            <Input id="expiration" className="formInput" value='02-14-2041' />
+            <Input 
+            id="expiration" 
+            className="formInput"
+            type="month" 
+            value={updatedOrder.expiration} />
             </label>
           </div>
 

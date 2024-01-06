@@ -29,7 +29,7 @@ function ConfirmDelete({displayConfirmDelete, setDisplayConfirmDelete, currentOr
         })
         const updatedOrders = [...currentUser.orders].filter(order => order.id !== currentOrder.id)
         const updatedUser = {...currentUser, orders: updatedOrders}
-        dispatch({type:"currentUser/updateBag", payload:updatedUser})
+        dispatch({type:"currentUser/update", payload:updatedUser})
         navigate('/profile')
       }
 
