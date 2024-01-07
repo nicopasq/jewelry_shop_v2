@@ -55,7 +55,7 @@ function Login(){
     }
     
     return(
-        <Container>
+        <Container className="container">
             <Alert severity="error" id="loginAlert" sx={alertDisplay}>{alertError}</Alert>
             <form id="loginForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
@@ -76,11 +76,13 @@ function Login(){
                     name="password"
                     value={login.password}
                     onChange={(e) => setLogin({...login, password:e.target.value})}/>
-
-                <Button type="submit" id="loginBtn" variant="contained">Login</Button>
+                <div id="buttonContainer">
+                <Button type="submit"sx={{marginBottom:'20%'}} variant="contained">Login</Button>
                 <Link to='/signup'>
-                    <Button variant="text" id="signupRoute"><u>Sign Up</u></Button>
+                    <Button variant="outlined" sx={{}}><u>Sign Up</u></Button>
                 </Link>
+                </div>
+                {/* <h1 id="centerLine"> | </h1> */}
             </form>
         </Container>
     )
