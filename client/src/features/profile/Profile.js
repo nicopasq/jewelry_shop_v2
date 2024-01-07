@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.currentUser.user);
-
+  const sortedOrders = [...currentUser.orders].sort((a, b) => a.id > b.id ? 1 : -1)
   let date 
   if (currentUser.created_at){
     const tempDate = currentUser.created_at.split('T')[0].split('-')
@@ -53,14 +53,14 @@ function Profile() {
             </Typography>
           </div>
           <Table id="itemsTable" sx={{width:"70%"}}>
-            <TableHead>
+            <TableHead sx={{borderBottom:'2px solid gray'}}>
               <TableRow>
                 <TableCell>Order Number</TableCell>
                 <TableCell align="right">Order Date</TableCell>
               </TableRow>
             </TableHead>
               <TableBody>
-                {currentUser.orders.map(order => {
+                {sortedOrders.map(order => {
                   const dateTime = order.created_at.split('T')[0].split('-')
                   const year = dateTime.shift()
                   dateTime.push(year)

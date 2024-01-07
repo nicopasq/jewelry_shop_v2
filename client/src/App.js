@@ -46,8 +46,6 @@ function App() {
         dispatch({type:'products/addProduct', payload:data})
     })
 
-
-    window.scrollTo(0,0)
   },[])
   
   if (!currentUser.user ){

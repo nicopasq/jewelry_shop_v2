@@ -13,6 +13,8 @@
     height: 35vh;
     position: relative;
     left: 2vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .containerHeader{
     border-bottom: 1px solid black;
@@ -22,4 +24,10 @@
 .containerTitle{
     position: relative;
     left: 1vw;
+}
+#itemsTable{
+
+    position: absolute;
+    top: 10%;
+    left: 15%;
 }
