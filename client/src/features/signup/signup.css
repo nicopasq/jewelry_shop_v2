@@ -35,3 +35,9 @@ body{
     bottom: 2%;
     left: 35.5%;
 }
+#signupAlert{
+    position: absolute;
+    left: 0%;
+    width: 100%;
+
+}

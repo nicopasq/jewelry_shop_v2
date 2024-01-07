@@ -35,6 +35,11 @@ body{
     bottom: 5%;
     left: 35.5%;
 }
+#loginAlert{
+    position: absolute;
+    left: 0%;
+    width: 100%;
+}
 /* #centerLine{
     transform: translateX(50%);
     position: relative;

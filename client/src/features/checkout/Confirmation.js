@@ -11,13 +11,14 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Confirmation({ handleEdit }) {
   const navigation = useNavigate()
   const dispatch = useDispatch()
+  const mounted = useRef(false)
   const currentUser = useSelector((state) => state.currentUser.user);
   const inBag = [...currentUser.order_products].sort((a, b) =>a.id > b.id ? 1 : -1)
   .filter(p => p.in_cart === true)
@@ -36,12 +37,27 @@ function Confirmation({ handleEdit }) {
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
   const [alertMessage, setAlertMessage] = useState([])
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
+  let timeOut = undefined
+
+  if (mounted.current === true){
+    timeOut = setTimeout(() => {
+      setAlertDisplay({display: 'none'});
+    }, 10000)
+  }
+
+  useEffect(() => {
+    mounted.current = true
+
+    return () => {
+      clearTimeout(timeOut)
+      mounted.current = false
+    }
+  }, [timeOut])
 
   function showAlert(errors){
     const errorJSX = errors.map((error, index) => <li key={index}>{error}</li>)
     setAlertMessage(errorJSX)
     setAlertDisplay({display:true})
-    setTimeout(() =>{setAlertDisplay({display:'none'})}, 10000)
   }
 
   function handlePlaceOrder(){
