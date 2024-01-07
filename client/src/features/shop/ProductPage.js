@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../navigation/Navbar";
 import {  useParams } from "react-router-dom";
 import images from "../../images/images";
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ProductPage() {
   const dispatch = useDispatch()
+  const mounted = useRef(false)
   const currentUser = useSelector((state) => state.currentUser.user);
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
@@ -45,6 +46,28 @@ function ProductPage() {
     ringDisplay = { display: "block" };
   }
 
+  // let timeOut = undefined
+  // if (mounted.current === true){
+  //   timeOut = setTimeout(() => {
+  //     setAlertDisplay({display:"none"})
+  //   }, 5000)
+  // }
+
+  useEffect(() => {
+    mounted.current = true;
+    
+    let timeOut
+    if (alertDisplay.display === true && alertMessage && mounted.current === true){
+      timeOut = setTimeout(() => {
+        setAlertDisplay({display:"none"})
+      }, 5000)
+    }
+    return () => {
+      clearTimeout(timeOut)
+      mounted.current = false;
+    }
+  }, [])
+
   useEffect(() => {
     fetch(`/products/${id}`)
       .then((r) => r.json())
@@ -57,8 +80,14 @@ function ProductPage() {
           return null
         });
       });
-  }, [id]);
+  }, []);
 
+  if (mounted.current && alertDisplay.display === true){
+    setTimeout(() => {
+      setAlertMessage('')
+      setAlertDisplay({display: 'none'})
+    }, 5000)
+  }
     function createAlert(message, severity, display){
       setAlertMessage(message)
       setAlertSeverity(severity)
