@@ -53,14 +53,14 @@ useEffect(() => {
                     <Typography variant="body1" key={index}>{error}</Typography>
                 ))
                 setAlertError(errors)
-                setAlertDisplay({display:true, position:'absolute'})
+                setAlertDisplay({display:true})
             }
         })
     }
 
     return(
         <Container>
-            <Alert severity="error" sx={alertDisplay}>{alertError}</Alert>
+            <Alert severity="error" id='signupAlert' sx={alertDisplay}>{alertError}</Alert>
             <form id="signupForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
                 <TextField 

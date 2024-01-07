@@ -46,28 +46,6 @@ function ProductPage() {
     ringDisplay = { display: "block" };
   }
 
-  // let timeOut = undefined
-  // if (mounted.current === true){
-  //   timeOut = setTimeout(() => {
-  //     setAlertDisplay({display:"none"})
-  //   }, 5000)
-  // }
-
-  useEffect(() => {
-    mounted.current = true;
-    
-    let timeOut
-    if (alertDisplay.display === true && alertMessage && mounted.current === true){
-      timeOut = setTimeout(() => {
-        setAlertDisplay({display:"none"})
-      }, 5000)
-    }
-    return () => {
-      clearTimeout(timeOut)
-      mounted.current = false;
-    }
-  }, [])
-
   useEffect(() => {
     fetch(`/products/${id}`)
       .then((r) => r.json())
@@ -81,13 +59,25 @@ function ProductPage() {
         });
       });
   }, []);
+  
 
+  let timeOut = undefined
   if (mounted.current && alertDisplay.display === true){
-    setTimeout(() => {
+   timeOut = setTimeout(() => {
       setAlertMessage('')
       setAlertDisplay({display: 'none'})
     }, 5000)
   }
+
+  useEffect(() => {
+    mounted.current = true;
+
+    return () => {
+      clearTimeout(timeOut);
+      mounted.current = false
+    }
+  }, [timeOut])
+
     function createAlert(message, severity, display){
       setAlertMessage(message)
       setAlertSeverity(severity)

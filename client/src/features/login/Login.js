@@ -49,14 +49,14 @@ function Login(){
                 navigate('/home')
             } else{
                 setAlertError(data.error)
-                setAlertDisplay({display:true, position:'absolute'})
+                setAlertDisplay({display:true})
             }
         })
     }
     
     return(
         <Container>
-            <Alert severity="error" sx={alertDisplay}>{alertError}</Alert>
+            <Alert severity="error" id="loginAlert" sx={alertDisplay}>{alertError}</Alert>
             <form id="loginForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
                 <TextField 
