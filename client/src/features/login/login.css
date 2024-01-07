@@ -1,3 +1,6 @@
+body{
+    text-align: center;
+}
 .container{
     height: 100vh;
 }
@@ -5,7 +8,7 @@
     width: 30%;
     height: 45%;
     display: inline-block;
-    transform: translateY(25%);
+    transform: translateY(27.75%);
 
     align-items: center;
     text-align: left;
@@ -21,7 +24,7 @@
 .loginInput{
     background-color: rgb(234, 210, 199);
     position: relative;
-    top: 8vh;
+    top: 5vh;
     left: 4.5vw;
 }
 #buttonContainer {
@@ -29,7 +32,7 @@
     height: 30%;
     text-align: center;
     position: absolute;
-    bottom: 0%;
+    bottom: 5%;
     left: 35.5%;
 }
 /* #centerLine{

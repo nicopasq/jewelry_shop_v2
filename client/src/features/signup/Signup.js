@@ -59,7 +59,7 @@ useEffect(() => {
     }
 
     return(
-        <Container>
+        <Container id="container">
             <Alert severity="error" id='signupAlert' sx={alertDisplay}>{alertError}</Alert>
             <form id="signupForm" onSubmit={(e) => handleSubmit(e)}>
                 <Typography variant="h3" id="businessName">Rock Hound</Typography>
@@ -89,11 +89,12 @@ useEffect(() => {
                     name="confirmation"
                     value={signup.confirmation}
                     onChange={(e) =>setSignup({...signup, confirmation:e.target.value})}/>
-
-                <Button type="submit" id="signupBtn" variant="contained">Signup</Button>
+                <div id="signupButtonContainer">
+                <Button type="submit" sx={{marginBottom:'20%'}} variant="contained">Signup</Button>
                 <Link to='/'>
-                    <Button variant="text" id="loginRoute"><u>Login</u></Button>
+                    <Button variant="outlined"><u>Login</u></Button>
                 </Link>
+                </div>
             </form>
         </Container>
     )
