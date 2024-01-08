@@ -70,4 +70,10 @@
     position: absolute;
     width: 100%;
     top: 12.5vh;
+    z-index: 1000;
+}
+#backBtn{
+    position: absolute;
+    left: 3%;
+    top:13%;
 }

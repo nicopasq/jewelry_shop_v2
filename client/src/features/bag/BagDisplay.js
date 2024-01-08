@@ -10,16 +10,15 @@ function BagDisplay(){
     const currentUser = useSelector(state => state.currentUser.user)
     const bagItems = currentUser.order_products.filter(p => p.in_cart === true)
     const products = useSelector(state => state.products.value)
-    const orderProducts = []
+    const inBag = []
      bagItems.map(orderProduct => {
         return products?.map(p => {
             if(p.id === orderProduct.product_id){
-                return orderProducts.push({...orderProduct, image: p.image})
+                return inBag.push({...orderProduct, image: p.image})
             }
             return null
         })
     })
-    const inBag = orderProducts.filter(p => p.in_cart === true)
 
     function handleMenuToggle(target){
         if(target !== null){
@@ -32,18 +31,40 @@ function BagDisplay(){
     }
 
     function handleDelete(product){
-        fetch('/order_products', {
+        fetch(`/order_products/${product.id}`, {
             method:"DELETE",
             headers:{
                 "Content-Type":"application/json"
-            },
-            body: JSON.stringify(product)
+            }
         })
         const updatedOrderProducts = [...currentUser.order_products].filter(p => p.id !== product.id )
         const updatedUser = {...currentUser, order_products: updatedOrderProducts}
         dispatch({type:"currentUser/update", payload:updatedUser})
         setAnchorEl(null)
         setOpen(false)
+    }
+
+    function updateQuantity(type, product){
+        if (type === 'decrement' && product.quantity > 1){
+            product.quantity --
+        } else if (type === 'increment'){
+            product.quantity ++
+        }
+
+        fetch(`/order_products/${product.id}`, {
+            method:"PATCH",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(product)
+        })
+        .then(r => r.json())
+        .then(data => {
+            const updatedOrderProducts = [...currentUser.order_products].map(p => p.id === data.id ? data : p)
+            const updatedUser = {...currentUser, order_products: updatedOrderProducts}
+            dispatch({type:'currentUser/update', payload:updatedUser})
+        })
+
     }
 
     const bagDisplay = inBag.map(product => {
@@ -57,13 +78,9 @@ function BagDisplay(){
                         <Typography variant='h6'>${productObj.price}</Typography>
                         <Divider sx={{bgcolor:'lightgrey'}}/>
                         <Typography variant='h6'>Quantity: 
-                            <Button className='incrementQty' sx={{fontSize:'16pt'}}
-                                // onClick={()=>dispatch({type:'bag/decrement'})}
-                            > - </Button>
+                            <Button className='incrementQty' sx={{fontSize:'16pt'}} onClick={() => updateQuantity('decrement', product)}> - </Button>
                                 {product.quantity}
-                            <Button className='incrementQty' sx={{fontSize:'13pt'}}
-                                // onClick={()=>dispatch({type:'bag/increment'})}
-                            > + </Button>
+                            <Button className='incrementQty' sx={{fontSize:'13pt'}} onClick={() => updateQuantity('increment', product)}> + </Button>
                         </Typography>
                         <Typography variant='h6' sx={() => {
                             if (productObj.product_type === 'ring'){

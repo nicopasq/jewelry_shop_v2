@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../navigation/Navbar";
-import {  useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import images from "../../images/images";
 import './productPage.css'
 import {
@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 function ProductPage() {
   const dispatch = useDispatch()
   const mounted = useRef(false)
+  const navigate = useNavigate()
   const currentUser = useSelector((state) => state.currentUser.user);
   const [alertSeverity, setAlertSeverity] = useState('error')
   const [alertMessage, setAlertMessage] = useState([])
@@ -136,6 +137,7 @@ function ProductPage() {
     <div className="main">
       <Navbar />
       <Alert sx={alertDisplay} severity={alertSeverity} id="alert">{alertMessage}</Alert>
+      <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>Back to Shop</Button>
       <div id="imageContainer" className="halfScreen">
         <img
           src={currentProduct.image}

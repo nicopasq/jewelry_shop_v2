@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  resources :order_products, only:[:create]
+  resources :order_products, only:[:create, :destroy, :update]
   resources :orders
   resources :users, only:[:create]
   resources :products, only:[:show, :index]
 
-  delete '/order_products', to:'order_products#destroy'
   delete '/orders', to:'orders#destroy'
   post '/login', to:'sessions#create'
   get '/auth', to:'sessions#show'

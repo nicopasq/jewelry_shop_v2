@@ -16,6 +16,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
         head:no_content
     end
 
+    def update
+        order_product = user.order_products.find_by(id: params[:id])
+        order_product.update(quantity: params[:quantity])
+        render json: order_product, status: :accepted
+    end
     private
 
     def order_product_params
