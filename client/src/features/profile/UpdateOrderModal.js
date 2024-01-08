@@ -61,6 +61,7 @@ function UpdateOrderModal({
       const updatedUser = {...currentUser, orders : updatedOrders}
       dispatch({type:'currentUser/update', payload: updatedUser})
       setCurrentOrder(data)
+      setDisplayUpdateForm(false)
     })
   }
 

@@ -1,3 +1,4 @@
+
 .infoDisplay{
     width:25%;
     height: 26vh;
@@ -11,7 +12,7 @@
 }
 #orderProducts{
     position: relative;
-    bottom: 20vh;
+    bottom: 30vh;
 }
 #itemTable{
     height: 30vh;
@@ -45,4 +46,11 @@
 }
 #shippingForm{
     margin-top: 6%;
+}
+#orderTotal{
+    text-align: left;
+    width: fit-content;
+    position: relative;
+    bottom: 52.5vh;
+    left: 65%;
 }

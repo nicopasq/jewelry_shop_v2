@@ -26,6 +26,7 @@ function ShowOrder() {
   const [currentOrder, setCurrentOrder] = useState({});
   const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
   const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false)
+  const navigate = useNavigate()
   const currentOrderCopy = {...currentOrder}
   let cardNum
   let expirationDate
@@ -39,6 +40,16 @@ function ShowOrder() {
     tempDate.push(year)
     expirationDate = tempDate.join('-')
   }
+
+  const priceArray = products?.map((product) => {
+    const productObj = product.product;
+    const price = productObj.price * product.quantity;
+    return price;
+  });
+  const subtotal = priceArray?.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
+
+  const tax = subtotal * 0.029;
+  const total = subtotal + tax
 
   useEffect(() => {
     fetch(`/orders/${order_number}`)
@@ -58,6 +69,7 @@ function ShowOrder() {
   return (
     <div className="main">
       <Navbar />
+      <Button variant="outlined" id="backBtn" onClick={() => navigate('/profile')}>Back to Profile</Button>
       <Container>
       <Typography variant="h3" align="left" marginBottom='1%' fontFamily="serif"><u>Order #: {currentOrder.order_number}</u></Typography>
       <ConfirmDelete 
@@ -87,11 +99,11 @@ function ShowOrder() {
           </Typography>
 
           <Typography variant="subtitle1">
-            <u>State:</u> {currentOrder.state}
+            <u>City:</u> {currentOrder.city}
           </Typography>
 
           <Typography variant="subtitle1">
-            <u>City:</u> {currentOrder.city}
+            <u>State:</u> {currentOrder.state}
           </Typography>
 
           <Typography variant="subtitle1">
@@ -122,6 +134,11 @@ function ShowOrder() {
             <u>Expiration Date:</u> {expirationDate}
           </Typography>
 
+      </div>
+      <div id="orderTotal">
+        <Typography variant="h6">Subtotal: ${subtotal.toFixed(2)}</Typography>
+        <Typography variant="h6">Tax: ${tax.toFixed(2)}</Typography>
+        <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
       </div>
       <div id="orderProducts">
         <TableContainer component={Paper} elevation={3} id="itemTable">
