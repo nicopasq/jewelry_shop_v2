@@ -16,8 +16,8 @@ function Total(){
     })
 
     const subtotal = priceArray.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
-    const tax = parseFloat((subtotal * .029).toFixed(2))
-    const total = (subtotal + tax).toFixed(2)
+    const tax = (subtotal * .029)
+    const total = (subtotal + tax)
 
     function handleCheckout(){
         navigate('/bag/checkout')
@@ -26,9 +26,9 @@ function Total(){
     return (
         <div id='totalContainer'>
             <Typography variant='h6'>Subtotal: ${subtotal.toFixed(2)}</Typography>
-            <Typography variant='h6'>Tax: ${tax}</Typography>
+            <Typography variant='h6'>Tax: ${tax.toFixed(2)}</Typography>
             <Divider sx={{bgcolor:'lightgrey'}}/>
-            <Typography variant='h5'>Total Price: ${total}</Typography>
+            <Typography variant='h5'>Total Price: ${total.toFixed(2)}</Typography>
             <Button id='checkout' variant='contained' onClick={() => handleCheckout()}>Checkout</Button>
         </div>
     )

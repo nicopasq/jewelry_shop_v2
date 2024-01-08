@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Navbar from '../navigation/Navbar'
 import { Container, Typography } from '@mui/material'
 import checkMark from './check_mark.png'
+import { useNavigate } from 'react-router-dom'
 
 function ThankYou(){
+    const mounted = useRef(false)
+    const navigate = useNavigate()
+    let timeOut
+
+    if (mounted.current){
+        timeOut = setTimeout(() => {
+            navigate('/home')
+        }, 10000)
+    }
+
+    useEffect(() => {
+        mounted.current = true
+
+        return () => {
+            clearTimeout(timeOut)
+            mounted.current = false
+        }
+    }, [timeOut])
+
     return(
         <div className='main'>
             <Navbar/>

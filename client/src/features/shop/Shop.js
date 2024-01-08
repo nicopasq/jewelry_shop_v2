@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../navigation/Navbar'
-import { Button, Card, Grid, Typography } from '@mui/material'
+import { Button, Card, Divider, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import './shop.css'
 import { useNavigate } from 'react-router-dom'
@@ -9,8 +9,7 @@ import product_images from '../../images/images.js'
 function Shop(){
     const products = useSelector(state => state.products.value)
     const navigation = useNavigate()
-
-    const renderProducts = products?.map((p) => {
+    const renderProducts = [...products].map((p) => {
         return (
             <Grid item xs={4} key={p.id} sm={3} >
                 <Card elevation={0} className="product">
@@ -25,6 +24,7 @@ function Shop(){
             </Grid>
         )
     })
+
     return (
         <div className='main'>
             <Navbar/>
