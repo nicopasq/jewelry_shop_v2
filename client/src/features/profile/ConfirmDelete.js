@@ -20,17 +20,17 @@ function ConfirmDelete({displayConfirmDelete, setDisplayConfirmDelete, currentOr
       };
 
       function handleDeleteOrder(){
-        fetch(`/orders`, {
+        fetch(`/orders/${currentOrder.id}`, {
           method:"DELETE",
           headers:{
             "Content-Type":"application/json"
-          },
-          body:JSON.stringify(currentOrder)
+          }
         })
-        const updatedOrders = [...currentUser.orders].filter(order => order.id !== currentOrder.id)
-        const updatedUser = {...currentUser, orders: updatedOrders}
-        dispatch({type:"currentUser/update", payload:updatedUser})
-        navigate('/profile')
+        .then(r => r.json())
+        .then(data => {
+          dispatch({type:"currentUser/update", payload:data})
+          navigate('/profile')
+        })
       }
 
     return(

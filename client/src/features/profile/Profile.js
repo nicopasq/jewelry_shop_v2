@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const navigate = useNavigate()
-  const productArray = useSelector(state => state.products.value)
-  console.log(productArray)
   const currentUser = useSelector((state) => state.currentUser.user);
   const sortedOrders = [...currentUser.orders].sort((a, b) => a.id > b.id ? 1 : -1)
   let date 
@@ -30,7 +28,7 @@ function Profile() {
         }
       })
   })
-  console.log(myOrderProducts)
+
   const myProducts = products.filter(
     (obj, index) =>
       products.findIndex((item) => item.id === obj.id) === index
@@ -112,13 +110,17 @@ function Profile() {
             <TableHead sx={{borderBottom:'2px solid gray'}}>
               <TableRow>
                 <TableCell>Product</TableCell>
+                <TableCell align="left">Product Type</TableCell>
+                <TableCell align="left">Price</TableCell>
               </TableRow>
             </TableHead>
               <TableBody>
                 {myProducts.map(product => {
                 return (
-                  <TableRow key={product.id} sx={{border:0}}>
-                    <TableCell scope="row" onClick={() => navigate(`/shop/${product.id}`)}>{product.product_name}</TableCell>
+                  <TableRow key={product.id} sx={{border:0}} onClick={() => navigate(`/shop/${product.id}`)}>
+                    <TableCell scope="row" >{product.product_name}</TableCell>
+                    <TableCell align="left" >{product.product_type}</TableCell>
+                    <TableCell align="left" >{product.price}</TableCell>
                   </TableRow>
                 )})}
               </TableBody>

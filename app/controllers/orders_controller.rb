@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 require 'securerandom'
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
-
+wrap_parameters format: []
 
     def create
         new_order = user.orders.create!(order_params)
@@ -24,7 +24,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
 
     def destroy
         user.orders.destroy(params[:id])
-        head:no_content
+        render json: user, status: :accepted
     end
 
     def update
