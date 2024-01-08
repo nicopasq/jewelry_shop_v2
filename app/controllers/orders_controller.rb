@@ -14,7 +14,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order
             item.update(order_id: new_order.id, in_cart: false)
         }
 
-        render json: {order_products: user.order_products, new_order: new_order}, status: :created
+        render json: {order_products: user.order_products, new_order: new_order, products:user.products}, status: :created
     end
 
     def show 

@@ -47,21 +47,6 @@ function ProductPage() {
     ringDisplay = { display: "block" };
   }
 
-  useEffect(() => {
-    fetch(`/products/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        return images.map((image) => {
-          if (image.includes(data.image_path)) {
-            data.image = image;
-            return setCurrentProduct(data);
-          }
-          return null
-        });
-      });
-  }, []);
-  
-
   let timeOut = undefined
   if (mounted.current && alertDisplay.display === true){
    timeOut = setTimeout(() => {
@@ -79,6 +64,21 @@ function ProductPage() {
     }
   }, [timeOut])
 
+  useEffect(() => {
+    fetch(`/products/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        return images.map((image) => {
+          if (image.includes(data.image_path)) {
+            data.image = image;
+            return setCurrentProduct(data);
+          }
+          return null
+        });
+      });
+  }, []);
+  
+
     function createAlert(message, severity, display){
       setAlertMessage(message)
       setAlertSeverity(severity)
@@ -92,6 +92,7 @@ function ProductPage() {
       } else{
         orderBodyCopy = {...orderBody, ring: false, quantity:parseInt(quantity)}
       }
+
       if (orderBodyCopy.ring && orderBodyCopy.size > 0 || orderBodyCopy.ring === false){
         fetch('/order_products', {
           method:"POST",
@@ -137,7 +138,7 @@ function ProductPage() {
     <div className="main">
       <Navbar />
       <Alert sx={alertDisplay} severity={alertSeverity} id="alert">{alertMessage}</Alert>
-      <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>Back to Shop</Button>
+      <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>Go Back</Button>
       <div id="imageContainer" className="halfScreen">
         <img
           src={currentProduct.image}

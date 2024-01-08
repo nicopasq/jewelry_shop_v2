@@ -6,5 +6,4 @@ class Product < ApplicationRecord
     validates :product_type, presence: true
     validates :price, presence: true
     validates :in_stock, presence: true
-    
 end
