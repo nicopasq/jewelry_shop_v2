@@ -3,16 +3,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Shipping() {
-    const dispatch = useDispatch()
-    const shippingInfo = useSelector(state => state.order.shipping)
+  const dispatch = useDispatch();
+  const shippingInfo = useSelector((state) => state.order.shipping);
 
-    function handleChange(e){
-        dispatch({type:'order/shipping', payload:{...shippingInfo, [e.target.name] : e.target.value}})
-    }
+  function handleChange(e) {
+    dispatch({
+      type: "order/shipping",
+      payload: { ...shippingInfo, [e.target.name]: e.target.value },
+    });
+  }
 
   return (
     <form className="orderForm" id="shippingForm">
-      <Typography variant="h6"><u>Recipient:</u></Typography>
+      <Typography variant="h6">
+        <u>Recipient:</u>
+      </Typography>
       <div className="orderInput">
         <label>
           <Typography variant="subtitle1">

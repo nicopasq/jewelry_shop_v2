@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../navigation/Navbar";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import images from "../../images/images";
-import './productPage.css'
+import "./productPage.css";
 import {
   Alert,
   Button,
@@ -16,43 +16,48 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductPage() {
-  const dispatch = useDispatch()
-  const mounted = useRef(false)
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const mounted = useRef(false);
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.currentUser.user);
-  const [alertSeverity, setAlertSeverity] = useState('error')
-  const [alertMessage, setAlertMessage] = useState([])
-  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
+  const [alertSeverity, setAlertSeverity] = useState("error");
+  const [alertMessage, setAlertMessage] = useState([]);
+  const [alertDisplay, setAlertDisplay] = useState({ display: "none" });
   const [currentProduct, setCurrentProduct] = useState({});
-  const [size, setSize] = useState('')
-  const [quantity, setQuantity] = useState('')
+  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState("");
   const { id } = useParams();
   let ringDisplay = { display: "none" };
-  const bag = currentUser.order_products
+  const bag = currentUser.order_products;
   const menuItems = [
     5.0, 5.25, 5.5, 6.0, 6.25, 6.5, 7.0, 7.25, 7.5, 8.0, 8.25, 8.5, 9.0, 9.25,
-    9.5, 10, 10.25, 10.5, 11].map((size) => (
-    <MenuItem value={size} key={size}> {size} </MenuItem>));
+    9.5, 10, 10.25, 10.5, 11,
+  ].map((size) => (
+    <MenuItem value={size} key={size}>
+      {" "}
+      {size}{" "}
+    </MenuItem>
+  ));
 
   const orderBody = {
     product_id: currentProduct.id,
     order_id: null,
     in_cart: true,
     size: "",
-    quantity:0,
-    ring: false
+    quantity: 0,
+    ring: false,
   };
 
   if (currentProduct && currentProduct.product_type === "ring") {
     ringDisplay = { display: "block" };
   }
 
-  let timeOut = undefined
-  if (mounted.current && alertDisplay.display === true){
-   timeOut = setTimeout(() => {
-      setAlertMessage('')
-      setAlertDisplay({display: 'none'})
-    }, 5000)
+  let timeOut = undefined;
+  if (mounted.current && alertDisplay.display === true) {
+    timeOut = setTimeout(() => {
+      setAlertMessage("");
+      setAlertDisplay({ display: "none" });
+    }, 5000);
   }
 
   useEffect(() => {
@@ -60,9 +65,9 @@ function ProductPage() {
 
     return () => {
       clearTimeout(timeOut);
-      mounted.current = false
-    }
-  }, [timeOut])
+      mounted.current = false;
+    };
+  }, [timeOut]);
 
   useEffect(() => {
     fetch(`/products/${id}`)
@@ -73,72 +78,97 @@ function ProductPage() {
             data.image = image;
             return setCurrentProduct(data);
           }
-          return null
+          return null;
         });
       });
   }, []);
-  
 
-    function createAlert(message, severity, display){
-      setAlertMessage(message)
-      setAlertSeverity(severity)
-      setAlertDisplay(display)
+  function createAlert(message, severity, display) {
+    setAlertMessage(message);
+    setAlertSeverity(severity);
+    setAlertDisplay(display);
+  }
+
+  function orderProduct() {
+    let orderBodyCopy = {};
+    if (currentProduct.product_type === "ring") {
+      orderBodyCopy = {
+        ...orderBody,
+        ring: true,
+        size: size,
+        quantity: parseInt(quantity),
+      };
+    } else {
+      orderBodyCopy = {
+        ...orderBody,
+        ring: false,
+        quantity: parseInt(quantity),
+      };
     }
 
-    function orderProduct(){
-      let orderBodyCopy = {}
-      if (currentProduct.product_type === 'ring'){
-        orderBodyCopy = {...orderBody, ring: true, size:size, quantity:parseInt(quantity)}
-      } else{
-        orderBodyCopy = {...orderBody, ring: false, quantity:parseInt(quantity)}
-      }
-
-      if (orderBodyCopy.ring && orderBodyCopy.size > 0 || orderBodyCopy.ring === false){
-        fetch('/order_products', {
-          method:"POST",
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body: JSON.stringify(orderBodyCopy)
-        })
-        .then(r => r.json())
-        .then(data => {
-          if (data.errors){
+    if (
+      (orderBodyCopy.ring && orderBodyCopy.size > 0) ||
+      orderBodyCopy.ring === false
+    ) {
+      fetch("/order_products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderBodyCopy),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.errors) {
             createAlert(
-              <Typography variant="body1">Quantity must be greater than 0</Typography>,
-              'error',
-              {display:true}
-            )
-          } else{
+              <Typography variant="body1">
+                Quantity must be greater than 0
+              </Typography>,
+              "error",
+              { display: true }
+            );
+          } else {
             createAlert(
               <Typography variant="body1">Added to bag</Typography>,
-              'success',
-              {display:true}
-            )
-            if (!bag.find(item => item.id === data.id)){
-              const updatedBag = [...bag, data]
-              const updatedUser = {...currentUser, order_products:updatedBag}
-              dispatch({type:'currentUser/update', payload:updatedUser})
+              "success",
+              { display: true }
+            );
+            if (!bag.find((item) => item.id === data.id)) {
+              const updatedBag = [...bag, data];
+              const updatedUser = {
+                ...currentUser,
+                order_products: updatedBag,
+              };
+              dispatch({ type: "currentUser/update", payload: updatedUser });
             } else {
-              const updatedBag = bag.map(item => item.id === data.id ? item = data : item)
-              const updatedUser = {...currentUser, order_products:updatedBag}
-              dispatch({type:'currentUser/update', payload:updatedUser})
+              const updatedBag = bag.map((item) =>
+                item.id === data.id ? (item = data) : item
+              );
+              const updatedUser = {
+                ...currentUser,
+                order_products: updatedBag,
+              };
+              dispatch({ type: "currentUser/update", payload: updatedUser });
             }
           }
-        })
-      } else{
-        createAlert(
-          <Typography variant="body1">Please enter a size</Typography>,
-          'error',
-          {display:true}
-        )
-      }
+        });
+    } else {
+      createAlert(
+        <Typography variant="body1">Please enter a size</Typography>,
+        "error",
+        { display: true }
+      );
     }
-    return (
+  }
+  return (
     <div className="main">
       <Navbar />
-      <Alert sx={alertDisplay} severity={alertSeverity} id="alert">{alertMessage}</Alert>
-      <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>Go Back</Button>
+      <Alert sx={alertDisplay} severity={alertSeverity} id="alert">
+        {alertMessage}
+      </Alert>
+      <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>
+        Go Back
+      </Button>
       <div id="imageContainer" className="halfScreen">
         <img
           src={currentProduct.image}

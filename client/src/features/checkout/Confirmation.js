@@ -20,10 +20,11 @@ function Confirmation({ handleEdit }) {
   const dispatch = useDispatch()
   const mounted = useRef(false)
   const currentUser = useSelector((state) => state.currentUser.user);
-  const inBag = [...currentUser.order_products].sort((a, b) =>a.id > b.id ? 1 : -1)
-  .filter(p => p.in_cart === true)
-  
   const orderInfo = useSelector((state) => state.order);
+  const [alertMessage, setAlertMessage] = useState([])
+  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
+  const inBag = [...currentUser.order_products].filter(p => p.in_cart === true)
+  .sort((a, b) =>a.id > b.id ? 1 : -1)
   const priceArray = inBag.map((product) => {
     const productObj = product.product;
     const price = productObj.price * product.quantity;
@@ -31,12 +32,9 @@ function Confirmation({ handleEdit }) {
   });
   const subtotal =
     priceArray.length > 0 ? priceArray.reduce((prev, cur) => prev + cur) : 0;
-
   const tax = parseFloat((subtotal * 0.029).toFixed(2));
   const total = (subtotal + tax).toFixed(2);
   const cardNum = orderInfo.billing.card_number.match(/.{1,4}/g)?.join("-");
-  const [alertMessage, setAlertMessage] = useState([])
-  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
   let timeOut = undefined
 
   if (mounted.current === true){
@@ -61,7 +59,7 @@ function Confirmation({ handleEdit }) {
   }
 
   function handlePlaceOrder(){
-    const orderBody = {...orderInfo.billing, ...orderInfo.shipping, user_id:currentUser.id}
+    const orderBody = {...orderInfo.billing, ...orderInfo.shipping}
     if (inBag.length > 0){
     fetch('/orders', {
       method:"POST",

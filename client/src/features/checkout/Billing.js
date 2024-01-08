@@ -3,15 +3,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Billing() {
-  const billingInfo = useSelector(state => state.order.billing)
-  const dispatch = useDispatch()
-    
-    function handleChange(e) {
-      dispatch({type:'order/billing', payload:{...billingInfo, [e.target.name] : e.target.value}})
-    }
+  const billingInfo = useSelector((state) => state.order.billing);
+  const dispatch = useDispatch();
+
+  function handleChange(e) {
+    dispatch({
+      type: "order/billing",
+      payload: { ...billingInfo, [e.target.name]: e.target.value },
+    });
+  }
 
   return (
-    <form className="orderForm" id="billingForm" >
+    <form className="orderForm" id="billingForm">
       <label>
         <Typography variant="h6" sx={{ fontFamily: "serif" }}>
           <u>Name on Card:</u>
@@ -24,7 +27,7 @@ function Billing() {
         placeholder="First Name"
         name="holder_first_name"
         value={billingInfo.holder_first_name}
-        onChange={e => handleChange(e)}
+        onChange={(e) => handleChange(e)}
       />
       <TextField
         label="Last Name"
@@ -33,7 +36,7 @@ function Billing() {
         type="text"
         placeholder="Last Name"
         value={billingInfo.holder_last_name}
-        onChange={e => handleChange(e)}
+        onChange={(e) => handleChange(e)}
       />
       <div className="orderInput">
         <label>
@@ -41,13 +44,13 @@ function Billing() {
             <u>Card Number</u>
           </Typography>
         </label>
-        <Input 
-        name="card_number" 
-        className="formInput" 
-        type="number" 
-        placeholder="Card Number" 
-        value={billingInfo.card_number}
-        onChange={e => handleChange(e)}
+        <Input
+          name="card_number"
+          className="formInput"
+          type="number"
+          placeholder="Card Number"
+          value={billingInfo.card_number}
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -58,12 +61,12 @@ function Billing() {
           </Typography>
         </label>
         <Input
-        name="expiration" 
-        className="formInput" 
-        type="month" 
-        value={billingInfo.expiration} 
-        onChange={e => handleChange(e)}
-         />
+          name="expiration"
+          className="formInput"
+          type="month"
+          value={billingInfo.expiration}
+          onChange={(e) => handleChange(e)}
+        />
       </div>
 
       <div className="orderInput">
@@ -72,13 +75,13 @@ function Billing() {
             <u>Security Code</u>
           </Typography>
         </label>
-        <Input 
-        name="cvv"
-        className="formInput" 
-        type="number"
-        placeholder="cvv" 
-        value={billingInfo.cvv}
-        onChange={e => handleChange(e)}
+        <Input
+          name="cvv"
+          className="formInput"
+          type="number"
+          placeholder="cvv"
+          value={billingInfo.cvv}
+          onChange={(e) => handleChange(e)}
         />
       </div>
     </form>
