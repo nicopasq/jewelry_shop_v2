@@ -46,6 +46,8 @@ function App() {
       dispatch({type:'products/addProduct', payload:data})
     })
     
+    //eslint claims navigate needs to be in dependancy array - this will cause useEffect() to run each time useNavigate() changes and routes to '/home' when any component uses useNavigate()
+  
     // eslint-disable-next-line
   },[dispatch])
 
