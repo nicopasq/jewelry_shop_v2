@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes
   resources :order_products, only:[:create, :destroy, :update]
   resources :orders
   resources :users, only:[:create]

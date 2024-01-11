@@ -160,6 +160,17 @@ function ProductPage() {
       );
     }
   }
+
+
+  function likeProduct(){
+    fetch('/likes', {
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({productId: id})
+    })
+  }
   return (
     <div className="main">
       <Navbar />
@@ -168,6 +179,9 @@ function ProductPage() {
       </Alert>
       <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>
         Go Back
+      </Button>
+      <Button variant="text" sx={{marginRight:'47%', fontSize:'30px'}} onClick={() => likeProduct()}>
+        ♡
       </Button>
       <div id="imageContainer" className="halfScreen">
         <img
