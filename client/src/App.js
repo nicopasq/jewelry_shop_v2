@@ -24,8 +24,8 @@ function App() {
       if (r.ok){
         r.json().then(data => {
           if (data){
-            dispatch({type:'currentUser/login', payload:data})
             navigate('/home')
+            dispatch({type:'currentUser/login', payload:data})
           } 
         })
       }

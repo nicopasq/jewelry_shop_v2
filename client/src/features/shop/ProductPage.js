@@ -28,6 +28,7 @@ function ProductPage() {
   const [quantity, setQuantity] = useState("");
   const { id } = useParams();
   let ringDisplay = { display: "none" };
+  let likeIcon = '♡'
   const bag = currentUser.order_products;
   const menuItems = [
     5.0, 5.25, 5.5, 6.0, 6.25, 6.5, 7.0, 7.25, 7.5, 8.0, 8.25, 8.5, 9.0, 9.25,
@@ -81,6 +82,10 @@ function ProductPage() {
           return null;
         });
       });
+
+      return () => {
+        setCurrentProduct({})
+      }
   }, [id]);
 
   function createAlert(message, severity, display) {
@@ -161,7 +166,6 @@ function ProductPage() {
     }
   }
 
-
   function likeProduct(){
     fetch('/likes', {
       method:"POST",
@@ -170,7 +174,25 @@ function ProductPage() {
       },
       body: JSON.stringify({productId: id})
     })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.error){
+        console.log('new like', data)
+        const updatedUser = {...currentUser, likes: [...currentUser.likes, data]}
+        likeIcon = '❤️'
+        dispatch({type:"currentUser/update", payload:updatedUser})
+      }
+    })
   }
+
+    [...currentUser.likes].map(like => {
+      if (like.product_id === currentProduct.id){
+        return likeIcon = '❤️'
+      }
+      return '♡'
+    })
+
+console.log(currentUser.likes)
   return (
     <div className="main">
       <Navbar />
@@ -181,7 +203,7 @@ function ProductPage() {
         Go Back
       </Button>
       <Button variant="text" sx={{marginRight:'47%', fontSize:'30px'}} onClick={() => likeProduct()}>
-        ♡
+        {likeIcon}
       </Button>
       <div id="imageContainer" className="halfScreen">
         <img
