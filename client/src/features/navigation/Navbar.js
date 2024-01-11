@@ -1,9 +1,9 @@
 import { Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import QuickLinks from "./QuickLinks";
 import "./navBar.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Navbar() {
   const dispatch = useDispatch();

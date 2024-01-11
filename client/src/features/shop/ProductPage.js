@@ -81,7 +81,7 @@ function ProductPage() {
           return null;
         });
       });
-  }, []);
+  }, [id]);
 
   function createAlert(message, severity, display) {
     setAlertMessage(message);

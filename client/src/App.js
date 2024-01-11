@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ import product_images from './images/images.js';
 import ShowOrder from './features/profile/ShowOrder.js';
 
 function App() {
-  const currentUser = useSelector(state => state.currentUser)
+  const currentUser = useSelector(state => state.currentUser.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -24,51 +24,53 @@ function App() {
       if (r.ok){
         r.json().then(data => {
           if (data){
-            navigate('/home')
             dispatch({type:'currentUser/login', payload:data})
+            navigate('/home')
           } 
         })
       }
     })
-
+    
     fetch('/products')
     .then(r => r.json())
     .then(data => {
-         data.map(product => {
-          return product_images.map(image => {
-                if (image.includes(product.image_path)){
-                    product.image = image
-                    return product
-                }
-                return null
-            })
+      data.map(product => {
+        return product_images.map(image => {
+          if (image.includes(product.image_path)){
+            product.image = image
+            return product
+          }
+          return null
         })
-        dispatch({type:'products/addProduct', payload:data})
+      })
+      dispatch({type:'products/addProduct', payload:data})
     })
+    
+    // eslint-disable-next-line
+  },[dispatch])
 
-  },[])
-  
-  if (!currentUser.user ){
-    return (
-      <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/signup' element={<Signup />}/>
-      </Routes>
-    );
-  } else {
-    return (
-      <Routes>
-        <Route path='/home' element={<Home />}/>
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/shop' element={<Shop/>} />
-        <Route path='/shop/:id' element={<ProductPage/>} /> 
-        <Route path='/bag' element={<Bag />} />
-        <Route path='/bag/checkout' element={<Checkout/>} />
-        <Route path='/bag/thankYou' element={<ThankYou />} />
-        <Route path='/orders/:order_number' element={<ShowOrder />} />
-      </Routes>
-    )
-  }
+if (!currentUser){
+  return (
+    <Routes>
+      <Route path='/' element={<Login />}/>
+      <Route path='/signup' element={<Signup />}/>
+    </Routes>
+  )
+} else {
+  return (
+    <Routes>
+      <Route path='/home' element={<Home />}/>
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/shop' element={<Shop/>} />
+      <Route path='/shop/:id' element={<ProductPage/>} /> 
+      <Route path='/bag' element={<Bag />} />
+      <Route path='/bag/checkout' element={<Checkout/>} />
+      <Route path='/bag/thankYou' element={<ThankYou />} />
+      <Route path='/orders/:order_number' element={<ShowOrder />} />
+    </Routes>
+  )
+}
+
 }
 
 export default App;

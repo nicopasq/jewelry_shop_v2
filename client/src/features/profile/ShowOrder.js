@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navigation/Navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  Alert,
-  Box,
   Button,
   Container,
-  Modal,
   Paper,
   Table,
   TableBody,
@@ -17,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import "./showOrder.css";
-import { useDispatch, useSelector } from "react-redux";
 import ConfirmDelete from "./ConfirmDelete";
 import UpdateOrderModal from "./UpdateOrderModal";
 
@@ -56,7 +52,7 @@ function ShowOrder() {
     fetch(`/orders/${order_number}`)
       .then((r) => r.json())
       .then((data) => setCurrentOrder(data));
-  }, []);
+  }, [order_number]);
 
   function handleAction(action) {
     if (action === "edit") {

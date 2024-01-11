@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../navigation/Navbar";
 import {
   Card,
-  CardContent,
   Container,
-  Divider,
   Paper,
   Table,
   TableBody,
@@ -34,12 +32,13 @@ function Profile() {
   const myOrderProducts = [...currentUser.order_products].filter(
     (p) => p.in_cart === false
   );
-  const products = [];
+  const products = []
   myOrderProducts?.map((orderProduct) => {
-    currentUser.products.map((p) => {
+     return currentUser.products.filter((p) => {
       if (p.id === orderProduct.product_id) {
         products.push(p);
-      }
+      } 
+      return p
     });
   });
 
