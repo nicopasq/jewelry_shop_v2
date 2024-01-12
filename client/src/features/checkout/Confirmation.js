@@ -166,8 +166,8 @@ function Confirmation({ handleEdit }) {
         </Table>
       </TableContainer>
       <div id="confirmationTotal">
-        <Typography variant="subtitle1">Subtotal: ${subtotal}</Typography>
-        <Typography variant="subtitle1">Tax: ${tax} </Typography>
+        <Typography variant="subtitle1">Subtotal: ${subtotal.toFixed(2)}</Typography>
+        <Typography variant="subtitle1">Tax: ${tax.toFixed(2)} </Typography>
         <Divider sx={{ bgcolor: "lightGrey" }} />
         <Typography variant="h6">Total: ${total} </Typography>
       </div>

@@ -166,6 +166,9 @@ function ProductPage() {
     }
   }
 
+
+  // const [like, setLike] = useState({})
+
   function likeProduct(){
     fetch('/likes', {
       method:"POST",
@@ -177,13 +180,41 @@ function ProductPage() {
     .then(r => r.json())
     .then(data => {
       if (!data.error){
-        console.log('new like', data)
         const updatedUser = {...currentUser, likes: [...currentUser.likes, data]}
         likeIcon = '❤️'
         dispatch({type:"currentUser/update", payload:updatedUser})
+        createAlert('Added to Favorites', 'success', {display:true})
+      } 
+    })
+  }
+
+  function removeLike(like){
+    console.log('removeLike',like )
+    fetch(`/likes/${like.id}`, {
+      method: "DELETE"
+    })
+    .then(r => {
+      if (r.ok){
+        likeIcon = '♡'
+        const updatedLikes = [...currentUser.likes.filter(l => l.id !== like.id)]
+        const updatedUser = {...currentUser, likes: updatedLikes}
+        dispatch({type:"currentUser/update", payload:updatedUser})
+        createAlert('Removed from Favorites', 'warning', {display:true})
       }
     })
   }
+
+
+  function handleLikeBtn(){
+    const like = currentUser.likes.find(like => like.product_id === currentProduct.id)
+    console.log(like)
+    if (like){
+      removeLike(like)
+    } else {
+      likeProduct()
+    }
+  }
+
 
     [...currentUser.likes].map(like => {
       if (like.product_id === currentProduct.id){
@@ -200,9 +231,9 @@ console.log(currentUser.likes)
         {alertMessage}
       </Alert>
       <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>
-        Go Back
+        <Typography variant="h4">←</Typography>
       </Button>
-      <Button variant="text" sx={{marginRight:'47%', fontSize:'30px'}} onClick={() => likeProduct()}>
+      <Button variant="text" id="likeBtn" onClick={() => handleLikeBtn()}>
         {likeIcon}
       </Button>
       <div id="imageContainer" className="halfScreen">

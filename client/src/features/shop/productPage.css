@@ -77,3 +77,9 @@
     left: 3%;
     top:13%;
 }
+#likeBtn{
+    font-size: 28px;
+    position: absolute;
+    top: 18%;
+    left: 45%;
+}

@@ -6,4 +6,11 @@ class LikesController < ApplicationController
         like = Like.last
         render json: like
     end
+
+    def destroy
+        user = User.find_by(id: session[:user_id])
+        like = user.likes.find_by(id: params[:id])
+        user.likes.destroy(like)
+        head:no_content
+    end
 end
