@@ -189,7 +189,6 @@ function ProductPage() {
   }
 
   function removeLike(like){
-    console.log('removeLike',like )
     fetch(`/likes/${like.id}`, {
       method: "DELETE"
     })
@@ -207,7 +206,6 @@ function ProductPage() {
 
   function handleLikeBtn(){
     const like = currentUser.likes.find(like => like.product_id === currentProduct.id)
-    console.log(like)
     if (like){
       removeLike(like)
     } else {
@@ -223,7 +221,7 @@ function ProductPage() {
       return '♡'
     })
 
-console.log(currentUser.likes)
+
   return (
     <div className="main">
       <Navbar />

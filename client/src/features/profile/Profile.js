@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../navigation/Navbar";
 import {
+  Button,
   Card,
   Container,
+  Grid,
   Paper,
   Table,
   TableBody,
@@ -15,9 +17,19 @@ import { useSelector } from "react-redux";
 import "./profile.css";
 import { useNavigate } from "react-router-dom";
 
+
+//User has liked products in currentUser.likes.map(l => return the product)
+//Get images the same way as Shop page
+//Display clickable product images and display heart in images
+
 function Profile() {
   const navigate = useNavigate();
+  const next = '>'
+  const back = '<'
+  const allProducts = useSelector(state => state.products.value)
   const currentUser = useSelector((state) => state.currentUser.user);
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(3)
   const sortedOrders = [...currentUser.orders].sort((a, b) =>
     a.id > b.id ? 1 : -1
   );
@@ -48,12 +60,55 @@ function Profile() {
     )
     .sort((a, b) => (a.id > b.id ? 1 : -1));
 
+    console.log('likes', currentUser.likes)
+
+  const likedProducts = currentUser.likes.map(like => like.product)
+  const LikedProductImages = likedProducts.map(product => {
+    return allProducts.find(p => {
+      if (p.id === product.id){
+        return p
+      }
+      return undefined
+    })
+  })
+
+  const renderLikedProducts = LikedProductImages.map(like => (
+    <Grid item xs={4} key={like.id} className="likedProductGridItem" >
+      <Card className="likedProduct">
+        <div id="img">
+        <img
+          src={like.image}
+          alt={like.product_name}
+          className="likedProductImage"/>
+        </div>
+        <Typography variant="body1" className="productName">{like.product_name}</Typography>
+        <Button
+            variant="text"
+            className="learnMoreBtn"
+            onClick={() => navigate(`/shop/${like.id}`)}
+          >
+            Learn More
+          </Button>
+      </Card>
+    </Grid>
+  ))
+
+  function handlePage(direction){
+    if (direction === "next" && max < likedProducts.length){
+      setMax(max + 1);
+      setMin(min + 1)
+    } else if (direction === "back" && min > 0 ){
+      setMax(max -1)
+      setMin(min -1)
+    }
+  }
+
   return (
     <div className="main">
       <Navbar />
 
       <Container>
-        <Card elevation={10} id="profileCard">
+        <Card elevation={3} id="profileCard">
           <Typography variant="h4" className="profileCardData">
             <u>{currentUser.username}</u>
           </Typography>
@@ -69,7 +124,27 @@ function Profile() {
         </Card>
 
         <Paper
-          elevation={6}
+          elevation={9}
+          id="favorites"
+        >
+          <div className="containerHeader">
+            <Typography 
+              variant="h5"
+              className="containerTitle"
+              sx={{ fontFamily: "monospace" }}
+            >
+              Your Favorites
+            </Typography>
+          </div>
+          <Typography variant="h4"  className="next" onClick={() => handlePage('next')}>{next}</Typography>
+          <Grid container spacing={6} id="likedProductsGrid">
+            {renderLikedProducts.slice(min,max)}
+          </Grid>
+            <Typography variant="h4" className="back" onClick={() => handlePage('back')} >{back}</Typography>
+        </Paper>
+
+        <Paper
+          elevation={3}
           className="dataContainer"
           sx={{ bgcolor: "antiquewhite" }}
         >
@@ -112,7 +187,7 @@ function Profile() {
         </Paper>
 
         <Paper
-          elevation={6}
+          elevation={3}
           className="dataContainer"
           sx={{ bgcolor: "antiquewhite" }}
         >

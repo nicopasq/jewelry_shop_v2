@@ -26,7 +26,7 @@ function QuickLinks() {
       <Button onClick={(e) => handleLogout(e)} id="logoutBtn">
         Logout
       </Button>
-      <Link to="/profile" id="profileBtn">
+      <Link to="/profile" id="profileBtn" onClick={() => window.scrollTo(0,0)}>
         <Typography variant="body1">Profile</Typography>
       </Link>
     </div>
