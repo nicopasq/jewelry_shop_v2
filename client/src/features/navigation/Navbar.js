@@ -8,9 +8,12 @@ import { useDispatch } from "react-redux";
 function Navbar() {
   const dispatch = useDispatch();
 
-  function handleClick() {
+  function handleClick(shop) {
     dispatch({ type: "order/clear" });
     window.scrollTo(0, 0);
+    if (shop){
+      dispatch({type:"jewelryType/resetFilter"});
+    }
   }
 
   return (
@@ -28,7 +31,7 @@ function Navbar() {
           </Link>
         </Grid>
         <Grid item xs={4}>
-          <Link to="/shop" onClick={() => handleClick()}>
+          <Link to="/shop" onClick={() => handleClick('shop')}>
             <Typography variant="h6" className="siteLinks">
               Shop
             </Typography>

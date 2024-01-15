@@ -17,6 +17,12 @@ import "./showOrder.css";
 import ConfirmDelete from "./ConfirmDelete";
 import UpdateOrderModal from "./UpdateOrderModal";
 
+// Make Update Order form have user info, not misc updated info
+// Create "Cancel Order" Button in Update Order Form.
+// Change Button text for Cancel Order
+
+
+
 function ShowOrder() {
   const { order_number } = useParams();
   const [currentOrder, setCurrentOrder] = useState({});

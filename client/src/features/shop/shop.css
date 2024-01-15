@@ -20,3 +20,9 @@
     position: relative;
     right: 0.4vw;
 }
+#selectProductType{
+    position: relative;
+    left: 2%;
+    bottom: 3vh;
+    text-align: left;
+}

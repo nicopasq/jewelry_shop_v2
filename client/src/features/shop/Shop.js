@@ -1,14 +1,25 @@
 import React from "react";
 import Navbar from "../navigation/Navbar";
-import { Button, Card, Grid, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Button, Card, Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import "./shop.css";
 import { useNavigate } from "react-router-dom";
 
 function Shop() {
   const products = useSelector((state) => state.products.value);
+  const jewelryType = useSelector((state) => state.jewelryType)
+  const dispatch = useDispatch()
   const navigation = useNavigate();
-  const renderProducts = [...products].map((p) => {
+  let filteredProducts
+  if (jewelryType === "rings"){
+    filteredProducts = products.filter(item=>item.product_type === 'ring')
+  } else if (jewelryType === "necklaces"){
+    filteredProducts = products.filter(item=>item.product_type === 'necklace')
+  } else if (jewelryType === "earrings"){
+    filteredProducts = products.filter(item=>item.product_type === 'earring')
+  }
+  const productList = jewelryType === "all" ? products : filteredProducts
+  const renderProducts = productList.map((p) => {
     return (
       <Grid item xs={4} key={p.id} sm={3}>
         <Card elevation={0} className="product">
@@ -31,9 +42,30 @@ function Shop() {
     );
   });
 
+  function handleChange(e){
+    dispatch({type:"jewelryType/change", payload:e.target.value})
+  }
+
   return (
     <div className="main">
       <Navbar />
+      <div id="selectProductType">
+        <InputLabel id='filter'>Filter Products</InputLabel>
+        <Select
+         sx={{color:'black', width:'10%'}}
+         labelId="filter"
+         id="filterProducts"
+         value={jewelryType}
+         onChange={(e) => handleChange(e)}
+         label="Ring"
+        >
+          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="rings">Rings</MenuItem>
+          <MenuItem value="necklaces">Necklaces</MenuItem>
+          <MenuItem value="earrings">Earrings</MenuItem>
+        </Select>
+        <Button onClick={() => dispatch({type:'jewelryType/resetFilter'})}>Clear filter</Button>
+      </div>
       <Grid container spacing={4} id="shopGrid">
         {renderProducts}
       </Grid>

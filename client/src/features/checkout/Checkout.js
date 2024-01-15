@@ -6,6 +6,9 @@ import Billing from "./Billing";
 import Shipping from "./Shipping";
 import Confirmation from "./Confirmation";
 
+// Make pages larger
+// Display Confirmation better
+
 function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
   const [renderForm, setRenderForm] = useState(<Billing />);
