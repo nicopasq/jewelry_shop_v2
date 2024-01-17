@@ -18,10 +18,6 @@ import "./profile.css";
 import { useNavigate } from "react-router-dom";
 
 
-//User has liked products in currentUser.likes.map(l => return the product)
-//Get images the same way as Shop page
-//Display clickable product images and display heart in images
-
 function Profile() {
   const navigate = useNavigate();
   const next = '>'
@@ -74,7 +70,7 @@ function Profile() {
 
   const renderLikedProducts = LikedProductImages.map(like => (
     <Grid item xs={4} key={like.id} className="likedProductGridItem" >
-      <Card className="likedProduct">
+      <Card className="likedProduct"  onClick={() => navigate(`/shop/${like.id}`)}>
         <div id="img">
         <img
           src={like.image}
@@ -85,7 +81,6 @@ function Profile() {
         <Button
             variant="text"
             className="learnMoreBtn"
-            onClick={() => navigate(`/shop/${like.id}`)}
           >
             Learn More
           </Button>

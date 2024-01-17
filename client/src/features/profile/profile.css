@@ -56,13 +56,14 @@
     left: 5px;
 }
  .likedProduct{
+    border: 1px solid black;
     text-align: center;
-    width: 13vw;
+    width: 12vw;
     height: 110%;
     display: inline-block;
     position: relative;
     right: 21%;
-    bottom: 18%;
+    bottom: 17%;
 }
 .likedProductImage{
     height: 20vh;

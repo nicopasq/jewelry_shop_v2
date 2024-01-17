@@ -166,9 +166,6 @@ function ProductPage() {
     }
   }
 
-
-  // const [like, setLike] = useState({})
-
   function likeProduct(){
     fetch('/likes', {
       method:"POST",
@@ -229,7 +226,7 @@ function ProductPage() {
         {alertMessage}
       </Alert>
       <Button variant="text" id="backBtn" onClick={() => navigate(-1)}>
-        <Typography variant="h4">←</Typography>
+        <Typography variant="body1">Go Back</Typography>
       </Button>
       <Button variant="text" id="likeBtn" onClick={() => handleLikeBtn()}>
         {likeIcon}

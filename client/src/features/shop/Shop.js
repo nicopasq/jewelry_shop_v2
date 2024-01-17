@@ -22,7 +22,7 @@ function Shop() {
   const renderProducts = productList.map((p) => {
     return (
       <Grid item xs={4} key={p.id} sm={3}>
-        <Card elevation={0} className="product">
+        <Card elevation={0} className="product"  onClick={() => navigation(`/shop/${p.id}`)}>
           <img
             src={p.image}
             alt={p.product_name}
@@ -33,7 +33,6 @@ function Shop() {
           <Button
             variant="text"
             className="addBtn"
-            onClick={() => navigation(`/shop/${p.id}`)}
           >
             Learn More
           </Button>
