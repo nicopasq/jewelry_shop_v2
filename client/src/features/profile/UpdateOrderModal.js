@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function UpdateOrderModal({
@@ -18,21 +18,20 @@ function UpdateOrderModal({
 }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
-  const updatedOrder = {
-    user_id: currentUser.id,
-    holder_first_name: "update firstName",
-    holder_last_name: "updated lastName",
-    card_number: "9485857373648586",
-    expiration: "2041-02",
-    cvv: 648,
-    first_name: "updated first_name",
-    last_name: "upddated last_name",
-    city: "Dinosaur",
-    state: "Colorado",
-    street_address: "1234 5th Street",
-    apt_number: 564,
-    zip_code: 40995,
-  };
+  const [updatedOrder, setUpdatedOrder] = useState({
+    holder_first_name: '',
+    holder_last_name: "",
+    first_name:'',
+    last_name:'',
+    expiration:'',
+    card_number:'',
+    cvv:'',
+    zip_code:'',
+    state:'',
+    city:'',
+    street_address:'',
+    apt_number:''
+  })
   const style = {
     borderRadius: "10px",
     position: "absolute",
@@ -44,10 +43,25 @@ function UpdateOrderModal({
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
-  };
+    };
+
+  function handleChange(e) {
+    setUpdatedOrder({...updatedOrder, [e.target.name]: e.target.value})
+  }
 
   function handleUpdateOrder(e) {
     e.preventDefault();
+    const values = Object.values(updatedOrder)
+    const keys = []
+    values.map((value, index) => {
+      if (value === ''){
+        return keys.push(Object.keys(updatedOrder)[index])
+      }
+    })
+    const test = keys.map(key => {
+      return updatedOrder[key] = currentOrder[key]
+    })
+
     fetch(`/orders/${currentOrder.id}`, {
       method: "PATCH",
       headers: {
@@ -57,16 +71,30 @@ function UpdateOrderModal({
     })
       .then((r) => r.json())
       .then((data) => {
-        const updatedOrders = [...currentUser.orders].map((order) =>
+        console.log(data)
+          const updatedOrders = [...currentUser.orders].map((order) =>
           order.id === data.id ? (order = data) : order
-        );
-        const updatedUser = { ...currentUser, orders: updatedOrders };
-        dispatch({ type: "currentUser/update", payload: updatedUser });
-        setCurrentOrder(data);
-        setDisplayUpdateForm(false);
+          );
+          const updatedUser = { ...currentUser, orders: updatedOrders };
+          dispatch({ type: "currentUser/update", payload: updatedUser });
+          setCurrentOrder(data);
+          setDisplayUpdateForm(false);
+          setUpdatedOrder({
+          holder_first_name: '',
+          holder_last_name: "",
+          first_name:'',
+          last_name:'',
+          expiration:'',
+          card_number:'',
+          cvv:'',
+          zip_code:'',
+          state:'',
+          city:'',
+          street_address:'',
+          apt_number:''})
       });
   }
-
+   
   return (
     <Modal
       open={displayUpdateForm}
@@ -89,15 +117,19 @@ function UpdateOrderModal({
                 <u>Name on Card:</u>
               </Typography>
               <TextField
-                label="First Name"
+                placeholder={currentOrder.holder_first_name}
                 sx={{ margin: "5px" }}
                 type="text"
+                name="holder_first_name"
+                onChange={(e) => handleChange(e)}
                 value={updatedOrder.holder_first_name}
               />
               <TextField
-                label="Last Name"
+                placeholder={currentOrder.holder_last_name}
                 sx={{ margin: "5px" }}
                 type="text"
+                name="holder_last_name"
+                onChange={(e) => handleChange(e)}
                 value={updatedOrder.holder_last_name}
               />
             </label>
@@ -111,6 +143,9 @@ function UpdateOrderModal({
                   id="card_number"
                   name="card_number"
                   className="formInput"
+                  type="number"
+                  placeholder={currentOrder.card_number}
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.card_number}
                 />
               </label>
@@ -125,7 +160,9 @@ function UpdateOrderModal({
                   id="expiration"
                   className="formInput"
                   type="month"
-                  value={updatedOrder.expiration}
+                  name="expiration"
+                  onChange={(e) => handleChange(e)}
+                  value={updatedOrder.expiration || currentOrder.expiration}
                 />
               </label>
             </div>
@@ -137,8 +174,11 @@ function UpdateOrderModal({
                 </Typography>
                 <Input
                   id="securityCode"
+                  placeholder={`${currentOrder.cvv}`}
                   className="formInput"
                   type="number"
+                  name="cvv"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.cvv}
                 />
               </label>
@@ -160,9 +200,11 @@ function UpdateOrderModal({
                   <u>First Name</u>
                 </Typography>
                 <TextField
-                  label="First Name"
+                  placeholder={currentOrder.first_name}
                   sx={{ margin: "5px" }}
                   type="text"
+                  name="first_name"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.first_name}
                 />
               </label>
@@ -174,9 +216,11 @@ function UpdateOrderModal({
                   <u>Last Name</u>
                 </Typography>
                 <TextField
-                  label="Last Name"
+                  placeholder={currentOrder.last_name}
                   sx={{ margin: "5px" }}
                   type="text"
+                  name="last_name"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.last_name}
                 />
               </label>
@@ -188,9 +232,11 @@ function UpdateOrderModal({
                   <u>State</u>
                 </Typography>
                 <TextField
-                  label="State"
+                  placeholder={currentOrder.state}
                   sx={{ margin: "5px" }}
                   type="text"
+                  name="state"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.state}
                 />
               </label>
@@ -202,9 +248,11 @@ function UpdateOrderModal({
                   <u>City</u>
                 </Typography>
                 <TextField
-                  label="City"
+                  placeholder={currentOrder.city}
                   sx={{ margin: "5px" }}
                   type="text"
+                  name="city"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.city}
                 />
               </label>
@@ -216,9 +264,12 @@ function UpdateOrderModal({
                   <u>Street Address</u>
                 </Typography>
                 <Input
+                  placeholder={currentOrder.street_address} 
                   id="street_address"
                   className="formInput"
                   type="text"
+                  name="street_address"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.street_address}
                 />
               </label>
@@ -230,9 +281,12 @@ function UpdateOrderModal({
                   <u>Apt. #</u>
                 </Typography>
                 <Input
+                  placeholder={`${currentOrder.apt_number}`}
                   id="apt_number"
                   className="formInput"
                   type="number"
+                  name="apt_number"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.apt_number}
                 />
               </label>
@@ -244,9 +298,12 @@ function UpdateOrderModal({
                   <u>Zip Code</u>
                 </Typography>
                 <Input
+                  placeholder={`${currentOrder.zip_code}`}
                   id="zip_code"
                   className="formInput"
                   type="number"
+                  name="zip_code"
+                  onChange={(e) => handleChange(e)}
                   value={updatedOrder.zip_code}
                 />
               </label>
@@ -256,6 +313,12 @@ function UpdateOrderModal({
               type="submit"
             >
               Update Order
+            </Button>
+            <Button
+              sx={{ width: "30%", marginLeft: "5%", marginBottom: "5%" }} 
+              onClick={() => setDisplayUpdateForm(false)}
+              >
+              Cancel
             </Button>
           </div>
         </form>

@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
+    rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     wrap_parameters format: []
 
     def create
@@ -8,19 +8,28 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
         else
             update_order_product || create_order_product
         end
-
     end
 
     def destroy
-        user.order_products.destroy(params[:id])
-        head:no_content
+        order_product = user.order_products.find_by(id: params[:id])
+        if order_product
+            user.order_products.destroy(params[:id])
+            head:no_content
+        else
+            render json: {errors:"Order product does not exist."}, status: 422
+        end
     end
 
     def update
         order_product = user.order_products.find_by(id: params[:id])
-        order_product.update(quantity: params[:quantity])
-        render json: order_product, status: :accepted
+        if order_product && params[:quantity].to_i > 0
+            order_product.update!(quantity: params[:quantity])
+            render json: order_product, status: :accepted
+        else
+            render json: {errors: "Can not update quantity to negative or non-integer value."}, status: :unauthorized
+        end
     end
+
     private
 
     def order_product_params
@@ -34,7 +43,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     def update_order_product_ring
         order_product = user.order_products.find_by(product_id:params[:product_id], size:params[:size], in_cart:true)
         if order_product && params[:quantity].to_i > 0
-            order_product.update(quantity:order_product[:quantity] + params[:quantity])
+            order_product.update!(quantity:order_product[:quantity] + params[:quantity])
             render json: order_product, status: :accepted
         end
     end
@@ -48,7 +57,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_order_product
     def update_order_product
         order_product = user.order_products.find_by(product_id:params[:product_id], in_cart:true)
         if order_product && params[:quantity].to_i > 0
-            order_product.update(quantity:order_product[:quantity] + params[:quantity])
+            order_product.update!(quantity:order_product[:quantity] + params[:quantity])
             render json: order_product, status: :accepted
         end
     end

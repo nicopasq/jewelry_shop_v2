@@ -10,5 +10,5 @@ class Order < ApplicationRecord
     validates :state, presence: true
     validates :city, presence: true
     validates :street_address, presence: true
-    validates :zip_code, presence: true, numericality:{only_integer:true}
+    validates :zip_code, presence: true, numericality:{only_integer:true}, length: {is:5}
 end

@@ -16,7 +16,7 @@ function ConfirmDelete({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 485,
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
@@ -48,10 +48,10 @@ function ConfirmDelete({
           Are you sure you want to cancel your order?
         </Typography>
         <Button id="yesBtn" onClick={() => handleDeleteOrder()}>
-          Yes, cancel my order
+          Yes, cancel my order.
         </Button>
         <Button id="noBtn" onClick={() => setDisplayConfirmDelete(false)}>
-          I changed my mind
+          No, don't cancel my order.
         </Button>
       </Box>
     </Modal>

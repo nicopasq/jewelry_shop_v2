@@ -12,7 +12,11 @@ class SessionsController < ApplicationController
 
     def show
         user = User.find_by(id: session[:user_id])
-        render json:user, status: :accepted
+        if user
+            render json:user, status: :accepted
+        else
+            render json:{errors:"User does not exist."}, status: :unauthorized
+        end
     end
 
     def destroy 
