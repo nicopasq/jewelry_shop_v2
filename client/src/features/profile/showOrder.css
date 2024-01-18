@@ -37,11 +37,12 @@
     margin-top: 3%;
 }
 #updateOrderForm{
+    scale: .95;
     text-align: left;
     width: 70%;
     height: 105%;
     position: relative;
-    bottom: 3%;
+    bottom: 7%;
     right: 4%
 }
 #shippingForm{
@@ -57,5 +58,11 @@
 #orderBackBtn{
     position: absolute;
     left: 2%;
-
+}
+#updateErrors{
+    text-align: left;
+    width: 60%;
+    position: absolute;
+    right: 105%;
+    top: 0%;
 }

@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Divider,
@@ -7,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function UpdateOrderModal({
@@ -16,8 +17,11 @@ function UpdateOrderModal({
   currentOrder,
   setCurrentOrder,
 }) {
+  const mounted = useRef(false)
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
+  const [alertDisplay, setAlertDisplay] = useState({display:'none'})
+  const [alertMessage, setAlertMessage] = useState('')
   const [updatedOrder, setUpdatedOrder] = useState({
     holder_first_name: '',
     holder_last_name: "",
@@ -45,6 +49,21 @@ function UpdateOrderModal({
     p: 4,
     };
 
+    let timer
+    if (mounted.current){
+      timer = setTimeout(() => {
+        setAlertDisplay({display:'none'});
+        setAlertMessage('')
+      }, 5000);
+    }
+
+    useEffect(() => {
+      mounted.current = true
+
+      return () => {
+        clearTimeout(timer)
+      }
+    }, [timer])
   function handleChange(e) {
     setUpdatedOrder({...updatedOrder, [e.target.name]: e.target.value})
   }
@@ -57,8 +76,10 @@ function UpdateOrderModal({
       if (value === ''){
         return keys.push(Object.keys(updatedOrder)[index])
       }
+      return value
     })
-    const test = keys.map(key => {
+
+    keys.map(key => {
       return updatedOrder[key] = currentOrder[key]
     })
 
@@ -71,7 +92,7 @@ function UpdateOrderModal({
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data)
+        if (!data.errors){
           const updatedOrders = [...currentUser.orders].map((order) =>
           order.id === data.id ? (order = data) : order
           );
@@ -79,23 +100,44 @@ function UpdateOrderModal({
           dispatch({ type: "currentUser/update", payload: updatedUser });
           setCurrentOrder(data);
           setDisplayUpdateForm(false);
+          setAlertDisplay({display:'none'})
+          setAlertMessage('')
           setUpdatedOrder({
-          holder_first_name: '',
-          holder_last_name: "",
-          first_name:'',
-          last_name:'',
-          expiration:'',
-          card_number:'',
-          cvv:'',
-          zip_code:'',
-          state:'',
-          city:'',
-          street_address:'',
-          apt_number:''})
+            holder_first_name: '',
+            holder_last_name: "",
+            first_name:'',
+            last_name:'',
+            expiration:'',
+            card_number:'',
+            cvv:'',
+            zip_code:'',
+            state:'',
+            city:'',
+            street_address:'',
+            apt_number:''})
+          } else{
+            const errors = data.errors.map((error, index) => <li key={index} >{error}</li>)
+            setAlertDisplay({display:true})
+            setAlertMessage(errors)
+            setUpdatedOrder({
+              holder_first_name: '',
+              holder_last_name: "",
+              first_name:'',
+              last_name:'',
+              expiration:'',
+              card_number:'',
+              cvv:'',
+              zip_code:'',
+              state:'',
+              city:'',
+              street_address:'',
+              apt_number:''})
+          }
       });
   }
    
   return (
+    <>
     <Modal
       open={displayUpdateForm}
       onClose={() => setDisplayUpdateForm(false)}
@@ -103,12 +145,13 @@ function UpdateOrderModal({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+      <Alert severity="error" color="error" sx={alertDisplay} id="updateErrors">{alertMessage}</Alert>
         <form
           id="updateOrderForm"
           onSubmit={(e) => handleUpdateOrder(e)}
           style={{ marginLeft: "20%", marginBottom: "2%" }}
         >
-          <div id="billingForm">
+          <div id="updateBillingForm">
             <Typography variant="h5" align="center">
               Billing
             </Typography>
@@ -185,7 +228,7 @@ function UpdateOrderModal({
             </div>
           </div>
 
-          <div id="shippingForm">
+          <div id="updateShippingForm">
             <Divider sx={{ bgcolor: "lightBlue" }} />
             <Typography variant="h5" marginTop={"1%"} align="center">
               Shipping
@@ -308,10 +351,13 @@ function UpdateOrderModal({
                 />
               </label>
             </div>
+          </div>
+
+          <div id="updateButtons">
             <Button
               sx={{ width: "30%", marginLeft: "5%", marginBottom: "5%" }}
               type="submit"
-            >
+              >
               Update Order
             </Button>
             <Button
@@ -324,6 +370,7 @@ function UpdateOrderModal({
         </form>
       </Box>
     </Modal>
+    </>
   );
 }
 
