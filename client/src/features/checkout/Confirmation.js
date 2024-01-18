@@ -1,5 +1,6 @@
 import {
   Alert,
+  AlertTitle,
   Button,
   Divider,
   Paper,
@@ -145,7 +146,12 @@ function Confirmation({ handleEdit }) {
         </div>
       </div>
 
-<Alert severity="error" sx={alertDisplay}>{alertMessage}</Alert>
+    <Alert severity="error" id="checkoutErrors" sx={alertDisplay}>
+      <AlertTitle>Missing information, can't confirm order.</AlertTitle>
+      <ul id="errorUl">
+        {alertMessage}
+      </ul>
+    </Alert>
 
     
       <TableContainer component={Paper} elevation={3} id="tableContainer">
