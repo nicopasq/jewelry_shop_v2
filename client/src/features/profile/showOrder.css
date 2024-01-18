@@ -54,3 +54,8 @@
     bottom: 52.5vh;
     left: 65%;
 }
+#orderBackBtn{
+    position: absolute;
+    left: 2%;
+
+}
