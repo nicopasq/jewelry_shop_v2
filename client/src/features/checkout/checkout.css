@@ -59,7 +59,7 @@
 
 #tableContainer{
     border:1px solid rgba(128, 128, 128, 0.856);
-    width: 60%;
+    width: 30%;
     height: 53%;
     position: relative;
     left: 35%;
@@ -105,4 +105,11 @@
 }
 #thankYouCheckMark{
     scale: .6;
+}
+#checkoutErrors{
+    text-align: left;
+    width: 25%;
+    position: absolute;
+    left: 70%;
+    top: 10%;
 }
