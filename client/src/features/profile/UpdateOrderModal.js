@@ -80,8 +80,9 @@ function UpdateOrderModal({
           setAlertDisplay({display:"none"})
           setAlertMessage('')
         } else {
+          const errors = data.errors.map((error, index) => <li key={index}>{error}</li>)
           setAlertDisplay({display:true})
-          setAlertMessage(data.errors)
+          setAlertMessage(errors)
         }
       })
       setUpdatedOrder({

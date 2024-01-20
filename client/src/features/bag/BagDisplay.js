@@ -3,17 +3,13 @@ import {
   Card,
   CardContent,
   Divider,
-  Menu,
-  MenuItem,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function BagDisplay() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value);
   const currentUser = useSelector((state) => state.currentUser.user);
@@ -29,15 +25,6 @@ function BagDisplay() {
       });
     });
 
-  function handleMenuToggle(target) {
-    if (target !== null) {
-      setAnchorEl(target);
-      setOpen(true);
-    } else {
-      setAnchorEl(target);
-      setOpen(false);
-    }
-  }
 
   function handleDelete(product) {
     fetch(`/order_products/${product.id}`, { method: "DELETE" });
@@ -49,17 +36,9 @@ function BagDisplay() {
       order_products: updatedOrderProducts,
     };
     dispatch({ type: "currentUser/update", payload: updatedUser });
-    setAnchorEl(null);
-    setOpen(false);
   }
 
-  function updateQuantity(type, product) {
-    if (type === "decrement" && product.quantity > 1) {
-      product.quantity--;
-    } else if (type === "increment") {
-      product.quantity++;
-    }
-
+  function handleUpdate(product){
     fetch(`/order_products/${product.id}`, {
       method: "PATCH",
       headers: {
@@ -78,6 +57,19 @@ function BagDisplay() {
         };
         dispatch({ type: "currentUser/update", payload: updatedUser });
       });
+  }
+
+  function updateQuantity(type, product) {
+    if (type === "decrement" && product.quantity > 1) {
+      product.quantity--;
+      handleUpdate(product)
+    } else if (type === "decrement" && product.quantity === 1){
+      handleDelete(product)
+    }
+    else if (type === "increment") {
+      product.quantity++;
+      handleUpdate(product)
+    }
   }
 
   const bagDisplay = inBag.map((product) => {
@@ -122,24 +114,6 @@ function BagDisplay() {
           >
             Size: {product.size?.toFixed(2)}
           </Typography>
-          <div className="cardButtons">
-            <Typography
-              className="openMenu"
-              sx={{ fontSize: "25pt" }}
-              onClick={(e) => handleMenuToggle(e.target, product)}
-            >
-              ...
-            </Typography>
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={() => handleMenuToggle(null)}
-            >
-              <MenuItem onClick={() => handleDelete(product)}>
-                Remove All
-              </MenuItem>
-            </Menu>
-          </div>
         </CardContent>
       </Card>
     );

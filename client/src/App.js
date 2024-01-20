@@ -12,6 +12,7 @@ import Checkout from './features/checkout/Checkout.js';
 import ThankYou from './features/checkout/ThankYou.js';
 import product_images from './images/images.js';
 import ShowOrder from './features/profile/ShowOrder.js';
+import NoUser from './NoUserError.js';
 
 function App() {
   const currentUser = useSelector(state => state.currentUser.user)
@@ -56,6 +57,14 @@ if (!currentUser){
     <Routes>
       <Route path='/' element={<Login />}/>
       <Route path='/signup' element={<Signup />}/>
+      <Route path='/home' element={<NoUser/>}/>
+      <Route path='/profile' element={<NoUser/>} />
+      <Route path='/shop' element={<NoUser/>} />
+      <Route path='/shop/:id' element={<NoUser/>} /> 
+      <Route path='/bag' element={<NoUser/>} />
+      <Route path='/bag/checkout' element={<NoUser/>} />
+      <Route path='/bag/thankYou' element={<NoUser/>} />
+      <Route path='/orders/:order_number' element={<NoUser/>} />
     </Routes>
   )
 } else {

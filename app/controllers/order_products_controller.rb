@@ -22,11 +22,11 @@ class OrderProductsController < ApplicationController
 
     def update
         order_product = user.order_products.find_by(id: params[:id])
-        if order_product && params[:quantity].to_i > 0
+        if order_product && params[:quantity] > 0
             order_product.update!(quantity: params[:quantity])
             render json: order_product, status: :accepted
-        else
-            render json: {errors: "Can not update quantity to negative or non-integer value."}, status: :unauthorized
+        elsif params[:quantity].to_i == 0
+            render json: {errors: "Can't increment quantity below 1. Please use 'remove all' insteaad.", id:order_product[:id]}, status: :unauthorized
         end
     end
 
@@ -42,7 +42,7 @@ class OrderProductsController < ApplicationController
 
     def update_order_product_ring
         order_product = user.order_products.find_by(product_id:params[:product_id], size:params[:size], in_cart:true)
-        if order_product && params[:quantity].to_i > 0
+        if order_product && params[:quantity] > 0
             order_product.update!(quantity:order_product[:quantity] + params[:quantity])
             render json: order_product, status: :accepted
         end

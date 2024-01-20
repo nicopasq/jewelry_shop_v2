@@ -48,7 +48,12 @@ class OrdersController < ApplicationController
     private
 
     def user
-        @user = User.find_by(id:session[:user_id])
+        user = User.find_by(id:session[:user_id])
+        if user
+            @user = user
+        else
+            render json: {errors:"User not found"}, status: 404
+        end
     end
 
     def order_params
@@ -56,7 +61,7 @@ class OrdersController < ApplicationController
     end
 
     def invalid_order invalid
-        render json: {errors: invalid.record.errors.full_messages}, status: :unauthorized
+        render json: {errors: invalid.record.errors.full_messages}, status: 422
     end
 
 
