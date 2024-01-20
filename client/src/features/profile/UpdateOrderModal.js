@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function UpdateOrderModal({
@@ -17,7 +17,6 @@ function UpdateOrderModal({
   currentOrder,
   setCurrentOrder,
 }) {
-  const mounted = useRef(false)
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
@@ -49,23 +48,9 @@ function UpdateOrderModal({
     p: 4,
     };
 
-    let timer
-    if (mounted.current){
-      timer = setTimeout(() => {
-        setAlertDisplay({display:'none'});
-        setAlertMessage('')
-      }, 5000);
-    }
 
-    useEffect(() => {
-      mounted.current = true
-
-      return () => {
-        clearTimeout(timer)
-      }
-    }, [timer])
   function handleChange(e) {
-    setUpdatedOrder({...updatedOrder, [e.target.name]: e.target.value})
+    setUpdatedOrder({...updatedOrder, [e.target.name]: e.target.value || ''})
   }
 
   function handleUpdateOrder(e) {
@@ -93,47 +78,30 @@ function UpdateOrderModal({
       .then((r) => r.json())
       .then((data) => {
         if (!data.errors){
-          const updatedOrders = [...currentUser.orders].map((order) =>
-          order.id === data.id ? (order = data) : order
-          );
-          const updatedUser = { ...currentUser, orders: updatedOrders };
-          dispatch({ type: "currentUser/update", payload: updatedUser });
-          setCurrentOrder(data);
-          setDisplayUpdateForm(false);
-          setAlertDisplay({display:'none'})
+          console.log('no errors', data)
+          setDisplayUpdateForm(false)
+          setCurrentOrder(data)
+          setAlertDisplay({display:"none"})
           setAlertMessage('')
-          setUpdatedOrder({
-            holder_first_name: '',
-            holder_last_name: "",
-            first_name:'',
-            last_name:'',
-            expiration:'',
-            card_number:'',
-            cvv:'',
-            zip_code:'',
-            state:'',
-            city:'',
-            street_address:'',
-            apt_number:''})
-          } else{
-            const errors = data.errors.map((error, index) => <li key={index} >{error}</li>)
-            setAlertDisplay({display:true})
-            setAlertMessage(errors)
-            setUpdatedOrder({
-              holder_first_name: '',
-              holder_last_name: "",
-              first_name:'',
-              last_name:'',
-              expiration:'',
-              card_number:'',
-              cvv:'',
-              zip_code:'',
-              state:'',
-              city:'',
-              street_address:'',
-              apt_number:''})
-          }
-      });
+        } else {
+          setAlertDisplay({display:true})
+          setAlertMessage(data.errors)
+        }
+      })
+      setUpdatedOrder({
+        holder_first_name: '',
+        holder_last_name: "",
+        first_name:'',
+        last_name:'',
+        expiration:'',
+        card_number:'',
+        cvv:'',
+        zip_code:'',
+        state:'',
+        city:'',
+        street_address:'',
+        apt_number:''
+      })
   }
    
   return (
