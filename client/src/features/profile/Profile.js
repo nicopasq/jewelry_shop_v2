@@ -56,7 +56,6 @@ function Profile() {
     )
     .sort((a, b) => (a.id > b.id ? 1 : -1));
 
-    console.log('likes', currentUser.likes)
 
   const likedProducts = currentUser.likes.map(like => like.product)
   const LikedProductImages = likedProducts.map(product => {

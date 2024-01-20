@@ -75,7 +75,6 @@ function UpdateOrderModal({
       .then((r) => r.json())
       .then((data) => {
         if (!data.errors){
-          console.log('no errors', data)
           setDisplayUpdateForm(false)
           setCurrentOrder(data)
           setAlertDisplay({display:"none"})
