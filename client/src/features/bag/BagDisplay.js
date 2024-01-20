@@ -7,10 +7,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function BagDisplay() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const products = useSelector((state) => state.products.value);
   const currentUser = useSelector((state) => state.currentUser.user);
   const inBag = [];
@@ -120,11 +121,12 @@ function BagDisplay() {
   });
 
   const nothingInBag = (
-    <Link to="/shop/">
-      <Typography variant="h6" sx={{ fontFamily: "serif" }}>
+    <Button variant="text" onClick={() => {
+      dispatch({type:'jewelryType/resetFilter'})
+      navigate('/shop')
+      }}>
         Continue shopping
-      </Typography>
-    </Link>
+    </Button>
   );
 
   const render = bagDisplay.length > 0 ? bagDisplay : nothingInBag;
