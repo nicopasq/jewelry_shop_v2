@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 function UpdateOrderModal({
   displayUpdateForm,
@@ -17,8 +16,6 @@ function UpdateOrderModal({
   currentOrder,
   setCurrentOrder,
 }) {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser.user);
   const [alertDisplay, setAlertDisplay] = useState({display:'none'})
   const [alertMessage, setAlertMessage] = useState('')
   const [updatedOrder, setUpdatedOrder] = useState({
