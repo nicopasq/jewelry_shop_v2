@@ -62,3 +62,4 @@ Once the installation process has been completed, users will be able to access t
 - After an Order is placed, the User can view the Order in the Profile page. 
 - Users can click on an Order and update or delete it.
 - Users can also view the products they have ordered in the past. However if an Order is cancelled, the Products are removed with it.
+# jewelry_shop_v3
